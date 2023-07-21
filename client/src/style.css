@@ -1,0 +1,55 @@
+html {
+    background-color: #7a4444;
+}
+
+/* change navbar color*/
+/* overrides bootstrap color scheme for navbar padding */
+.bg-secondary,
+.navbar-light {
+    background-color: #c7ccea !important;
+}
+
+
+ /*CSS for flex containers for primary content */
+#main_container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #7a4444;
+    height: calc(100vh - 250px); /* navbar is 56px in height */
+}
+
+.content_div {
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.left_div_container {
+    background-color: #c1bebe;
+    border: 1px solid #868585;
+    width: 45vw;
+    height: 65vh;
+}
+
+.div_col {
+    background-color: #8e96a6;
+    border: 1px solid #666c7a;
+    width: 20vw;
+    height: 65vh;
+}
+
+form {
+    background-color: #c1bebe;
+    border: 1px solid #868585;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+
+/*<div id="main_container">*/
+/*<div class="left_div_container">Left DIV LIST/SPRITES</div>*/
+/*<div class="center_div_col1">Center COLUMN DIV DESCRIPTION</div>*/
+/*<div class="center_div_col2">>Right COLUMN DIV INFO</div>*/
+/*</div>*/

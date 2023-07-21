@@ -2,9 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>itemSelection</title>
+    <!-- Link in bootstrap CSS: -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="src/style.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
+    <!-- easy NAVBAR template -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="charPage.html">charPage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dungeonPage.html">dungeonsPage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="itemPage.html">itemPage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="itemSelection.html">itemSelection</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR template  -->
 
+
+    <!-- main containers -->
+    <div id="main_container">
+        <div class="left_div_container content_div">Left DIV LIST/SPRITES</div>
+        <div class="div_col content_div">Center COLUMN DIV with some text for a longer description</div>
+        <div class="div_col content_div">Right COLUMN DIV INFO</div>
+
+    </div>
+    <!-- END main containers -->
+
+
+    <!-- HTML form example -->
+    <form method="POST">
+        <text>Update Item:</text>
+        <input type="text" name="item_name" placeholder="Item name">
+        <input type="textbox" name="item_desc" placeholder="Item desc">
+        <button type="submit">Submit</button>
+    </form>
+    <!-- END HTML form example -->
+
+
+    <!-- Link in bootstrap JS: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
