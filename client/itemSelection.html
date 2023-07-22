@@ -9,6 +9,13 @@
 </head>
 <body>
     <!-- easy NAVBAR template -->
+    <!--
+    1 # Havens, W (July 2022) Citation for the following HTML
+    inclusive of contents inside <nav></nav> tags:
+    2 # Date: 07/21/2023
+    3 # Copied from Bootstrap
+    4 # Modified navbar item names to match our requirements, custom CSS applied
+    5 # Source URL: https://getbootstrap.com/docs/5.0/components/navbar/-->
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">Home</a>
@@ -31,6 +38,7 @@
                     </li>
                 </ul>
             </div>
+            <button>Reload database to defaults</button>
         </div>
     </nav>
     <!-- END NAVBAR template  -->
@@ -38,21 +46,133 @@
 
     <!-- main containers -->
     <div id="main_container">
-        <div class="left_div_container content_div">Left DIV LIST/SPRITES</div>
-        <div class="div_col content_div">Center COLUMN DIV with some text for a longer description</div>
-        <div class="div_col content_div">Right COLUMN DIV INFO</div>
+        <div class="left_div_container content_div">
+            <h1>All Inventory Items</h1><br>
+            <table class="table">
+                <tr>
+                    <th scope="col">character_name</th>
+                    <th scope="col">item_name</th>
+                    <th scope="col">item_description</th>
+                    <th scope="col">quantity</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+                </tr>
+                <tr>
+                    <th><input type="text" value="Bardy"></th>
+                    <td><input type="text" value="Sword"></td>
+                    <td><input type="text" value="A sharp sword"></td>
+                    <td><input type="number" value="1" min="1" max="2147483647"></td>
+                    <td><input type="submit" value="X"></td>
+                    <td><input type="submit"` value="Update"></td>
+                </tr>
+                <tr>
+                    <th><input type="text" value="Bardy"></th>
+                    <td><input type="text" value="stick"></td>
+                    <td><input type="text" value="magical stick"></td>
+                    <td><input type="number" value="1" min="1" max="2147483647"></td>
+                    <td><input type="submit" value="X"></td>
+                    <td><input type="submit"` value="Update"></td>
+                </tr>
+                <tr>
+                    <th><input type="text" value="Bardy"></th>
+                    <td><input type="text" value="Coins"></td>
+                    <td><input type="text" value="Game Currency"></td>
+                    <td><input type="number" value="10000" min="1" max="2147483647"></td>
+                    <td><input type="submit" value="X"></td>
+                    <td><input type="submit"` value="Update"></td>
+                </tr>
+                <tr>
+                    <th><input type="text" value="evil_mage"></th>
+                    <td><input type="text" value="Healing Potion"></td>
+                    <td><input type="text" value="Heals 25 hit-points"></td>
+                    <td><input type="number" value="8" min="1" max="2147483647"></td>
+                    <td><input type="submit" value="X"></td>
+                    <td><input type="submit"` value="Update"></td>
+                </tr>
+                <tr>
+                    <th><input type="text" value="Ranger_Rick"></th>
+                    <td><input type="text" value="Stick"></td>
+                    <td><input type="text" value="magical stick"></td>
+                    <td><input type="number" value="1" min="1" max="2147483647"></td>
+                    <td><input type="submit" value="X"></td>
+                    <td><input type="submit"` value="Update"></td>
+                </tr>
+                <tr>
+                    <th><input type="text" value="Ranger_Rick"></th>
+                    <td><input type="text" value="Coins"></td>
+                    <td><input type="text" value="Game Currency"></td>
+                    <td><input type="number" value="50" min="1" max="2147483647"></td>
+                    <td><input type="submit" value="X"></td>
+                    <td><input type="submit"` value="Update"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="div_col content_div">
+            <h1>Ranger_Rick's Inventory Items List</h1><br>
+            <table class="table">
+                <tr>
+                    <th scope="col">item_name</th>
+                    <th scope="col">item_description</th>
+                    <th scope="col">quantity</th>
+                </tr>
+                <tr>
+                    <td>Stick</td>
+                    <td>magical stick</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Coins</td>
+                    <td>Game Currency</td>
+                    <td>50</td>
+                </tr>
+            </table>
+        </div>
+        </div>
     </div>
     <!-- END main containers -->
 
 
-    <!-- HTML form example -->
-    <form method="POST">
-        <text>Update Item:</text>
-        <input type="text" name="item_name" placeholder="Item name">
-        <input type="textbox" name="item_desc" placeholder="Item desc">
-        <button type="submit">Submit</button>
+    <!-- HTML form  -->
+    <div>
+        <h3>Insert a new item into inventory for a character:</h3>
+
+        <form class="footer_form" method="POST">
+        <div>
+            <label for="Characters">Choose a Character:</label>
+            <select id="Characters" name="Characters">
+                <!-- value attribute example below would be a composite
+                between Table Name and the character_id. Flask/Jina will generate
+                all of this iteratively.
+                On submit, this would be sent back to the
+                backend and that way it's a unique identifier to create the
+                correct SQL INSERT Statements -->
+                <option value="" selected="selected" disabled>Select Char</option>
+                <option value="Characters_1">Bardy</option>
+                <option value="Characters_2">Ranger_Rick</option>
+                <option value="Characters_3">evil_mage</option>
+                <option value="Characters_4">gollum</option>
+                <option value="Characters_5">fighter_orc</option>
+            </select>
+        </div>
+        <div>
+            <select id="Items" name="Items">
+                <option value="" selected="selected" disabled >Select Item</option>
+                <option value="Items_1">Sword</option>
+                <option value="Items_2">stick</option>
+                <option value="Items_3">Coins</option>
+                <option value="Items_4">Healing Potion</option>
+                <option value="Items_5">Wooden Shield</option>
+            </select>
+        </div>
+
+        <input type="number" id="quantity" name="quantity" placeholder="Item quantity" min="1" max="2147483647">
+
+        <input type="submit" value="INSERT">
     </form>
-    <!-- END HTML form example -->
+
+    </div>
+
 
 
     <!-- Link in bootstrap JS: -->
