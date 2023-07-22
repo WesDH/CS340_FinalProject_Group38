@@ -128,16 +128,14 @@
                 </tr>
             </table>
         </div>
-        </div>
-    </div>
-    <!-- END main containers -->
 
+        <div class="break"></div> <!-- break to a new row -->
 
-    <!-- HTML form  -->
-    <div>
-        <h3>Insert a new item into inventory for a character:</h3>
+        <!-- HTML form  -->
+        <div>
+            <h3>Insert a new item into inventory for a character:</h3>
 
-        <form class="footer_form" method="POST">
+            <form class="footer_form" method="POST">
         <div>
             <label for="Characters">Choose a Character:</label>
             <select id="Characters" name="Characters">
@@ -154,24 +152,32 @@
                 <option value="Characters_4">gollum</option>
                 <option value="Characters_5">fighter_orc</option>
             </select>
-        </div>
-        <div>
-            <select id="Items" name="Items">
-                <option value="" selected="selected" disabled >Select Item</option>
-                <option value="Items_1">Sword</option>
-                <option value="Items_2">stick</option>
-                <option value="Items_3">Coins</option>
-                <option value="Items_4">Healing Potion</option>
-                <option value="Items_5">Wooden Shield</option>
-            </select>
-        </div>
-
-        <input type="number" id="quantity" name="quantity" placeholder="Item quantity" min="1" max="2147483647">
-
-        <input type="submit" value="INSERT">
-    </form>
-
     </div>
+    <div>
+        <select id="Items" name="Items">
+            <option value="" selected="selected" disabled >Select Item</option>
+            <option value="Items_1">Sword</option>
+            <option value="Items_2">stick</option>
+            <option value="Items_3">Coins</option>
+            <option value="Items_4">Healing Potion</option>
+            <option value="Items_5">Wooden Shield</option>
+        </select>
+    </div>
+
+    <input type="number" id="quantity" name="quantity" placeholder="Item quantity" min="1" max="2147483647">
+
+    <input type="submit" value="INSERT">
+</form>
+
+</div>
+    </div>
+
+
+
+    <!-- END main containers -->
+
+
+
 
 
 

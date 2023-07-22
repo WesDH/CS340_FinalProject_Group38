@@ -1,6 +1,3 @@
-/* Static Page CSS
-Actual CSS now is handled with Jinja templating in static folder instead */
-
 html {
     background-color: #7a4444;
 }
