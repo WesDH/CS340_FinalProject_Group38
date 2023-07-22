@@ -1,3 +1,15 @@
+-- MINIFIED VERSION OF DDB.SQL
+-- CS340 : Project Step 2 Draft DDL SQL SCRIPT
+-- Group 38 Name: Team 38
+-- Title: Dungeons & Dragons Character Management System
+-- Members:
+-- Wesley Havens (havensw@oregonstate.edu)
+-- Lauren Norman Schueneman (normansl@oregonstate.edu)
+-- Joseph Houghton (houghtjo@oregonstate.edu)
+-- DDL Generated using MySQL Workbench, with modifications afterwards
+-- Sun Jul 16 19:49:40 2023
+-- Model: New Model    Version: 1.0
+-- MySQL Workbench Forward Engineering
 SET UNIQUE_CHECKS = 0;
 SET FOREIGN_KEY_CHECKS = 0;
 SET AUTOCOMMIT = 0;
@@ -8,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `Abilities` ( `ability_id` INT(11) NOT NULL AUTO_INCR
 DROP TABLE IF EXISTS `User_Accounts`;
 CREATE TABLE IF NOT EXISTS `User_Accounts` ( `user_id` INT(11) NOT NULL AUTO_INCREMENT UNIQUE, `username` VARCHAR(50) NOT NULL UNIQUE, `password` VARCHAR(50) NOT NULL, `email` VARCHAR(100) NULL DEFAULT NULL, PRIMARY KEY (`user_id`), UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE, UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE ) ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Characters`;
-CREATE TABLE IF NOT EXISTS `Characters` ( `character_id` INT(11) NOT NULL AUTO_INCREMENT UNIQUE, `character_name` VARCHAR(100) NOT NULL, `race` VARCHAR(100) NULL DEFAULT NULL, `class` VARCHAR(100) NULL DEFAULT NULL, `creature_type` VARCHAR(100) NULL DEFAULT NULL, `alignment` VARCHAR(100) NULL DEFAULT NULL, `Users_user_id` INT(11) NOT NULL, PRIMARY KEY (`character_id`), INDEX `user_id_idx` (`Users_user_id` ASC) VISIBLE, UNIQUE INDEX `character_id_UNIQUE` (`character_id` ASC) VISIBLE, CONSTRAINT `user_id` FOREIGN KEY (`Users_user_id`) REFERENCES `User_Accounts` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION ) ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `Characters` ( `character_id` INT(11) NOT NULL AUTO_INCREMENT UNIQUE, `character_name` VARCHAR(100) NOT NULL UNIQUE, `race` VARCHAR(100) NULL DEFAULT NULL, `class` VARCHAR(100) NULL DEFAULT NULL, `creature_type` VARCHAR(100) NULL DEFAULT NULL, `alignment` VARCHAR(100) NULL DEFAULT NULL, `Users_user_id` INT(11) NOT NULL, PRIMARY KEY (`character_id`), INDEX `user_id_idx` (`Users_user_id` ASC) VISIBLE, UNIQUE INDEX `character_id_UNIQUE` (`character_id` ASC) VISIBLE, CONSTRAINT `user_id` FOREIGN KEY (`Users_user_id`) REFERENCES `User_Accounts` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION ) ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Spells`;
 CREATE TABLE IF NOT EXISTS `Spells` ( `spell_id` INT(11) NOT NULL AUTO_INCREMENT UNIQUE, `spell_name` VARCHAR(100) NOT NULL UNIQUE, `spell_damage` INT(11) NULL DEFAULT NULL, PRIMARY KEY (`spell_id`), UNIQUE INDEX `spell_id_UNIQUE` (`spell_id` ASC) VISIBLE ) ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Items`;
