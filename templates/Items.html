@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-    Item Modification Page
+    Items Table
 {% endblock %}
 
 {% block content %}
@@ -30,7 +30,7 @@
 
         <form class="footer_form" method="POST" action="/Items.html">
             <input type="text" id="item_name" name="name" placeholder="Item name" min="1" max="2147483647">
-            <input type="number" id="item_description" name="description" placeholder="Item description" min="1" max="2147483647">
+            <input type="text" id="item_description" name="description" placeholder="Item description" min="1" max="2147483647">
             <label for="is_weapon">Is weapon?</label>
             <select id="is_weapon" name="is_weapon">
                 <option value="" selected="selected" disabled>Select</option>

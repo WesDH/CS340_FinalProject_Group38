@@ -59,30 +59,29 @@ def items():
 
 @app.route("/Inventory_Items.html", methods=['GET', 'POST'])
 def item_selection():
-    if request.method == "GET":
-        cur = mysql.connection.cursor()
-        join_chars_items = cur.execute(sql.chars_items_qty)
-        if join_chars_items > 0:
-            left_table_rows = cur.fetchall()
+    cur = mysql.connection.cursor()
+    join_chars_items = cur.execute(sql.chars_items_qty)
+    if join_chars_items > 0:
+        left_table_rows = cur.fetchall()
 
-        join_user_items = cur.execute(sql.individual_char_items)
-        if join_user_items > 0:
-            right_table_rows = cur.fetchall()
+    join_user_items = cur.execute(sql.individual_char_items)
+    if join_user_items > 0:
+        right_table_rows = cur.fetchall()
 
-        # The following 2 queries are for dynamic dropdown input functionality:
-        chars = cur.execute(sql.get_char_names)
-        if chars > 0:
-            char_list = cur.fetchall()
+    # The following 2 queries are for dynamic dropdown input functionality:
+    chars = cur.execute(sql.get_char_names)
+    if chars > 0:
+        char_list = cur.fetchall()
 
-        items = cur.execute(sql.get_item_list)
-        if items > 0:
-            item_list = cur.fetchall()
+    items = cur.execute(sql.get_item_list)
+    if items > 0:
+        item_list = cur.fetchall()
 
-        return render_template('Inventory_Items.html',
-                               left_table_rows=left_table_rows,
-                               right_table_rows=right_table_rows,
-                               char_list=char_list,
-                               item_list=item_list)
+    return render_template('Inventory_Items.html',
+                           left_table_rows=left_table_rows,
+                           right_table_rows=right_table_rows,
+                           char_list=char_list,
+                           item_list=item_list)
 
 
 if __name__ == "__main__":
