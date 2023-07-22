@@ -30,7 +30,7 @@ def generate_ddl():
         cur.execute(statement)
         mysql.connection.commit()
         cur.close()
-        print("Statement ran: {}".format(statement))
+        print(statement)
 
 
 # Populate the DB once on startup, for now, like this:
@@ -41,12 +41,23 @@ with app.app_context():
     #pass
 
 
+@app.route("/logout", methods=['GET'])
 @app.route("/", methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
 
 
-@app.route("/itemSelection.html", methods=['GET', 'POST'])
+@app.route("/Items.html", methods=['GET', 'POST'])
+def items():
+    cur = mysql.connection.cursor()
+    items_info = cur.execute(sql.get_all_item_info)
+    if items_info > 0:
+        item_rows = cur.fetchall()
+
+    return render_template('Items.html',
+                           item_rows=item_rows)
+
+@app.route("/Inventory_Items.html", methods=['GET', 'POST'])
 def item_selection():
     if request.method == "GET":
         cur = mysql.connection.cursor()
@@ -67,7 +78,7 @@ def item_selection():
         if items > 0:
             item_list = cur.fetchall()
 
-        return render_template('itemSelection.html',
+        return render_template('Inventory_Items.html',
                                left_table_rows=left_table_rows,
                                right_table_rows=right_table_rows,
                                char_list=char_list,

@@ -16,4 +16,5 @@ individual_char_items = "SELECT Characters.character_name, Items.item_name, Item
                  "WHERE User_Accounts.user_id='3'"
 
 get_char_names = "SELECT Characters.character_name FROM Characters;"
-get_item_list =  "SELECT Items.item_name FROM Items"
+get_item_list = "SELECT Items.item_name FROM Items"
+get_all_item_info =  "SELECT Items.item_id, Items.item_name, Items.item_description, Items.is_weapon FROM Items"
