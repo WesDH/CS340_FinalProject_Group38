@@ -15,75 +15,36 @@
                 <th scope="col">Delete</th>
                 <th scope="col">Update</th>
             </tr>
+            {% for col in left_table_rows %}
             <tr>
-                <th><input type="text" value="Bardy"></th>
-                <td><input type="text" value="Sword"></td>
-                <td><input type="text" value="A sharp sword"></td>
-                <td><input type="number" value="1" min="1" max="2147483647"></td>
+                <th><input type="text" value="{{col[0]}}"></th>
+                <td><input type="text" value="{{col[1]}}"></td>
+                <td><input type="text" value="{{col[2]}}"></td>
+                <td><input type="number" value="{{col[3]}}" min="1" max="2147483647"></td>
                 <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
+                <td><input type="submit" value="Update"></td>
             </tr>
-            <tr>
-                <th><input type="text" value="Bardy"></th>
-                <td><input type="text" value="stick"></td>
-                <td><input type="text" value="magical stick"></td>
-                <td><input type="number" value="1" min="1" max="2147483647"></td>
-                <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
-            </tr>
-            <tr>
-                <th><input type="text" value="Bardy"></th>
-                <td><input type="text" value="Coins"></td>
-                <td><input type="text" value="Game Currency"></td>
-                <td><input type="number" value="10000" min="1" max="2147483647"></td>
-                <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
-            </tr>
-            <tr>
-                <th><input type="text" value="evil_mage"></th>
-                <td><input type="text" value="Healing Potion"></td>
-                <td><input type="text" value="Heals 25 hit-points"></td>
-                <td><input type="number" value="8" min="1" max="2147483647"></td>
-                <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
-            </tr>
-            <tr>
-                <th><input type="text" value="Ranger_Rick"></th>
-                <td><input type="text" value="Stick"></td>
-                <td><input type="text" value="magical stick"></td>
-                <td><input type="number" value="1" min="1" max="2147483647"></td>
-                <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
-            </tr>
-            <tr>
-                <th><input type="text" value="Ranger_Rick"></th>
-                <td><input type="text" value="Coins"></td>
-                <td><input type="text" value="Game Currency"></td>
-                <td><input type="number" value="50" min="1" max="2147483647"></td>
-                <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
-            </tr>
+            {% endfor %}
         </table>
     </div>
 
     <div class="div_col content_div">
-        <h1>Ranger_Rick's Inventory Items List</h1><br>
+        <h1>Inventory Items List for all chars created by User 'joeuser5'</h1><br>
         <table class="table">
             <tr>
+                <th scope="col">name</th>
                 <th scope="col">item_name</th>
                 <th scope="col">item_description</th>
                 <th scope="col">quantity</th>
             </tr>
+            {% for col in right_table_rows %}
             <tr>
-                <td>Stick</td>
-                <td>magical stick</td>
-                <td>1</td>
+                <td>{{col[0]}}</td>
+                <td>{{col[1]}}</td>
+                <td>{{col[2]}}</td>
+                <td>{{col[3]}}</td>
             </tr>
-            <tr>
-                <td>Coins</td>
-                <td>Game Currency</td>
-                <td>50</td>
-            </tr>
+            {% endfor %}
         </table>
     </div>
 
@@ -103,21 +64,17 @@
             backend and that way it's a unique identifier to create the
             correct SQL INSERT Statements -->
             <option value="" selected="selected" disabled>Select Char</option>
-            <option value="Characters_1">Bardy</option>
-            <option value="Characters_2">Ranger_Rick</option>
-            <option value="Characters_3">evil_mage</option>
-            <option value="Characters_4">gollum</option>
-            <option value="Characters_5">fighter_orc</option>
+            {% for char in char_list %}
+            <option value="{{char[0]}}">{{char[0]}}</option>
+            {% endfor %}
         </select>
 </div>
 <div>
     <select id="Items" name="Items">
         <option value="" selected="selected" disabled >Select Item</option>
-        <option value="Items_1">Sword</option>
-        <option value="Items_2">stick</option>
-        <option value="Items_3">Coins</option>
-        <option value="Items_4">Healing Potion</option>
-        <option value="Items_5">Wooden Shield</option>
+        {% for item in item_list %}
+        <option value="{{item[0]}}">{{item[0]}}</option>
+        {% endfor %}
     </select>
 </div>
 
@@ -127,4 +84,5 @@
 </form>
 
 </div>
+
 {% endblock %}
