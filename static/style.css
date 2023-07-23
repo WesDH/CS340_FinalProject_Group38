@@ -9,8 +9,11 @@ html {
     background-color: #c7ccea !important;
 }
 
-.grow {
-      width: 50vw
+.flash_box {
+    display: flex;
+    width: 50vw;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -96,4 +99,16 @@ th, td {
 
 .footer_form > * {
     margin: 5px;
+}
+
+text.info {
+    color: #545454;
+}
+
+text.success {
+    color: #177a00;
+}
+
+text.error {
+    color: #c70000;
 }

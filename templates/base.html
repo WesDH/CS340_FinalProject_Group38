@@ -13,12 +13,13 @@
 <body>
     <!-- easy NAVBAR template -->
     <!--
-    1 # Havens, W (July 2022) Citation for the following HTML
+    1 # Havens, W (July 2023) Citation for the following HTML
     inclusive of contents inside <nav></nav> tags:
-    2 # Date: 07/21/2023
+    2 # Date accessed: 07/21/2023
     3 # Copied from Bootstrap
     4 # Modified navbar item names to match our requirements, custom CSS applied
-    5 # Source URL: https://getbootstrap.com/docs/5.0/components/navbar/-->
+    5 # Source URL: https://getbootstrap.com/docs/5.0/components/navbar/
+    -->
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Home</a>
@@ -39,8 +40,23 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/Inventory_Items.html">Inventory_Items</a>
                     </li>
-                    <li class="nav-item grow">
-                        <!-- Intentionally empty -->
+                    <li class="nav-item flash_box">
+                            <!--
+                            1 # Havens, W (July 2023)
+                                Citation for the following Jinja templating
+                            2 # Date accessed: 07/23/2023
+                            3 # Copied code snippet from "Message Flashing",
+                                with slight modifications
+                            5 # Source URL:
+                                https://flask.palletsprojects.com/en/2.3.x/patterns/flashing/
+                            -->
+                            {% with alerts = get_flashed_messages(with_categories=true) %}
+                                {% if alerts %}
+                                    {% for category, msg in alerts %}
+                                        <text class="{{category}}">{{msg}}</text>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/logout">Logout</a>
@@ -52,7 +68,12 @@
     </nav>
     <!-- END NAVBAR template  -->
 
+
+
     <div id="main_container">
+
+
+
         {% block content %}
         {% endblock %}
     </div>

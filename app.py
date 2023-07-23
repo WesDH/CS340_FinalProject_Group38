@@ -2,7 +2,7 @@
     Starter flask app to define primary routes.
 """
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
 from env.credentials import *
 import queries as sql
@@ -13,6 +13,7 @@ app.config['MYSQL_HOST'] = ENV_HOST
 app.config['MYSQL_USER'] = ENV_USERNAME
 app.config['MYSQL_PASSWORD'] = ENV_PASSWORD
 app.config['MYSQL_DB'] = ENV_DATABASE
+app.secret_key = session_key
 
 mysql = MySQL(app)
 
@@ -23,14 +24,14 @@ def generate_ddl():
         Drops all tables and recreates default DB with sample data
     :return: None
     """
+    cur = mysql.connection.cursor()
     schema = open('db/ddbtest.sql', mode='r')
     for statement in schema.readlines():
         statement = statement.rstrip()
-        cur = mysql.connection.cursor()
         cur.execute(statement)
         mysql.connection.commit()
-        cur.close()
         print(statement)
+    cur.close()
 
 
 # Populate the DB once on startup, for now, like this:
@@ -44,6 +45,7 @@ with app.app_context():
 @app.route("/logout", methods=['GET'])
 @app.route("/", methods=['GET', 'POST'])
 def home():
+    session["default"] = "default_session"
     return render_template('index.html')
 
 
@@ -62,20 +64,17 @@ def items():
             item_name = request.form['name']
             item_desc = request.form['description']
             is_weapon = 1 if request.form['is_weapon'] == 'True' else 0
-        except KeyError:
-            return redirect(url_for("items"))
-
-        cur = mysql.connection.cursor()
-        try:
+            cur = mysql.connection.cursor()
             cur.execute(sql.insert_new_item, (item_name, item_desc, is_weapon))
             mysql.connection.commit()
-        except MySQL.IntegrityError:
-            print("'Tegrity error on the DB..")
-            return "IntegrityError Key", 505
-        cur.close()
-
-        return redirect(url_for("items"))
+            cur.close()
+            flash(f"Row inserted for item: {item_name}", "info")
+            return redirect(url_for("items"))
+        except Exception as e:
+            flash(f"Row insertion error: {e}", "error")
+            return redirect(url_for("items"))
     else:
+        flash("route /items.html only accepts GET or POST requests", "error")
         return "route /items.html only accepts GET or POST requests", 505
 
 
@@ -108,18 +107,14 @@ def item_selection():
 
 @app.route("/reload_the_db", methods=['POST'])
 def reload_the_db():
-    print(request.json["page_name"])
-    page_name = request.json["page_name"]
     try:
         generate_ddl()
-        if page_name[0] == "Items.html":
-            return redirect(url_for("items"))
-        elif page_name[0] == "Inventory_Items.html":
-            return redirect(url_for("item_selection"))
-        else:
-            return redirect(url_for("home"))
-    except:
-        return "Backend Exception on DB reload", 505
+        flash("Database reloaded!", "success")
+        return "OK!", 202
+    except Exception as e:
+        print(e)
+        flash(f"Database reload error: {e}", "error")
+        return "Backend Exception on DB reload", 506
 
 
 if __name__ == "__main__":
