@@ -24,6 +24,7 @@ get_char_names = "SELECT Characters.character_name FROM Characters;"
 Items Table associated queries:
 """
 get_all_item_info =  "SELECT Items.item_id, Items.item_name, Items.item_description, Items.is_weapon FROM Items"
+insert_new_item = "INSERT INTO Items (item_name, item_description, is_weapon) VALUES (%s,%s,%s);"
 
 
 """

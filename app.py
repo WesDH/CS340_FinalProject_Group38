@@ -37,8 +37,8 @@ def generate_ddl():
 # ddbtest.sql is as single line of the schema as .execute only
 # Executes one line per execute.
 with app.app_context():
-    generate_ddl()  # Comment this during development to save some time
-    #pass
+    # generate_ddl()  # Comment this during development to save some time
+    pass
 
 
 @app.route("/logout", methods=['GET'])
@@ -49,13 +49,35 @@ def home():
 
 @app.route("/Items.html", methods=['GET', 'POST'])
 def items():
-    cur = mysql.connection.cursor()
-    items_info = cur.execute(sql.get_all_item_info)
-    if items_info > 0:
-        item_rows = cur.fetchall()
+    if request.method == 'GET':
+        cur = mysql.connection.cursor()
+        items_info = cur.execute(sql.get_all_item_info)
+        if items_info > 0:
+            item_rows = cur.fetchall()
 
-    return render_template('Items.html',
-                           item_rows=item_rows)
+        return render_template('Items.html',
+                               item_rows=item_rows)
+    elif request.method == 'POST':
+        try:
+            item_name = request.form['name']
+            item_desc = request.form['description']
+            is_weapon = 1 if request.form['is_weapon'] == 'True' else 0
+        except KeyError:
+            return redirect(url_for("items"))
+
+        cur = mysql.connection.cursor()
+        try:
+            cur.execute(sql.insert_new_item, (item_name, item_desc, is_weapon))
+            mysql.connection.commit()
+        except MySQL.IntegrityError:
+            print("'Tegrity error on the DB..")
+            return "IntegrityError Key", 505
+        cur.close()
+
+        return redirect(url_for("items"))
+    else:
+        return "route /items.html only accepts GET or POST requests", 505
+
 
 @app.route("/Inventory_Items.html", methods=['GET', 'POST'])
 def item_selection():
@@ -82,6 +104,22 @@ def item_selection():
                            right_table_rows=right_table_rows,
                            char_list=char_list,
                            item_list=item_list)
+
+
+@app.route("/reload_the_db", methods=['POST'])
+def reload_the_db():
+    print(request.json["page_name"])
+    page_name = request.json["page_name"]
+    try:
+        generate_ddl()
+        if page_name[0] == "Items.html":
+            return redirect(url_for("items"))
+        elif page_name[0] == "Inventory_Items.html":
+            return redirect(url_for("item_selection"))
+        else:
+            return redirect(url_for("home"))
+    except:
+        return "Backend Exception on DB reload", 505
 
 
 if __name__ == "__main__":
