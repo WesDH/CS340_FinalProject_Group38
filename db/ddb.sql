@@ -121,7 +121,9 @@ CREATE TABLE IF NOT EXISTS `Items` (
   `is_weapon` TINYINT(0) NOT NULL DEFAULT 0,
   PRIMARY KEY (`item_id`),
   UNIQUE INDEX `item_name_UNIQUE` (`item_name` ASC) VISIBLE,
-  UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) VISIBLE)
+  UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) VISIBLE,
+  CONSTRAINT `item_name_cant_be_empty_string`
+        CHECK (item_name <> ''))
 ENGINE = InnoDB;
 
 

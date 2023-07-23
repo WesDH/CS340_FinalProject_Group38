@@ -41,6 +41,13 @@ with app.app_context():
     generate_ddl()  # Comment this during development to save some time
     #pass
 
+def flash_err(e):
+    if len(e.args) > 1:
+        flash(f"Row insertion error: {e.args[1]}", "error")
+    elif e.args:
+        flash(f"Column: {e.args[0]}: {e}", "error")
+    else:
+        flash(f"Row insertion error: {e}", "error")
 
 @app.route("/logout", methods=['GET'])
 @app.route("/", methods=['GET', 'POST'])
@@ -71,7 +78,7 @@ def items():
             flash(f"Row inserted for item: {item_name}", "info")
             return redirect(url_for("items"))
         except Exception as e:
-            flash(f"Row insertion error: {e}", "error")
+            flash_err(e)
             return redirect(url_for("items"))
     else:
         flash("route /items.html only accepts GET or POST requests", "error")
