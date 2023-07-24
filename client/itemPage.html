@@ -2,9 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>itemPage</title>
+    <!-- Link in bootstrap CSS: -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="../static/style.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
+    <!-- easy NAVBAR template -->
+    <!--
+    1 # Havens, W (July 2022) Citation for the following HTML
+    inclusive of contents inside <nav></nav> tags:
+    2 # Date: 07/21/2023
+    3 # Copied from Bootstrap
+    4 # Modified navbar item names to match our requirements, custom CSS applied
+    5 # Source URL: https://getbootstrap.com/docs/5.0/components/navbar/-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="charPage.html">charPage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dungeonPage.html">dungeonPage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="itemPage.html">itemPage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="charSelection.html">charSelection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="dungeonSelection.html">dungeonSelection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="itemSelection.html">itemSelection</a>
+                    </li>
+                </ul>
+            </div>
+            <button>Reload database to defaults</button>
+        </div>
+    </nav>
+    <!-- END NAVBAR template  -->
 
+
+    <!-- main containers -->
+    <div id="main_container">
+        <div class="char_container content_div">
+            <h1>Healing Potion</h1>
+            <br>
+        </div>
+
+        <div class="item_info content_div">
+            <h1>Item Description</h1><br>
+            <h5>"Heals 25 hit-points"</h5>
+        </div>
+
+        <div class="item_info content_div">
+            <h1>Item Details</h1><br>
+            <table class="table">
+                <tr>
+                    <th scope="col">is weapon</th>
+                </tr>
+                <tr>  
+                    <th><input type="text" value="No"></th>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+
+
+
+    <!-- END main containers -->
+
+
+
+
+
+
+    <!-- Link in bootstrap JS: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

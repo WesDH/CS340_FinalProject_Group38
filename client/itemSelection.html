@@ -5,7 +5,7 @@
     <title>itemSelection</title>
     <!-- Link in bootstrap CSS: -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="src/style.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="../static/style.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
     <!-- easy NAVBAR template -->
@@ -28,10 +28,16 @@
                         <a class="nav-link" href="charPage.html">charPage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dungeonPage.html">dungeonsPage</a>
+                        <a class="nav-link" href="dungeonPage.html">dungeonPage</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="itemPage.html">itemPage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="charSelection.html">charSelection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="dungeonSelection.html">dungeonSelection</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="itemSelection.html">itemSelection</a>
@@ -46,16 +52,17 @@
 
     <!-- main containers -->
     <div id="main_container">
-        <div class="left_div_container content_div">
-            <h1>All Inventory Items</h1><br>
+        <div class="item_div_container content_div">
+            <h1 class="inventory_all">All Inventory Items</h1>
             <table class="table">
                 <tr>
-                    <th scope="col">character_name</th>
-                    <th scope="col">item_name</th>
-                    <th scope="col">item_description</th>
+                    <th scope="col">character name</th>
+                    <th scope="col">item name</th>
+                    <th scope="col">item description</th>
                     <th scope="col">quantity</th>
                     <th scope="col">Delete</th>
                     <th scope="col">Update</th>
+                    <th scope="col">View</th>
                 </tr>
                 <tr>
                     <th><input type="text" value="Bardy"></th>
@@ -64,6 +71,7 @@
                     <td><input type="number" value="1" min="1" max="2147483647"></td>
                     <td><input type="submit" value="X"></td>
                     <td><input type="submit"` value="Update"></td>
+                    <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
                 </tr>
                 <tr>
                     <th><input type="text" value="Bardy"></th>
@@ -72,6 +80,7 @@
                     <td><input type="number" value="1" min="1" max="2147483647"></td>
                     <td><input type="submit" value="X"></td>
                     <td><input type="submit"` value="Update"></td>
+                    <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
                 </tr>
                 <tr>
                     <th><input type="text" value="Bardy"></th>
@@ -80,6 +89,7 @@
                     <td><input type="number" value="10000" min="1" max="2147483647"></td>
                     <td><input type="submit" value="X"></td>
                     <td><input type="submit"` value="Update"></td>
+                    <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
                 </tr>
                 <tr>
                     <th><input type="text" value="evil_mage"></th>
@@ -88,6 +98,7 @@
                     <td><input type="number" value="8" min="1" max="2147483647"></td>
                     <td><input type="submit" value="X"></td>
                     <td><input type="submit"` value="Update"></td>
+                    <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
                 </tr>
                 <tr>
                     <th><input type="text" value="Ranger_Rick"></th>
@@ -96,6 +107,7 @@
                     <td><input type="number" value="1" min="1" max="2147483647"></td>
                     <td><input type="submit" value="X"></td>
                     <td><input type="submit"` value="Update"></td>
+                    <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
                 </tr>
                 <tr>
                     <th><input type="text" value="Ranger_Rick"></th>
@@ -104,6 +116,7 @@
                     <td><input type="number" value="50" min="1" max="2147483647"></td>
                     <td><input type="submit" value="X"></td>
                     <td><input type="submit"` value="Update"></td>
+                    <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
                 </tr>
             </table>
         </div>
@@ -115,16 +128,19 @@
                     <th scope="col">item_name</th>
                     <th scope="col">item_description</th>
                     <th scope="col">quantity</th>
+                    <th scope="col">view</th>
                 </tr>
                 <tr>
                     <td>Stick</td>
                     <td>magical stick</td>
                     <td>1</td>
+                    <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
                 </tr>
                 <tr>
                     <td>Coins</td>
                     <td>Game Currency</td>
                     <td>50</td>
+                    <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
                 </tr>
             </table>
         </div>
