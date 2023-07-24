@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}
-    Characters:Items Tables (M:N), with Inventory_Items as Junction Table
+{% block title %}   
+    Item Selection:   displays 1-2 tables, one of all items from characters made from all users on the site, and another for items held by a character made from a sole logged-in user. If the user is not logged in, then only the "all items" table displays. This page also allows for insertion into the Inventory_Items table for a given character, as well as updates and deletes.
 {% endblock %}
 
 {% block content %}

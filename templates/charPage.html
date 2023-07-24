@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-    Char Page representing a single char viewed and demonstrating Chars M:N relationships with other tables
+    Character Page:    represents a single character viewed from the Characters table. Displays which Spells, Abilities, and Items are connected to that Character. Here users can also insert a new Spell or new Ability to the Spells and Abilities tables.
 {% endblock %}
 
 {% block content %}
@@ -26,8 +26,8 @@
             <th scope="col">spell damage</th>
         </tr>
         <tr>
-            <th><input type="text" value="Elf Punch"></th>
-            <td><input type="number" value="5"></td>
+            <td>Elf Punch</td>
+            <td>5</td>
         </tr>
     </table>
 </div>
@@ -41,9 +41,9 @@
             <th scope="col">quantity</th>
         </tr>
         <tr>
-            <td><input type="text" value="Healing Potion"></td>
-            <td><input type="text" value="Heals 25 hit-points"></td>
-            <td><input type="number" value="8" min="1" max="2147483647"></td>
+            <td>Healing Potion</td>
+            <td>Heals 25 hit-points</td>
+            <td>8</td>
         </tr>
     </table>
 </div>
@@ -57,19 +57,63 @@
             <th scope="col">dungeon strength</th>
         </tr>
         <tr>
-            <th><input type="text" value="Hope"></th>
-            <td><input type="number" value="2"></td>
-            <td><input type="text" value="Temple of Time"></td>
+            <td>Hope</td>
+            <td>2</td>
+            <td>Temple of Time</td>
         </tr>
         <tr>
-            <th><input type="text" value="Dread"></th>
-            <td><input type="number" value="3"></td>
-            <td><input type="text" value="Temple of Time"></td>
+            <td>Dread</td>
+            <td>3</td>
+            <td>Temple of Time</td>
         </tr>
     </table>
 </div>
 
 <div class="break"></div>
+
+<div class="bottom_div_container content_div">
+    <h3 class="create_char_h3">Create a New Spell</h3>
+
+    <form class="footer_form" method="POST">
+        <table class="table">
+            <tr>
+                <th scope="col">spell name</th>
+                <th scope="col">spell damage</th>
+            </tr>
+            <tr>
+                <td><input type="text" value=""></td>
+                <td><input type="text" value=""></td>
+            </tr>
+        </table>
+
+        <input type="submit" value="INSERT">
+
+    </form>
+
+</div>
+
+<div class="bottom_div_container content_div">
+    <h3 class="create_char_h3">Create a New Ability</h3>
+
+    <form class="footer_form" method="POST">
+        <table class="table">
+            <tr>
+                <th scope="col">ability name</th>
+                <th scope="col">ability damage</th>
+                <th scope="col">dungeon strength</th>
+            </tr>
+            <tr>
+                <td><input type="text" value=""></td>
+                <td><input type="text" value=""></td>
+                <td><input type="text" value=""></td>
+            </tr>
+        </table>
+
+        <input type="submit" value="INSERT">
+
+    </form>
+
+</div>
 
 
 

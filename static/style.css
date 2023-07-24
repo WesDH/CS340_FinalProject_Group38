@@ -76,6 +76,7 @@ html {
 .char_info {
     display: flex;
     flex-direction: column;
+    margin: 5px;
     background-color: #8e96a6;
     border: 3px solid #666c7a;
     max-width: 40%;
