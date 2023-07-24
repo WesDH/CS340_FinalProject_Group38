@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}
+    Char Page representing a single char viewed and demonstrating Chars M:N relationships with other tables
+{% endblock %}
+
+{% block content %}
+
+<div class="char_container content_div">
+    <h1>Evil Mage</h1>
+    <br>
+</div>
+
+<div class="char_container content_div">
+    <h5>Race: Other</h5>
+    <h5>Class: Magician</h5>
+    <h5>Creature Type: Demon</h5>
+    <h5>Alignment: Chaotic Evil</h5>
+    <br>
+</div>
+
+<div class="char_info content_div">
+    <h1>(M:N) Evil Mage's Spells</h1><br>
+    <table class="table">
+        <tr>
+            <th scope="col">spell name</th>
+            <th scope="col">spell damage</th>
+        </tr>
+        <tr>
+            <th><input type="text" value="Elf Punch"></th>
+            <td><input type="number" value="5"></td>
+        </tr>
+    </table>
+</div>
+
+<div class="char_info content_div">
+    <h1>(M:N) Evil Mage's Inventory</h1><br>
+    <table class="table">
+        <tr>
+            <th scope="col">item name</th>
+            <th scope="col">item description</th>
+            <th scope="col">quantity</th>
+        </tr>
+        <tr>
+            <td><input type="text" value="Healing Potion"></td>
+            <td><input type="text" value="Heals 25 hit-points"></td>
+            <td><input type="number" value="8" min="1" max="2147483647"></td>
+        </tr>
+    </table>
+</div>
+
+<div class="char_info content_div">
+    <h1>(M:N) Evil Mage's Abilities</h1><br>
+    <table class="table">
+        <tr>
+            <th scope="col">ability name</th>
+            <th scope="col">ability damage</th>
+            <th scope="col">dungeon strength</th>
+        </tr>
+        <tr>
+            <th><input type="text" value="Hope"></th>
+            <td><input type="number" value="2"></td>
+            <td><input type="text" value="Temple of Time"></td>
+        </tr>
+        <tr>
+            <th><input type="text" value="Dread"></th>
+            <td><input type="number" value="3"></td>
+            <td><input type="text" value="Temple of Time"></td>
+        </tr>
+    </table>
+</div>
+
+<div class="break"></div>
+
+
+
+
+
+{% endblock %}

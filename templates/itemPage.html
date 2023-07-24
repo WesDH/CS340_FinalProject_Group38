@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+    Item Page representing a single item view from Items table
+{% endblock %}
+
+{% block content %}
+
+    <div class="char_container content_div">
+        <h1>Healing Potion</h1>
+        <br>
+    </div>
+
+    <div class="item_info content_div">
+        <h1>Item Description</h1><br>
+        <h5>"Heals 25 hit-points"</h5>
+    </div>
+
+    <div class="item_info content_div">
+        <h1>Item Details</h1><br>
+        <table class="table">
+            <tr>
+                <th scope="col">is weapon</th>
+            </tr>
+            <tr>
+                <th><input type="text" value="No"></th>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}
+    Item Page representing a single item from Items table
+{% endblock %}
+
+{% block content %}
+
+<div class="left_div_container content_div">
+    <h1>All Characters</h1><br>
+    <table class="table">
+        <tr>
+            <th scope="col">character name</th>
+            <th scope="col">race</th>
+            <th scope="col">class</th>
+            <th scope="col">creature type</th>
+            <th scope="col">alignment</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+            <th scope="col">View</th>
+        </tr>
+        <tr>
+            <th><input type="text" value="Bardy"></th>
+            <td><input type="text" value="Half-Elf"></td>
+            <td><input type="text" value="Bard"></td>
+            <td><input type="text" value="Humanoid"></td>
+            <td><input type="text" value="Lawful Good"></td>
+            <td><input type="submit" value="X"></td>
+            <td><input type="submit"` value="Update"></td>
+            <td><a class="nav-link view_button" href="charPage.html">View</a></td>
+        </tr>
+        <tr>
+            <th><input type="text" value="Ranger_Rick"></th>
+            <td><input type="text" value="Elf"></td>
+            <td><input type="text" value="Ranger"></td>
+            <td><input type="text" value="Humanoid"></td>
+            <td><input type="text" value="Lawful Neutral"></td>
+            <td><input type="submit" value="X"></td>
+            <td><input type="submit"` value="Update"></td>
+            <td><a class="nav-link view_button" href="charPage.html">View</a></td>
+        </tr>
+        <tr>
+            <th><input type="text" value="Evil_Mage"></th>
+            <td><input type="text" value="Other"></td>
+            <td><input type="text" value="Magician"></td>
+            <td><input type="text" value="Demon"></td>
+            <td><input type="text" value="Chaotic Evil"></td>
+            <td><input type="submit" value="X"></td>
+            <td><input type="submit"` value="Update"></td>
+            <td><a class="nav-link view_button" href="charPage.html">View</a></td>
+        </tr>
+    </table>
+</div>
+
+<div class="div_col content_div">
+    <h1>User007's Characters</h1><br>
+    <table class="table">
+        <tr>
+            <th scope="col">character name</th>
+            <th scope="col">race</th>
+            <th scope="col">class</th>
+            <th scope="col">creature type</th>
+            <th scope="col">alignment</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+            <th scope="col">View</th>
+        </tr>
+        <tr>
+            <th><input type="text" value="Evil_Mage"></th>
+            <td><input type="text" value="Other"></td>
+            <td><input type="text" value="Magician"></td>
+            <td><input type="text" value="Demon"></td>
+            <td><input type="text" value="Chaotic Evil"></td>
+            <td><input type="submit" value="X"></td>
+            <td><input type="submit"` value="Update"></td>
+            <td><a class="nav-link view_button" href="charPage.html">View</a></td>
+        </tr>
+    </table>
+</div>
+
+<div class="break"></div> <!-- break to a new row -->
+
+<!-- HTML form  -->
+<div class="bottom_div_container content_div">
+    <h3 class="create_char_h3">Create a New Character</h3>
+
+    <form class="footer_form" method="POST">
+        <table class="table">
+            <tr>
+                <th scope="col">character name</th>
+                <th scope="col">race</th>
+                <th scope="col">class</th>
+                <th scope="col">creature type</th>
+                <th scope="col">alignment</th>
+            </tr>
+            <tr>
+                <th><input type="text" value=""></th>
+                <td><input type="text" value=""></td>
+                <td><input type="text" value=""></td>
+                <td><input type="text" value=""></td>
+                <td><input type="text" value=""></td>
+            </tr>
+        </table>
+
+        <input type="submit" value="INSERT">
+
+    </form>
+
+</div>
+
+
+
+
+
+{% endblock %}

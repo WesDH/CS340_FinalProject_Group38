@@ -14,6 +14,7 @@
                 <th scope="col">quantity</th>
                 <th scope="col">Delete</th>
                 <th scope="col">Update</th>
+                <th scope="col">View</th>
             </tr>
             {% for row in left_table_rows %}
             <tr>
@@ -23,19 +24,21 @@
                 <td><input type="number" value="{{row[3]}}" min="1" max="2147483647"></td>
                 <td><input type="submit" value="X"></td>
                 <td><input type="submit" value="Update"></td>
+                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
             </tr>
             {% endfor %}
         </table>
     </div>
 
     <div class="div_col content_div">
-        <h1>Inventory Items List for all chars created by User 'joeuser5'</h1><br>
+        <h1>joeuser5's Inventory Items Items List</h1>
         <table class="table">
             <tr>
                 <th scope="col">name</th>
                 <th scope="col">item_name</th>
                 <th scope="col">item_description</th>
                 <th scope="col">quantity</th>
+                <th scope="col">View</th>
             </tr>
             {% for row in right_table_rows %}
             <tr>
@@ -43,6 +46,7 @@
                 <td>{{row[1]}}</td>
                 <td>{{row[2]}}</td>
                 <td>{{row[3]}}</td>
+                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>
             </tr>
             {% endfor %}
         </table>

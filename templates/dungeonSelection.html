@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}
+    Item Page representing a single item from Items table
+{% endblock %}
+
+{% block content %}
+
+    <div class="left_div_container content_div">
+        <h1>All Dungeons</h1><br>
+        <table class="table">
+            <tr>
+                <th scope="col">dungeon name</th>
+                <th scope="col">dungeon type</th>
+                <th scope="col">dungeon description</th>
+                <th scope="col">damage multiplier</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
+                <th scope="col">View</th>
+            </tr>
+            <tr>
+                <th><input type="text" value="Zora's Domain"></th>
+                <td><input type="text" value="Demon"></td>
+                <td><input type="text" value="A cave with water and fountains"></td>
+                <td><input type="number" value="2" min="1" max="2147483647"></td>
+                <td><input type="submit" value="X"></td>
+                <td><input type="submit"` value="Update"></td>
+                <td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
+            </tr>
+            <tr>
+                <th><input type="text" value="Temple of Time"></th>
+                <td><input type="text" value="Fairy"></td>
+                <td><input type="text" value="A temple with flute music"></td>
+                <td><input type="number" value="3" min="1" max="2147483647"></td>
+                <td><input type="submit" value="X"></td>
+                <td><input type="submit"` value="Update"></td>
+                <td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
+            </tr>
+            <tr>
+                <th><input type="text" value="Bowser's Castle"></th>
+                <td><input type="text" value="Monster"></td>
+                <td><input type="text" value="A castle with pirhana plants and evil mushrooms"></td>
+                <td><input type="number" value="2.5" min="1" max="2147483647"></td>
+                <td><input type="submit" value="X"></td>
+                <td><input type="submit"` value="Update"></td>
+                <td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="div_col content_div">
+        <h1>User007's Dungeons</h1><br>
+        <table class="table">
+            <tr>
+                <th scope="col">dungeon name</th>
+                <th scope="col">dungeon type</th>
+                <th scope="col">dungeon description</th>
+                <th scope="col">damage multiplier</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
+                <th scope="col">View</th>
+            </tr>
+            <tr>
+                <th><input type="text" value="Zora's Domain"></th>
+                <td><input type="text" value="Demon"></td>
+                <td><input type="text" value="A cave with water and fountains"></td>
+                <td><input type="number" value="2" min="1" max="2147483647"></td>
+                <td><input type="submit" value="X"></td>
+                <td><input type="submit"` value="Update"></td>
+                <td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="break"></div> <!-- break to a new row -->
+
+    <!-- HTML form  -->
+    <div class="bottom_div_container content_div">
+        <h3 class="create_char_h3">Create a New Dungeon</h3>
+
+        <form class="footer_form" method="POST">
+            <table class="table">
+                <tr>
+                    <th scope="col">dungeon name</th>
+                    <th scope="col">dungeon type</th>
+                    <th scope="col">dungeon description</th>
+                    <th scope="col">damage multiplier</th>
+                </tr>
+                <tr>
+                    <th><input type="text" value=""></th>
+                    <td><input type="text" value=""></td>
+                    <td><input type="text" value=""></td>
+                    <td><input type="text" value=""></td>
+                </tr>
+            </table>
+
+            <input type="submit" value="INSERT">
+
+        </form>
+
+    </div>
+
+
+
+
+
+{% endblock %}

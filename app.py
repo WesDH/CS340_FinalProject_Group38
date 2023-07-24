@@ -63,6 +63,46 @@ def index():
                            user_rows=user_rows)
 
 
+
+
+
+
+@app.route("/charPage.html", methods=['GET'])
+def char_page():
+    return render_template('charPage.html')
+
+@app.route("/dungeonPage.html", methods=['GET'])
+def dungeon_page():
+    return render_template('dungeonPage.html')
+
+@app.route("/itemPage.html", methods=['GET'])
+def item_page():
+    return render_template('itemPage.html')
+
+@app.route("/dungeonSelection.html", methods=['GET'])
+def dungeon_selection():
+    return render_template('dungeonSelection.html')
+
+@app.route("/charSelection.html", methods=['GET'])
+def char_selection():
+    return render_template('charSelection.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route("/Items.html", methods=['GET', 'POST'])
 def items():
     if request.method == 'GET':

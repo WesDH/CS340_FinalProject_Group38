@@ -35,10 +35,19 @@
                         <a class="nav-link" href="dungeonPage.html">dungeonsPage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Items.html">Items</a>
+                        <a class="nav-link" href="/itemPage.html">itemPage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/Inventory_Items.html">Inventory_Items</a>
+                        <a class="nav-link" href="/Items.html">allItems</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/charSelection.html">charSelection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dungeonSelection.html">dungeonSelection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/Inventory_Items.html">itemSelection</a>
                     </li>
                     <li class="nav-item flash_box">
                             <!--
@@ -62,8 +71,9 @@
                         <a class="nav-link" aria-current="page" href="/logout">Logout</a>
                     </li>
                 </ul>
+                <button id="reload_db_btn">Reload database to defaults</button>
             </div>
-            <button id="reload_db_btn">Reload database to defaults</button>
+
         </div>
     </nav>
     <!-- END NAVBAR template  -->
@@ -76,6 +86,8 @@
 
         {% block content %}
         {% endblock %}
+        <div class="break"></div>
+        <small>CS 340 Summer 2023 Final Project: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens</small>
     </div>
 
 
