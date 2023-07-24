@@ -51,9 +51,16 @@ def flash_err(e):
 
 @app.route("/logout", methods=['GET'])
 @app.route("/", methods=['GET', 'POST'])
-def home():
+@app.route("/index.html", methods=['GET'])
+def index():
     session["default"] = "default_session"
-    return render_template('index.html')
+    cur = mysql.connection.cursor()
+    user_info = cur.execute(sql.get_all_users)
+    if user_info > 0:
+        user_rows = cur.fetchall()
+
+    return render_template('index.html',
+                           user_rows=user_rows)
 
 
 @app.route("/Items.html", methods=['GET', 'POST'])
