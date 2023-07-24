@@ -28,6 +28,11 @@ insert_new_item = "INSERT INTO Items (item_name, item_description, is_weapon) VA
 
 
 """
+Queries used by User_Accounts (login) page:
+"""
+get_all_users = "SELECT * FROM User_Accounts;"
+
+"""
 Queries used by multiple pages:
 """
 # For drop down menu functionality:

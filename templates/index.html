@@ -1,12 +1,40 @@
 {% extends "base.html" %}
 {% block title %}
-    Login Page
+    Login Page / Welcome to User_Accounts Table View
 {% endblock %}
 
 {% block content %}
-<div>
-    <h1>Dungeons and Dragon's Character Manager</h1>
-    <h3>Welcome to pure D&B fantasy</h3>
-    <h3>Please login:</h3>
-</div>
+
+    <div class="left_div_container content_div">
+        <h1>User_Accounts Administrator View</h1><br>
+        <table class="table">
+            <tr>
+                <th scope="col">username</th>
+                <th scope="col">password</th>
+                <th scope="col">email</th>
+            </tr>
+            {% for row in user_rows %}
+            <tr>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="div_col content_div">
+        <h1>Dungeons and Dragon's Character Manager</h1>
+        <h3>
+            <p>Please login:</p>
+        </h3>
+        <input type="text" value="username">
+        <input type="text" value="password">
+        <div>
+            <input type="submit" value="INSERT USER">
+            <input type="submit" value="LOGIN">
+        </div>
+    </div>
+
+
 {% endblock %}
