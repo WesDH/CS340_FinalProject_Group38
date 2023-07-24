@@ -1,67 +1,74 @@
 {% extends "base.html" %}
 {% block title %}
-    Character Page:    represents a single character viewed from the Characters table. Displays which Spells, Abilities, and Items are connected to that Character. Here users can also insert a new Spell or new Ability to the Spells and Abilities tables.
+    Spells/Abilities: Shows Spells/Abilities for all chars by default. Also plan to show individual char if char was viewed from charSelection page. Here users can also insert a new Spell or new Ability to the Spells and Abilities tables.
 {% endblock %}
 
 {% block content %}
 
-<div class="char_container content_div">
-    <h1>Evil Mage</h1>
-    <br>
-</div>
+<!--<div class="char_container content_div">-->
+<!--    <h1>Evil Mage</h1>-->
+<!--    <br>-->
+<!--</div>-->
 
-<div class="char_container content_div">
-    <h5>Race: Other</h5>
-    <h5>Class: Magician</h5>
-    <h5>Creature Type: Demon</h5>
-    <h5>Alignment: Chaotic Evil</h5>
-    <br>
-</div>
+<!--<div class="char_container content_div">-->
+<!--    <h5>Race: Other</h5>-->
+<!--    <h5>Class: Magician</h5>-->
+<!--    <h5>Creature Type: Demon</h5>-->
+<!--    <h5>Alignment: Chaotic Evil</h5>-->
+<!--    <br>-->
+<!--</div>-->
 
 <div class="char_info content_div">
-    <h1>(M:N) Evil Mage's Spells</h1><br>
+    <h1>(M:N) All Chars Spells</h1><br>
+    <small>Note: We plan that this will only display Spells for a certain user if that char was VIEWED on charPage.</small>
     <table class="table">
         <tr>
+            <th scope="col">Character name</th>
             <th scope="col">spell name</th>
             <th scope="col">spell damage</th>
         </tr>
         <tr>
+            <td>Evil Mage</td>
             <td>Elf Punch</td>
             <td>5</td>
         </tr>
     </table>
 </div>
 
-<div class="char_info content_div">
-    <h1>(M:N) Evil Mage's Inventory</h1><br>
-    <table class="table">
-        <tr>
-            <th scope="col">item name</th>
-            <th scope="col">item description</th>
-            <th scope="col">quantity</th>
-        </tr>
-        <tr>
-            <td>Healing Potion</td>
-            <td>Heals 25 hit-points</td>
-            <td>8</td>
-        </tr>
-    </table>
-</div>
+<!--<div class="char_info content_div">-->
+<!--    <h1>(M:N) Evil Mage's Inventory</h1><br>-->
+<!--    <table class="table">-->
+<!--        <tr>-->
+<!--            <th scope="col">item name</th>-->
+<!--            <th scope="col">item description</th>-->
+<!--            <th scope="col">quantity</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Healing Potion</td>-->
+<!--            <td>Heals 25 hit-points</td>-->
+<!--            <td>8</td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</div>-->
 
 <div class="char_info content_div">
-    <h1>(M:N) Evil Mage's Abilities</h1><br>
+    <h1>(M:N) All Chars's Abilities</h1><br>
+    <small>Note: We plan that this will only display Abilities for a certain user if that username was VIEWED on charPage..</small>
     <table class="table">
         <tr>
+            <th scope="col">Character name</th>
             <th scope="col">ability name</th>
             <th scope="col">ability damage</th>
             <th scope="col">dungeon strength</th>
         </tr>
         <tr>
+            <td>Evil Mage</td>
             <td>Hope</td>
             <td>2</td>
             <td>Temple of Time</td>
         </tr>
         <tr>
+            <td>Evil Mage</td>
             <td>Dread</td>
             <td>3</td>
             <td>Temple of Time</td>

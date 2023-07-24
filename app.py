@@ -38,8 +38,8 @@ def generate_ddl():
 # ddbtest.sql is as single line of the schema as .execute only
 # Executes one line per execute.
 with app.app_context():
-    generate_ddl()  # Comment this during development to save some time
-    #pass
+    #generate_ddl()  # Comment this during development to save some time
+    pass
 
 def flash_err(e):
     if len(e.args) > 1:

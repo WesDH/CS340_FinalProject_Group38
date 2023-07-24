@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-    Login Page / Welcome to User_Accounts Table View
+    Welcome to User_Accounts Table View
 {% endblock %}
 
 {% block content %}
@@ -26,14 +26,40 @@
     <div class="div_col content_div">
         <h1>Dungeons and Dragon's Character Manager</h1>
         <h3>
-            <p>Please login:</p>
+            <p>Select a Specific User for a more personalized view:</p>
         </h3>
-        <input type="text" value="username">
-        <input type="text" value="password">
         <div>
-            <input type="submit" value="INSERT USER">
-            <input type="submit" value="LOGIN">
+            <form class="footer_form" method="POST" action="/">
+                <label for="Characters"></label><select id="Characters" name="Characters">
+                        <!-- value attribute example below would be a composite
+                        between Table Name and the character_id. Flask/Jina will generate
+                        all of this iteratively.
+                        On submit, this would be sent back to the
+                        backend and that way it's a unique identifier to create the
+                        correct SQL INSERT Statements -->
+                        <option value="" selected="selected" disabled>Select User</option>
+                        <option value="Daniel">Daniel</option>
+                        <option value="wdean123">wdean123</option>
+                        <option value="joe_user5">joe_user5</option>
+                        <option value="new_user01">new_user01</option>
+                    </select>
+                <input type="submit" value="SELECT">
+            </form>
         </div>
+    </div>
+
+        <div class="break"></div>
+    <!-- HTML form  -->
+    <div>
+        <h3>Insert a New User</h3>
+
+        <form class="footer_form" method="POST" action="/">
+            <input type="text" id="users_name" name="name" placeholder="username">
+            <input type="text" id="password" name="description" placeholder="password">
+            <input type="email" id="email" name="description" placeholder="email">
+        <input id="Users_INSERT" type="submit" value="INSERT">
+        </form>
+
     </div>
 
 
