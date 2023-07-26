@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <title>
+
+    Item Selection:   displays 1-2 tables, one of all items from characters made from all users on the site, and another for items held by a character made from a sole selected user. If the user is not selected, then only the "all items" table displays. This page also allows for insertion into the Inventory_Items table for a given character, as well as updates and deletes.
+
+    </title>
+    <!-- Link in bootstrap CSS: -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+<!-- START MDL LAYOUT   -->
+<div class="mdl-layout mdl-js-layout">
+
+
+  <header class="mdl-layout__header mdl-layout__header--scroll">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Dungeons and Dragons Character Manager</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Link</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">D&D Manager</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+    </nav>
+  </div>
+
+
+  <main class="mdl-layout__content">
+    <div class="page-content">
+
+
+
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">All Inventory Items (M:N)</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+      <tr>
+                    <th>Char Name</th>
+                    <th>Item Name</th>
+                    <th>Item Description</th>
+                    <th>Item Qty</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                    <th>View<br>Item</th>
+      </tr>
+    </thead>
+    <tbody>
+                <tr>
+                <td>
+                    <div class="mdl-textfield fat mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Ranger_Rick">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield normal mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Coins">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield fatter mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield thinner mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="number" value="500" min="0" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       <i class="material-icons md-18">close</i>
+                    </button>
+                </td>
+                <td>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       Update
+                    </button>
+                </td>
+                <td>
+                    <a class="view_link" href="/itemPage.html">View</a>
+                </td>
+                </tr>
+ <tr>
+                <td>
+                    <div class="mdl-textfield fat mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Ranger_Rick">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield normal mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Coins">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield fatter mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield thinner mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="number" value="500" min="0" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       <i class="material-icons md-18">close</i>
+                    </button>
+                </td>
+                <td>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       Update
+                    </button>
+                </td>
+                <td>
+                    <a class="view_link" href="/itemPage.html">View</a>
+                </td>
+                </tr> <tr>
+                <td>
+                    <div class="mdl-textfield fat mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Ranger_Rick">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield normal mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Coins">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield fatter mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield thinner mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="number" value="500" min="0" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       <i class="material-icons md-18">close</i>
+                    </button>
+                </td>
+                <td>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       Update
+                    </button>
+                </td>
+                <td>
+                    <a class="view_link" href="/itemPage.html">View</a>
+                </td>
+                </tr> <tr>
+                <td>
+                    <div class="mdl-textfield fat mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Ranger_Rick">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield normal mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Coins">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield fatter mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield thinner mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="number" value="500" min="0" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       <i class="material-icons md-18">close</i>
+                    </button>
+                </td>
+                <td>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       Update
+                    </button>
+                </td>
+                <td>
+                    <a class="view_link" href="/itemPage.html">View</a>
+                </td>
+                </tr>
+
+
+    </tbody>
+  </table>
+
+
+  </div>
+</div>
+
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Ranger_Rick's Inventory Items (M:N)</h2>
+  </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Char Name</th>
+                    <th>Item Name</th>
+                    <th>Item Description</th>
+                    <th>Item Qty</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                    <th>View<br>Item</th>
+                </tr>
+            </thead>
+            <tbody>
+
+<tr>
+                <td>
+                    <div class="mdl-textfield fat mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Ranger_Rick">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield normal mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Coins">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield fatter mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield thinner mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="number" value="500" min="0" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       <i class="material-icons md-18">close</i>
+                    </button>
+                </td>
+                <td>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       Update
+                    </button>
+                </td>
+                <td>
+                    <a class="view_link" href="/itemPage.html">View</a>
+                </td>
+                </tr>
+ <tr>
+                <td>
+                    <div class="mdl-textfield fat mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Ranger_Rick">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield normal mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Coins">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield fatter mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield thinner mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="number" value="500" min="0" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       <i class="material-icons md-18">close</i>
+                    </button>
+                </td>
+                <td>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       Update
+                    </button>
+                </td>
+                <td>
+                    <a class="view_link" href="/itemPage.html">View</a>
+                </td>
+                </tr> <tr>
+                <td>
+                    <div class="mdl-textfield fat mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Ranger_Rick">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield normal mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Coins">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield fatter mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield thinner mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="number" value="500" min="0" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       <i class="material-icons md-18">close</i>
+                    </button>
+                </td>
+                <td>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       Update
+                    </button>
+                </td>
+                <td>
+                    <a class="view_link" href="/itemPage.html">View</a>
+                </td>
+                </tr> <tr>
+                <td>
+                    <div class="mdl-textfield fat mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Ranger_Rick">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield normal mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Coins">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield fatter mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="mdl-textfield thinner mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="number" value="500" min="0" value="Game Currency">
+                        <label class="mdl-textfield__label" ></label>
+                    </div>
+                </td>
+                <td>
+                    <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       <i class="material-icons md-18">close</i>
+                    </button>
+                </td>
+                <td>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                       Update
+                    </button>
+                </td>
+                <td>
+                    <a class="view_link" href="/itemPage.html">View</a>
+                </td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+    <!--   DIV END MDL PAGE CONTENT-->
+    </div>
+
+  <!-- END mdl-layout__content-->
+  </main>
+
+    <footer class = "mdl-mini-footer">
+       <div class = "mdl-mini-footer__left-section">
+
+           <div class = mdl-mini-footer__link-list>
+               <ul>CS 340 Summer 2023 Final Project: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens</ul>
+               <ul>|</ul>
+               <ul>
+                   <text>Reload DB --->&nbsp&nbsp&nbsp</text>
+                   <a href="/reload_the_db" title="RELOAD DATABASE"><i class="fa fa-database fa-2x" aria-hidden="true"></i></a>
+               </ul>
+           </div>
+       </div>
+    </footer>
+
+
+<!-- END MDL LAYOUT   -->
+</div>
+
+
+
+    <!-- END NAVBAR template  -->
+
+
+
+<!--    <div id="main_container">-->
+
+
+
+
+<!--    <div class="left_div_container content_div">-->
+<!--        <h1>All Inventory Items (M:N)</h1><br>-->
+<!--        <table class="table">-->
+<!--            <tr>-->
+<!--                <th scope="col">character_name</th>-->
+<!--                <th scope="col">item_name</th>-->
+<!--                <th scope="col">item_description</th>-->
+<!--                <th scope="col">quantity</th>-->
+<!--                <th scope="col">Delete</th>-->
+<!--                <th scope="col">Update</th>-->
+<!--                <th scope="col">View</th>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th><input type="text" value="Bardy"></th>-->
+<!--                <td><input type="text" value="Coins"></td>-->
+<!--                <td><input type="text" value="Game Currency"></td>-->
+<!--                <td><input type="number" value="10000" min="1" max="2147483647"></td>-->
+<!--                <td><input type="submit" value="X"></td>-->
+<!--                <td><input type="submit" value="Update"></td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th><input type="text" value="Bardy"></th>-->
+<!--                <td><input type="text" value="Stick"></td>-->
+<!--                <td><input type="text" value="magical stick"></td>-->
+<!--                <td><input type="number" value="2" min="1" max="2147483647"></td>-->
+<!--                <td><input type="submit" value="X"></td>-->
+<!--                <td><input type="submit" value="Update"></td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th><input type="text" value="Bardy"></th>-->
+<!--                <td><input type="text" value="Sword"></td>-->
+<!--                <td><input type="text" value="A sharp sword"></td>-->
+<!--                <td><input type="number" value="1" min="1" max="2147483647"></td>-->
+<!--                <td><input type="submit" value="X"></td>-->
+<!--                <td><input type="submit" value="Update"></td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th><input type="text" value="evil_mage"></th>-->
+<!--                <td><input type="text" value="Healing Potion"></td>-->
+<!--                <td><input type="text" value="Heals 25 hit-points"></td>-->
+<!--                <td><input type="number" value="8" min="1" max="2147483647"></td>-->
+<!--                <td><input type="submit" value="X"></td>-->
+<!--                <td><input type="submit" value="Update"></td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th><input type="text" value="fighter_orc"></th>-->
+<!--                <td><input type="text" value="Sword"></td>-->
+<!--                <td><input type="text" value="A sharp sword"></td>-->
+<!--                <td><input type="number" value="1" min="1" max="2147483647"></td>-->
+<!--                <td><input type="submit" value="X"></td>-->
+<!--                <td><input type="submit" value="Update"></td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th><input type="text" value="fighter_orc"></th>-->
+<!--                <td><input type="text" value="Coins"></td>-->
+<!--                <td><input type="text" value="Game Currency"></td>-->
+<!--                <td><input type="number" value="15" min="1" max="2147483647"></td>-->
+<!--                <td><input type="submit" value="X"></td>-->
+<!--                <td><input type="submit" value="Update"></td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th><input type="text" value="Ranger_Rick"></th>-->
+<!--                <td><input type="text" value="Stick"></td>-->
+<!--                <td><input type="text" value="magical stick"></td>-->
+<!--                <td><input type="number" value="1" min="1" max="2147483647"></td>-->
+<!--                <td><input type="submit" value="X"></td>-->
+<!--                <td><input type="submit" value="Update"></td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th><input type="text" value="Ranger_Rick"></th>-->
+<!--                <td><input type="text" value="Coins"></td>-->
+<!--                <td><input type="text" value="Game Currency"></td>-->
+<!--                <td><input type="number" value="50" min="1" max="2147483647"></td>-->
+<!--                <td><input type="submit" value="X"></td>-->
+<!--                <td><input type="submit" value="Update"></td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--        </table>-->
+<!--    </div>-->
+
+<!--    <div class="div_col content_div">-->
+<!--        <h1>joeuser5's Characters Inventory Items</h1>-->
+<!--        <table class="table">-->
+<!--            <tr>-->
+<!--                <th scope="col">name</th>-->
+<!--                <th scope="col">item_name</th>-->
+<!--                <th scope="col">item_description</th>-->
+<!--                <th scope="col">quantity</th>-->
+<!--                <th scope="col">View</th>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <td>fighter_orc</td>-->
+<!--                <td>Sword</td>-->
+<!--                <td>A sharp sword</td>-->
+<!--                <td>1</td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <td>fighter_orc</td>-->
+<!--                <td>Coins</td>-->
+<!--                <td>Game Currency</td>-->
+<!--                <td>15</td>-->
+<!--                <td><a class="nav-link view_button" href="itemPage.html">View</a></td>-->
+<!--            </tr>-->
+
+<!--        </table>-->
+<!--    </div>-->
+
+<!--    <div class="break"></div>-->
+<!--    &lt;!&ndash; HTML form  &ndash;&gt;-->
+<!--    <div>-->
+<!--        <h3>Insert a new item into inventory for a character:</h3>-->
+
+<!--        <form class="footer_form" method="POST" action="/Inventory_Items.html">-->
+<!--        <div>-->
+<!--            <label for="Characters">Choose a Character:</label>-->
+<!--            <select id="Characters" name="Characters">-->
+<!--                &lt;!&ndash; value attribute example below would be a composite-->
+<!--                between Table Name and the character_id. Flask/Jina will generate-->
+<!--                all of this iteratively.-->
+<!--                On submit, this would be sent back to the-->
+<!--                backend and that way it's a unique identifier to create the-->
+<!--                correct SQL INSERT Statements &ndash;&gt;-->
+<!--                <option value="" selected="selected" disabled>Select Char</option>-->
+
+<!--                <option value="Bardy">Bardy</option>-->
+
+<!--                <option value="evil_mage">evil_mage</option>-->
+
+<!--                <option value="fighter_orc">fighter_orc</option>-->
+
+<!--                <option value="gollum">gollum</option>-->
+
+<!--                <option value="Ranger_Rick">Ranger_Rick</option>-->
+
+<!--            </select>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <select id="Items" name="Items">-->
+<!--                <option value="" selected="selected" disabled >Select Item</option>-->
+
+<!--                <option value="123">123</option>-->
+
+<!--                <option value="Coins">Coins</option>-->
+
+<!--                <option value="Healing Potion">Healing Potion</option>-->
+
+<!--                <option value="Stick">Stick</option>-->
+
+<!--                <option value="Sword">Sword</option>-->
+
+<!--                <option value="Wooden Shield">Wooden Shield</option>-->
+
+<!--            </select>-->
+<!--        </div>-->
+
+<!--<input type="number" id="quantity" name="quantity" placeholder="Item quantity" min="1" max="2147483647">-->
+
+<!--<input type="submit" value="INSERT">-->
+<!--</form>-->
+
+<!--</div>-->
+
+
+<!--        <div class="break"></div>-->
+<!--        <small>CS 340 Summer 2023 Final Project: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens</small>-->
+<!--    </div>-->
+
+
+
+    <!-- Link in bootstrap JS: -->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Link in custom JS for button binds and handling other front end stuff -->
+    <script src="test.js"></script>
+</body>
+</html>

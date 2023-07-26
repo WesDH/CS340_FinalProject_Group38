@@ -45,7 +45,7 @@ html {
     max-width: 45%;
     /*width: 65vw;*/
     height: 65vh;
-    overflow-y: scroll;
+    overflow: scroll;
 }
 
 .item_div_container {
