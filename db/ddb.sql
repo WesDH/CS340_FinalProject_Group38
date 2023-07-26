@@ -216,7 +216,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 
--- Insert test_html_mdl data into User_Accounts table
+-- Insert test data into User_Accounts table
 INSERT INTO User_Accounts (username, password, email)
 VALUES
     ("Daniel", "Dragons", "dand@mail.com"),
@@ -226,7 +226,7 @@ VALUES
     ;
 
 
--- Insert test_html_mdl data into Characters table
+-- Insert test data into Characters table
 INSERT INTO Characters (character_name, race, class, creature_type, alignment, Users_user_id)
 VALUES
     ("Bardy","Half-Elf","Bard","Humanoid", "Lawful Good",(SELECT User_Accounts.user_id FROM User_Accounts WHERE User_Accounts.username="Daniel")),
@@ -237,7 +237,7 @@ VALUES
     ;
 
 
--- Insert test_html_mdl data into Items table
+-- Insert test data into Items table
 INSERT INTO Items (item_name, item_description, is_weapon)
 VALUES
     ("Sword","A sharp sword",1),
@@ -248,7 +248,7 @@ VALUES
     ;
 
 
--- Insert test_html_mdl data into Inventory_Items table
+-- Insert test data into Inventory_Items table
 INSERT INTO Inventory_Items (quantity, Items_item_id, Characters_character_id)
 VALUES
     (1,1,1),
@@ -262,7 +262,7 @@ VALUES
     ;
 
 
--- Insert test_html_mdl data into Dungeons table
+-- Insert test data into Dungeons table
 INSERT INTO Dungeons (dungeon_id, dungeon_name, dungeon_type, dungeon_description, damage_multiplier) 
 VALUES 
     (1, "Zora's Domain", "Demon", "A cave with water and fountains", 2), 
@@ -271,7 +271,7 @@ VALUES
     ; 
     
 
--- Insert test_html_mdl data into Abilities table
+-- Insert test data into Abilities table
 INSERT INTO Abilities (ability_id, ability_name, ability_damage, Dungeons_dungeon_id) 
 VALUES 
     (1, "Charisma", 4, 1), 
@@ -280,7 +280,7 @@ VALUES
     ;
     
 
--- Insert test_html_mdl data into Characters_has_Abilities table
+-- Insert test data into Characters_has_Abilities table
 INSERT INTO Characters_has_Abilities (Characters_character_id, Abilities_ability_id) 
 VALUES 
     (1, 1), 
@@ -290,7 +290,7 @@ VALUES
     ;
     
 
--- Insert test_html_mdl data into Spells table
+-- Insert test data into Spells table
 INSERT INTO Spells (spell_id, spell_name, spell_damage) 
 VALUES 
     (1, "Elf Punch", 5), 
@@ -299,7 +299,7 @@ VALUES
     ;
     
 
--- Insert test_html_mdl data into Characters_has_Spells table
+-- Insert test data into Characters_has_Spells table
 INSERT INTO Characters_has_Spells (Characters_character_id, Spells_spell_id) 
 VALUES 
     (3, 1), 
