@@ -71,6 +71,13 @@ def index():
 def char_page():
     return render_template('charPage.html')
 
+
+# TODO : New char_selection route
+@app.route("/charSelection_v2.html", methods=['GET'])
+def char_selection_v2():
+    return render_template('charSelection_v2.html')
+
+
 @app.route("/dungeonPage.html", methods=['GET'])
 def dungeon_page():
     return render_template('dungeonPage.html')
@@ -83,9 +90,12 @@ def item_page():
 def dungeon_selection():
     return render_template('dungeonSelection.html')
 
-@app.route("/charSelection.html", methods=['GET'])
-def char_selection():
-    return render_template('charSelection.html')
+
+
+# TODO : Deprecated route
+# @app.route("/charSelection.html", methods=['GET'])
+# def char_selection():
+#     return render_template('charSelection.html')
 
 
 
