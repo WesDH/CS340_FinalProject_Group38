@@ -1,31 +1,56 @@
-{% extends "base.html" %}
+{% extends "base_v2.html" %}
 {% block title %}
     Item Page:   represents a single item viewed from Items table
 {% endblock %}
 
 {% block content %}
 
-    <div class="char_container content_div">
-        <h1>Healing Potion</h1>
-        <br>
+<div class="single_attribute_container">
+
+    <div class="mdl-card-attribute mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+            <h4>
+                Healing Potion
+            </h4>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            item_name
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons">construction</i>
+        </div>
     </div>
 
-    <div class="item_info content_div">
-        <h1>Item Description</h1><br>
-        <h5>"Heals 25 hit-points"</h5>
+    <div class="mdl-card-attribute mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+            <h4>
+                heals 25 hp
+            </h4>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            item_description
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons">info</i>
+        </div>
     </div>
 
-    <div class="item_info content_div">
-        <h1>Item Details</h1><br>
-        <table class="table">
-            <tr>
-                <th scope="col">is weapon</th>
-            </tr>
-            <tr>
-                <td>No</td>
-            </tr>
-        </table>
+    <div class="mdl-card-attribute mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+            <h4>
+                False
+            </h4>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            is_weapon?
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons">restaurant</i>
+        </div>
     </div>
+
+<!--END div class single_attribute_container-->
+</div>
+
+
+
 
 
 

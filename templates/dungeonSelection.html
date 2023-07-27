@@ -5,93 +5,181 @@
 
 {% block content %}
 
-    <div class="left_div_container content_div">
-        <h1>All Dungeons</h1><br>
-        <table class="table">
-            <tr>	
-                <th scope="col">Dungeon Name</th>
-                <th scope="col">Dungeon Type</th>
-                <th scope="col">Dungeon Description</th>
-                <th scope="col">Dungeon Damage Multiplier</th>
-                <th scope="col">Delete</th>
-                <th scope="col">Update</th>
-                <th scope="col">View</th>
-            </tr>
-	    {% for dungeon in all_dungeons %}
-            <tr>
-		<td><input type="text" value={{dungeon[0]}}></td>
-		<td><input type="text" value={{dungeon[1]}}></td>
-		<td><input type="text" value={{dungeon[2]}}></td>
-		<td><input type="number" value={{dungeon[3]}}></td>
-		<td><input type="submit" value="Delete"></td>
-                <td><input type="submit" value="Update"></td>
-		<td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
-            </tr>
-	    {% endfor %}
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">All Characters View</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Char Name</th>
+                    <th>Race</th>
+                    <th>Class</th>
+                    <th>Creature Type</th>
+                    <th>Alignment</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="mdl-textfield normal fat mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="Bardy">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="Half-Elf">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield thin mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="Bard">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="Humanoid">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="Lawful Good">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            <i class="material-icons md-18">close</i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            Update
+                        </button>
+                    </td>
+                    <td>
+                        <a class="view_link" href="/charPage.html">View</a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
+</div>
 
-    <div class="div_col content_div">
-	    {% if username %}
-	    <h1>{{username[0][0]}}'s Dungeons</h1><br>
-            <table class="table">
-            <tr>
-                <th scope="col">Character Name</th>
-		<th scope="col">Ability Name</th>
-                <th scope="col">Dungeon Name</th>
-                <th scope="col">Dungeon Type</th>
-                <th scope="col">Dungeon Description</th>
-                <th scope="col">Dungeon Damage Multiplier</th>
-		<th scope="col">View</th>
-            </tr>
-	    {% for user_dungeon in user_dungeons %}
-            <tr>
-		<td>{{user_dungeon[0]}}</td>
-		<td>{{user_dungeon[1]}}</td>
-		<td>{{user_dungeon[2]}}</td>
-		<td>{{user_dungeon[3]}}</td>
-		<td>{{user_dungeon[4]}}</td>
-		<td>{{user_dungeon[5]}}</td>
-                <td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
-            </tr>
-	    {% endfor %}
-            </table>
-	    {% else %}
-	    <h1>Please Select a User to View User-Specific Dungeons</h1><br>
-	    {% endif %}
-
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Only Ranger_Rick's Characters</h2>
     </div>
-
-    <div class="break"></div> <!-- break to a new row -->
-
-    <!-- HTML form  -->
-    <div class="bottom_div_container content_div">
-        <h3 class="create_char_h3">Create a New Dungeon</h3>
-
-        <form class="footer_form" method="POST">
-            <table class="table">
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
+            <thead>
                 <tr>
-                    <th scope="col">Dungeon Name</th>
-                    <th scope="col">Dungeon Type</th>
-                    <th scope="col">Dungeon Description</th>
-                    <th scope="col">Damage Multiplier</th>
+                    <th>Char Name</th>
+                    <th>Race</th>
+                    <th>Class</th>
+                    <th>Type</th>
+                    <th>Alignment</th>
+                    <th>View</th>
                 </tr>
+            </thead>
+            <tbody>
                 <tr>
-                    <th><input type="text" value=""></th>
-                    <td><input type="text" value=""></td>
-                    <td><input type="text" value=""></td>
-                    <td><input type="text" value=""></td>
+                    <td>
+                        Bard
+                    </td>
+                    <td>
+                        Half-Elf
+                    </td>
+                    <td>
+                        Bard
+                    </td>
+                    <td>
+                        Humanoid
+                    </td>
+                    <td>
+                        Lawful Good
+                    </td>
+                    <td>
+                        <a class="view_link" href="/charPage.html">View</a>
+                    </td>
                 </tr>
-            </table>
-
-            <input type="submit" value="INSERT">
-
-        </form>
-
+            </tbody>
+        </table>
     </div>
+</div>
 
 
 
 
+
+
+
+
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Create a new character:</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Character Name</th>
+                    <th>Race</th>
+                    <th>Class</th>
+                    <th>Type</th>
+                    <th>Alignment</th>
+                    <th>Insert</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="mdl-textfield fat mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                           INSERT
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,4 +1,4 @@
--- CS340 : Project Step 2 Draft DDL SQL SCRIPT
+-- CS340 : Project Step 3 Final DDL SQL SCRIPT
 -- Group 38 Name: Team 38
 -- Title: Dungeons & Dragons Character Management System
 -- Members:

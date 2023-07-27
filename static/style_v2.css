@@ -4,11 +4,11 @@
     --hovercol2 : #add0ac;
     --row_col1: #f3ebde;
     --row_col2: #ddece2;
-    --bg_col_dark: #916969;
-    --bg_col_light: #a47f7f;
+    --bg_col_dark: #7a4444;
+    --bg_col_light: #9b6464;
     --bg_col_personal_card: #9ea49b;
     --link_color: #0b30b0;
-    --link_hover: #df58ef;
+    --link_hover: #af4aef;
 }
 
 .page-content {
@@ -16,10 +16,8 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-content: space-between;
-
     flex-wrap: wrap;
     min-height : 80vh;
-    padding-top: 25px;
     overflow: auto;
 }
 
@@ -62,8 +60,9 @@ div.mdl-layout__drawer.is-visible {
     background-color: var(--hovercol1) !important;
 }
 
-/* This is the default behavior for the the <table> containers */
+/* This is the default behavior for the the <table card> containers */
 .table_data.mdl-card {
+    margin-top: 25px;
     width: 49vw;
     min-width: 750px;
     border-radius: 4px;
@@ -95,6 +94,10 @@ div.mdl-layout__drawer.is-visible {
     padding-right: 5px
 }
 
+td {
+    color: black;
+}
+
 /* Make table rows iterate on colors */
 tbody:nth-child(even) {
     background-color: var(--row_col1);
@@ -110,8 +113,12 @@ tr:nth-child(odd):hover {
 }
 
 /*General main background color*/
-.mdl-layout,
+
 .mdl-layout__content {
+        background-color: var(--bg_col_dark);
+}
+
+.mdl-layout {
     background-color: var(--bg_col_dark);
 }
 
@@ -133,7 +140,76 @@ tr:nth-child(odd):hover {
   color: var(--link_hover);
 }
 
+.mdl-button:hover {
+    background-color: rgba(255, 255, 255, .5);
+    color: var(--link_hover);
+}
+
+td p {
+    color: #000000;
+}
+
+
+
+
+/* Styling for "single item" pages */
+
+/*This is a div container for the 3 "cards" for
+ itemPage, charPage, dungeonPage, etc*/
+.single_attribute_container {
+    width: 100%;
+    padding: 5%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.single_attribute_container > * {
+    width: 30%;
+}
+
+.mdl-card-attribute:nth-child(3n+1) {
+    background-color: var(--row_col1);
+}
+
+.mdl-card-attribute:nth-child(3n+2) {
+    background-color: var(--hovercol2);
+}
+
+.mdl-card-attribute:nth-child(3n+3) {
+    background-color: var(--bg_col_personal_card);
+}
+
+/*https://github.com/angular/material/issues/3776*/
+.material-icons.md-36 {
+font-size: 36px !important;
+height: 36px !important;
+width: 36px !important;
+}
+
+
+ /*This is for the reload database on bottom of navbar*/
+/*https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize*/
+.inline-icon {
+   vertical-align: middle;
+   font-size: 24px !important;
+}
+.inline-icon:hover {
+   color: var(--link_hover);
+}
+a[title="RELOAD DATABASE"]:hover {
+  color: var(--link_hover);
+}
+
+
+
+
+
+
 /* Define custom class widths for input fields */
+.mdl-textfield__input {
+    color: #000000;
+}
+
 .mdl-textfield.fatter {
     width: 150px;
 }

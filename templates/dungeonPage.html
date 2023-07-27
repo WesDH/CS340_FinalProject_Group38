@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_v2.html" %}
 {% block title %}
     Dungeon Page:    represents a single dungeon viewed from the Dungeons table
 {% endblock %}
@@ -6,28 +6,63 @@
 {% block content %}
 
 
-<div class="char_container content_div">
-    <h1>Zora's Domain</h1>
-    <br>
-</div>
+<div class="single_attribute_container">
 
-<div class="dungeon_info content_div">
-    <h1>Dungeon Description</h1><br>
-    <h5>"A cave with water and fountains"</h5>
-</div>
+    <div class="mdl-card-attribute mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+            <h4>
+                Zora's Domain
+            </h4>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            dungeon_name
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons md-36">public</i>
+        </div>
+    </div>
 
-<div class="dungeon_info content_div">
-    <h1>Dungeon Details</h1><br>
-    <table class="table">
-        <tr>
-            <th scope="col">dungeon type</th>
-            <th scope="col">damage multiplier</th>
-        </tr>
-        <tr>
-            <td>Demon</td>
-            <td>2</td>
-        </tr>
-    </table>
+    <div class="mdl-card-attribute mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+            <h4>
+                A cave with water and fountains
+            </h4>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            dungeon_description
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons md-36">menu_book</i>
+        </div>
+    </div>
+
+    <div class="mdl-card-attribute mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Dungeon Type</th>
+                    <th>Damage Multiplier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Demon
+                    </td>
+                    <td>
+                        2
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            Dungeon Details
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons">explore</i>
+        </div>
+    </div>
+
+<!--END div class single_attribute_container-->
 </div>
 
 
