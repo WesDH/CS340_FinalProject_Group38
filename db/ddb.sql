@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `Abilities` (
   `ability_id` INT(11) NOT NULL AUTO_INCREMENT UNIQUE,
   `ability_name` VARCHAR(100) NOT NULL UNIQUE,
   `ability_damage` INT(11) NULL DEFAULT NULL,
-  `Dungeons_dungeon_id` INT(11) NOT NULL,
+  `Dungeons_dungeon_id` INT(11),
   PRIMARY KEY (`ability_id`),
   INDEX `fk_Abilities_Dungeons1_idx` (`Dungeons_dungeon_id` ASC) VISIBLE,
   UNIQUE INDEX `ability_id_UNIQUE` (`ability_id` ASC) VISIBLE,
@@ -135,7 +135,7 @@ DROP TABLE IF EXISTS `Inventory_Items` ;
 CREATE TABLE IF NOT EXISTS `Inventory_Items` (
   `inventory_id` INT(11) NOT NULL AUTO_INCREMENT UNIQUE,
   `quantity` INT(11) NULL,
-  `Items_item_id` INT(11) NOT NULL,
+  `Items_item_id` INT(11),
   `Characters_character_id` INT(11) NOT NULL,
   PRIMARY KEY (`inventory_id`, `Characters_character_id`),
   INDEX `fk_item_id_idx` (`Items_item_id` ASC) VISIBLE,
