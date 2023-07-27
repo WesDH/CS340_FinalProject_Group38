@@ -4,19 +4,23 @@
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
-from env.credentials import *
+# from env.credentials import *
 import queries as sql
+import sys, logging
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = ENV_HOST
-app.config['MYSQL_USER'] = ENV_USERNAME
-app.config['MYSQL_PASSWORD'] = ENV_PASSWORD
-app.config['MYSQL_DB'] = ENV_DATABASE
-app.secret_key = session_key
+# app.config['MYSQL_HOST'] = ENV_HOST
+# app.config['MYSQL_USER'] = ENV_USERNAME
+# app.config['MYSQL_PASSWORD'] = ENV_PASSWORD
+# app.config['MYSQL_DB'] = ENV_DATABASE
+# app.secret_key = session_key
+
+app.config.from_pyfile(".env")
 
 mysql = MySQL(app)
 
+curr_user_id = None
 
 def generate_ddl():
     """
@@ -86,9 +90,34 @@ def dungeon_page():
 def item_page():
     return render_template('itemPage.html')
 
-@app.route("/dungeonSelection.html", methods=['GET'])
+@app.route("/dungeonSelection.html", methods=['GET', 'POST'])
 def dungeon_selection():
-    return render_template('dungeonSelection.html')
+    if request.method == "GET":
+        cur = mysql.connection.cursor()
+
+        if curr_user_id:
+            username = cur.execute(sql.get_user, [curr_user_id])
+            if username > 0:
+                username = cur.fetchall()
+            user_dungeons = cur.execute(sql.get_user_dungeons, [curr_user_id])
+            if user_dungeons > 0:
+                user_dungeons = cur.fetchall()
+        else:
+            username, user_dungeons = None, None
+
+
+
+        all_dungeons = cur.execute(sql.get_all_dungeons)
+        if all_dungeons > 0:
+            all_dungeons = cur.fetchall()
+
+
+        # print("username =", username, file=sys.stderr)
+        print("all_dungeons =", all_dungeons, file=sys.stderr)
+        return render_template('dungeonSelection.html',
+                           username=username,
+                           all_dungeons=all_dungeons,
+                           user_dungeons=user_dungeons)
 
 
 

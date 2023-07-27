@@ -8,67 +8,58 @@
     <div class="left_div_container content_div">
         <h1>All Dungeons</h1><br>
         <table class="table">
-            <tr>
-                <th scope="col">dungeon name</th>
-                <th scope="col">dungeon type</th>
-                <th scope="col">dungeon description</th>
-                <th scope="col">damage multiplier</th>
+            <tr>	
+                <th scope="col">Dungeon Name</th>
+                <th scope="col">Dungeon Type</th>
+                <th scope="col">Dungeon Description</th>
+                <th scope="col">Dungeon Damage Multiplier</th>
                 <th scope="col">Delete</th>
                 <th scope="col">Update</th>
                 <th scope="col">View</th>
             </tr>
+	    {% for dungeon in all_dungeons %}
             <tr>
-                <th><input type="text" value="Zora's Domain"></th>
-                <td><input type="text" value="Demon"></td>
-                <td><input type="text" value="A cave with water and fountains"></td>
-                <td><input type="number" value="2" min="1" max="2147483647"></td>
-                <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
-                <td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
+		<td><input type="text" value={{dungeon[0]}}></td>
+		<td><input type="text" value={{dungeon[1]}}></td>
+		<td><input type="text" value={{dungeon[2]}}></td>
+		<td><input type="number" value={{dungeon[3]}}></td>
+		<td><input type="submit" value="Delete"></td>
+                <td><input type="submit" value="Update"></td>
+		<td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
             </tr>
-            <tr>
-                <th><input type="text" value="Temple of Time"></th>
-                <td><input type="text" value="Fairy"></td>
-                <td><input type="text" value="A temple with flute music"></td>
-                <td><input type="number" value="3" min="1" max="2147483647"></td>
-                <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
-                <td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
-            </tr>
-            <tr>
-                <th><input type="text" value="Bowser's Castle"></th>
-                <td><input type="text" value="Monster"></td>
-                <td><input type="text" value="A castle with pirhana plants and evil mushrooms"></td>
-                <td><input type="number" value="2.5" min="1" max="2147483647"></td>
-                <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
-                <td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
-            </tr>
+	    {% endfor %}
         </table>
     </div>
 
     <div class="div_col content_div">
-        <h1>User007's Dungeons</h1><br>
-        <table class="table">
+	    {% if username %}
+	    <h1>{{username[0][0]}}'s Dungeons</h1><br>
+            <table class="table">
             <tr>
-                <th scope="col">dungeon name</th>
-                <th scope="col">dungeon type</th>
-                <th scope="col">dungeon description</th>
-                <th scope="col">damage multiplier</th>
-                <th scope="col">Delete</th>
-                <th scope="col">Update</th>
-                <th scope="col">View</th>
+                <th scope="col">Character Name</th>
+		<th scope="col">Ability Name</th>
+                <th scope="col">Dungeon Name</th>
+                <th scope="col">Dungeon Type</th>
+                <th scope="col">Dungeon Description</th>
+                <th scope="col">Dungeon Damage Multiplier</th>
+		<th scope="col">View</th>
             </tr>
+	    {% for user_dungeon in user_dungeons %}
             <tr>
-                <th><input type="text" value="Zora's Domain"></th>
-                <td><input type="text" value="Demon"></td>
-                <td><input type="text" value="A cave with water and fountains"></td>
-                <td><input type="number" value="2" min="1" max="2147483647"></td>
-                <td><input type="submit" value="X"></td>
-                <td><input type="submit"` value="Update"></td>
+		<td>{{user_dungeon[0]}}</td>
+		<td>{{user_dungeon[1]}}</td>
+		<td>{{user_dungeon[2]}}</td>
+		<td>{{user_dungeon[3]}}</td>
+		<td>{{user_dungeon[4]}}</td>
+		<td>{{user_dungeon[5]}}</td>
                 <td><a class="nav-link view_button" href="dungeonPage.html">View</a></td>
             </tr>
-        </table>
+	    {% endfor %}
+            </table>
+	    {% else %}
+	    <h1>Please Select a User to View User-Specific Dungeons</h1><br>
+	    {% endif %}
+
     </div>
 
     <div class="break"></div> <!-- break to a new row -->
@@ -80,10 +71,10 @@
         <form class="footer_form" method="POST">
             <table class="table">
                 <tr>
-                    <th scope="col">dungeon name</th>
-                    <th scope="col">dungeon type</th>
-                    <th scope="col">dungeon description</th>
-                    <th scope="col">damage multiplier</th>
+                    <th scope="col">Dungeon Name</th>
+                    <th scope="col">Dungeon Type</th>
+                    <th scope="col">Dungeon Description</th>
+                    <th scope="col">Damage Multiplier</th>
                 </tr>
                 <tr>
                     <th><input type="text" value=""></th>
