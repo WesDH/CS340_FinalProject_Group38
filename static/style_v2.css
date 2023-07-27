@@ -210,6 +210,10 @@ a[title="RELOAD DATABASE"]:hover {
     color: #000000;
 }
 
+.mdl-textfield.fattest {
+    width: 200px;
+}
+
 .mdl-textfield.fatter {
     width: 150px;
 }

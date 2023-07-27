@@ -1,66 +1,139 @@
-{% extends "base.html" %}
+{% extends "base_v2.html" %}
 {% block title %}
     Welcome to User_Accounts Table View
 {% endblock %}
 
 {% block content %}
 
-    <div class="left_div_container content_div">
-        <h1>User_Accounts Administrator View</h1><br>
-        <table class="table">
-            <tr>
-                <th scope="col">username</th>
-                <th scope="col">password</th>
-                <th scope="col">email</th>
-            </tr>
-            {% for row in user_rows %}
-            <tr>
-                <td>{{row[1]}}</td>
-                <td>{{row[2]}}</td>
-                <td>{{row[3]}}</td>
-            </tr>
-            {% endfor %}
+
+
+
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">User_Accounts Table Administrator Panel View</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>username</th>
+                    <th>password</th>
+                    <th>email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in user_rows %}
+                <tr>
+                    <td>
+                        {{row[1]}}
+                    </td>
+                    <td>
+                        {{row[2]}}
+                    </td>
+                    <td>
+                        {{row[3]}}
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
+</div>
 
-    <div class="div_col content_div">
-        <h1>Dungeons and Dragon's Character Manager</h1>
-        <h3>
-            <p>Select a Specific User for a more personalized view:</p>
-        </h3>
-        <div>
-            <form class="footer_form" method="POST" action="/">
-                <label for="Characters"></label><select id="Characters" name="Characters">
-                        <!-- value attribute example below would be a composite
-                        between Table Name and the character_id. Flask/Jina will generate
-                        all of this iteratively.
-                        On submit, this would be sent back to the
-                        backend and that way it's a unique identifier to create the
-                        correct SQL INSERT Statements -->
-                        <option value="" selected="selected" disabled>Select User</option>
-                        <option value="Daniel">Daniel</option>
-                        <option value="wdean123">wdean123</option>
-                        <option value="joe_user5">joe_user5</option>
-                        <option value="new_user01">new_user01</option>
-                    </select>
-                <input type="submit" value="SELECT">
-            </form>
-        </div>
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Set a username for a more personalized view:</h2>
     </div>
+    <div class="mdl-card__supporting-text">
 
-        <div class="break"></div>
-    <!-- HTML form  -->
-    <div>
-        <h3>Insert a New User</h3>
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Set Username</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="mdl-selectfield mdl-js-selectfield">
+                            <select id="select_user" name="select_user" class="mdl-selectfield__select">
+                                <option value="" disabled selected>Select</option>
+                                {% for row in user_rows %}
+                                <option value="{{row[1]}}">{{row[1]}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-        <form class="footer_form" method="POST" action="/">
-            <input type="text" id="users_name" name="name" placeholder="username">
-            <input type="text" id="password" name="description" placeholder="password">
-            <input type="email" id="email" name="description" placeholder="email">
-        <input id="Users_INSERT" type="submit" value="INSERT">
-        </form>
+
+
+
+
 
     </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Create a New User Account:</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="mdl-textfield fatter mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" value="">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield fatter mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="password" value="">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield fattest mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="email" value="">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <button id="insert_usr_btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                           INSERT
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
 
 
 {% endblock %}

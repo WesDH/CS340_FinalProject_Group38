@@ -4,19 +4,19 @@
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
-# from env.credentials import *
+from env.credentials import *
 import queries as sql
 import sys, logging
 
 app = Flask(__name__)
 
-# app.config['MYSQL_HOST'] = ENV_HOST
-# app.config['MYSQL_USER'] = ENV_USERNAME
-# app.config['MYSQL_PASSWORD'] = ENV_PASSWORD
-# app.config['MYSQL_DB'] = ENV_DATABASE
-# app.secret_key = session_key
+app.config['MYSQL_HOST'] = ENV_HOST
+app.config['MYSQL_USER'] = ENV_USERNAME
+app.config['MYSQL_PASSWORD'] = ENV_PASSWORD
+app.config['MYSQL_DB'] = ENV_DATABASE
+app.secret_key = session_key
 
-app.config.from_pyfile(".env")
+#app.config.from_pyfile(".env")
 
 mysql = MySQL(app)
 
@@ -57,14 +57,33 @@ def flash_err(e):
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index.html", methods=['GET'])
 def index():
-    session["default"] = "default_session"
-    cur = mysql.connection.cursor()
-    user_info = cur.execute(sql.get_all_users)
-    if user_info > 0:
-        user_rows = cur.fetchall()
+    if request.method == "GET":
+        session["default"] = "default_session"
+        cur = mysql.connection.cursor()
+        user_info = cur.execute(sql.get_all_users)
+        if user_info > 0:
+            user_rows = cur.fetchall()
 
-    return render_template('index.html',
-                           user_rows=user_rows)
+        return render_template('index.html',
+                               user_rows=user_rows)
+    if request.method == "POST":
+        try:
+            req = request.json
+            if len(req) > 0:
+                if len(req) == 2:
+                    print("table: ", req["table"])
+                    print("username: ", req["username"])
+                else:
+                    print("table: ", req["table"])
+                    print("username: ", req["username"])
+                    print("password: ", req["password"])
+                    print("email: ", req["email"])
+                return "OK", 200
+            return "Empty request received", 500
+        except Exception as exc:
+            print(exc)
+            return f"Exception on POST to / route: {exc}", 500
+
 @app.route("/charPage.html", methods=['GET'])
 def char_page():
     return render_template('charPage.html')
@@ -139,8 +158,8 @@ def items():
             cur.close()
             flash(f"Row inserted for item: {item_name}", "info")
             return redirect(url_for("items"))
-        except Exception as e:
-            flash_err(e)
+        except Exception as exc:
+            flash_err(exc)
             return redirect(url_for("items"))
     else:
         flash("route /items.html only accepts GET or POST requests", "error")
@@ -180,9 +199,9 @@ def reload_the_db():
         generate_ddl()
         flash("Database reloaded!", "success")
         return "OK!", 202
-    except Exception as e:
-        print(e)
-        flash(f"Database reload error: {e}", "error")
+    except Exception as exc:
+        print(exc)
+        flash(f"Database reload error: {exc}", "error")
         return "Backend Exception on DB reload", 506
 
 
