@@ -16,11 +16,11 @@ app.config['MYSQL_PASSWORD'] = ENV_PASSWORD
 app.config['MYSQL_DB'] = ENV_DATABASE
 app.secret_key = session_key
 
-#app.config.from_pyfile(".env")
+# app.config.from_pyfile(".env")
 
 mysql = MySQL(app)
 
-curr_user_id = None
+curr_user_id = 1
 
 def generate_ddl():
     """
@@ -44,6 +44,7 @@ def generate_ddl():
 with app.app_context():
     #generate_ddl()  # Comment this during development to save some time
     pass
+
 
 def flash_err(e):
     if len(e.args) > 1:
@@ -84,22 +85,140 @@ def index():
             print(exc)
             return f"Exception on POST to / route: {exc}", 500
 
+
 @app.route("/charPage.html", methods=['GET'])
 def char_page():
     return render_template('charPage.html')
 
+
+
+
 # TODO : New char_selection route
-@app.route("/charSelection_v2.html", methods=['GET'])
+@app.route("/charSelection_v2.html", methods=['GET', 'POST'])
 def char_selection_v2():
-    return render_template('charSelection_v2.html')
+
+    
+    if request.method == "GET":
+        cur = mysql.connection.cursor()
+            
+        if curr_user_id:
+            username = cur.execute(sql.get_user, [curr_user_id])
+            if username > 0:
+                username = cur.fetchall()
+            user_chars = cur.execute(sql.get_user_chars, [curr_user_id])
+            if user_chars > 0:
+                user_chars = cur.fetchall()
+        else:
+            username, user_chars = None, None
+
+        all_chars = cur.execute(sql.get_all_chars)
+        if all_chars > 0:
+            all_chars = cur.fetchall() 
+
+        print("all_chars =", all_chars, file=sys.stderr)
+        print("username =", username, file=sys.stderr)
+
+        return render_template('charSelection_v2.html',
+                           username=username,
+                           all_chars=all_chars,
+                           user_chars=user_chars)
+
+
+    elif request.method == "POST":
+        print("button clicked =", request.form['button_press'], file=sys.stderr)
+        if request.form['button_press'] == "insert":
+            print("insert was clicked")
+            try:
+                char_name = request.form['char_name']
+                char_race = request.form['char_race']
+                char_class = request.form['char_class']
+                char_type = request.form['char_type']
+                char_alignment = request.form['char_alignment']
+                cur = mysql.connection.cursor()
+                cur.execute(sql.add_char, (char_name, char_race, char_class, char_type, char_alignment, curr_user_id))
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row inserted for char: {char_name}", "info")
+                return redirect(url_for("char_selection_v2"))
+            except Exception as exc:
+                flash_err(exc)
+                return redirect(url_for("char_selection_v2"))
+
+
+        
+
+            return render_template('charSelection_v2.html',
+                                    username=username,
+                                    all_chars=all_chars,
+                                    user_chars=user_chars)
+
+
+        elif request.form['button_press'][0] == "d":
+            print("delete was clicked")
+            char_id = request.form['button_press'][1:]
+            print("char_id =", char_id)
+            try:
+                char_name = request.form['char_name']
+                char_race = request.form['char_race']
+                char_class = request.form['char_class']
+                char_type = request.form['char_type']
+                char_alignment = request.form['char_alignment']
+                cur = mysql.connection.cursor()
+                cur.execute(sql.delete_char, [char_id])
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row deleted for char: {char_name}", "info")
+                return redirect(url_for("char_selection_v2"))
+            except Exception as exc:
+                flash_err(exc)
+                return redirect(url_for("char_selection_v2"))
+
+
+        
+
+            return render_template('charSelection_v2.html',
+                                    username=username,
+                                    all_chars=all_chars,
+                                    user_chars=user_chars)
+
+
+        elif request.form['button_press'][0] == "u":
+            print("update was clicked")
+            char_id = request.form['button_press'][1:]
+            print("char_id =", char_id)
+            try:
+                char_name = request.form['char_name']
+                char_race = request.form['char_race']
+                print("char_race:", char_race)
+                char_class = request.form['char_class']
+                char_type = request.form['char_type']
+                char_alignment = request.form['char_alignment']
+                cur = mysql.connection.cursor()
+                cur.execute(sql.update_char, (char_name, char_race, char_class, char_type, char_alignment, char_id))
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row updated for char: {char_name}", "info")
+                return redirect(url_for("char_selection_v2"))
+            except Exception as exc:
+                flash_err(exc)
+                return redirect(url_for("char_selection_v2"))
+
+
+        
+
+            return render_template('charSelection_v2.html',
+                                    username=username,
+                                    all_chars=all_chars,
+                                    user_chars=user_chars)
+
+
+
 
 @app.route("/dungeonPage.html", methods=['GET'])
 def dungeon_page():
     return render_template('dungeonPage.html')
 
-@app.route("/itemPage.html", methods=['GET'])
-def item_page():
-    return render_template('itemPage.html')
+
 
 @app.route("/dungeonSelection.html", methods=['GET', 'POST'])
 def dungeon_selection():
@@ -124,7 +243,7 @@ def dungeon_selection():
 
 
         # print("username =", username, file=sys.stderr)
-        print("all_dungeons =", all_dungeons, file=sys.stderr)
+        # print("all_dungeons =", all_dungeons, file=sys.stderr)
         return render_template('dungeonSelection.html',
                            username=username,
                            all_dungeons=all_dungeons,
@@ -135,6 +254,11 @@ def dungeon_selection():
 # @app.route("/charSelection.html", methods=['GET'])
 # def char_selection():
 #     return render_template('charSelection.html')
+
+
+@app.route("/itemPage.html", methods=['GET'])
+def item_page():
+    return render_template('itemPage.html')
 
 
 @app.route("/Items.html", methods=['GET', 'POST'])

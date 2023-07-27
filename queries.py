@@ -29,6 +29,33 @@ get_user_dungeons = "SELECT character_name, ability_name, dungeon_name, dungeon_
 
 
 
+
+# -- *****************************************************************************
+# -- Queries that act on charSelection Page  --
+# -- *****************************************************************************
+
+# -- for loading all Characters in the “All Characters” list
+get_all_chars = "SELECT character_id, character_name, race, class, creature_type, alignment FROM Characters ORDER BY character_name ASC;"
+
+# -- for loading only this user’s Characters in the “My Characters” list
+get_user_chars = "SELECT character_name, race, class, creature_type, alignment FROM Characters JOIN User_Accounts ON Characters.Users_user_id = User_Accounts.user_id WHERE User_Accounts.user_id = %s ORDER BY character_name ASC;"
+
+# -- this displays the user’s username in “User007’s Chars”
+get_user = "SELECT username FROM User_Accounts WHERE user_id = %s;"
+
+# -- for Character creation
+add_char = "INSERT INTO Characters (character_name, race, class, creature_type, alignment, Users_user_id) VALUES (%s, %s, %s, %s, %s, %s);"
+ 
+# -- 2 queries for when the user updates a Char
+
+update_char = "UPDATE Characters SET character_name = %s, race = %s, class = %s, creature_type = %s, alignment = %s WHERE character_id = %s;"
+
+# -- for when a user deletes a char
+delete_char = "DELETE FROM Characters WHERE character_id = %s;"
+
+
+
+
 """
 Inventory Items Junction Table associated queries:
 """
