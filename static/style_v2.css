@@ -56,6 +56,11 @@ div.mdl-layout__drawer.is-visible {
     padding: 0;
 }
 
+/* default was 16px */
+.mdl-textfield__input {
+    font-size: 14px;
+}
+
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
     background-color: var(--hovercol1) !important;
 }
@@ -84,6 +89,11 @@ div.mdl-layout__drawer.is-visible {
 /* Table header custom CSS */
 .mdl-data-table.th-right-align th {
     text-align: right;
+}
+
+ /*Make data tables almost fill their card container*/
+.mdl-card__supporting-text {
+    width: 97%;
 }
 
 .mdl-data-table th {
