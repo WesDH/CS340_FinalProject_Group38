@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () =>
     case 'index.html':
         bind_index();
         break;
-    case 'charSelection_v2.html':
+    case 'charSelection.html':
         bind_char_selection();
         break;
     default:
@@ -27,7 +27,7 @@ function bind_char_selection() {
 
     // Assumption is the FIRST table is the CRUD table based on our layout:
     let table = document.getElementById("cruddy_tbody");
-    let route = "/charSelection_v2.html"
+    let route = "/charSelection.html"
     let method = "PATCH";
 
     let cols = 5;

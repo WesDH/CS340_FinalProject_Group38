@@ -6,7 +6,7 @@
     <title>
         {% block title %}{% endblock %}
     </title>
-    <!-- Link in bootstrap CSS: -->
+    <!-- Link in MDL CSS: -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='style_v2.css') }}">
@@ -29,10 +29,9 @@
                 <a class="mdl-navigation__link" href="/charPage.html">Spells/Abilities</a>
                 <a class="mdl-navigation__link" href="/dungeonPage.html">dungeonPage</a>
                 <a class="mdl-navigation__link" href="/itemPage.html">itemPage</a>
-                <a class="mdl-navigation__link" href="/Items.html">Items</a>
-                <a class="mdl-navigation__link" href="/charSelection_v2.html">charSelection</a>
+                <a class="mdl-navigation__link" href="/charSelection.html">charSelection</a>
                 <a class="mdl-navigation__link" href="/dungeonSelection.html">dungeonSelection</a>
-                <a class="mdl-navigation__link" href="/Inventory_Items.html">itemSelection</a>
+                <a class="mdl-navigation__link" href="/itemSelection.html">itemSelection</a>
             </nav>
         </div>
     </header>
@@ -45,10 +44,9 @@
             <a class="mdl-navigation__link" href="/charPage.html">Spells/Abilities</a>
             <a class="mdl-navigation__link" href="/dungeonPage.html">dungeonPage</a>
             <a class="mdl-navigation__link" href="/itemPage.html">itemPage</a>
-            <a class="mdl-navigation__link" href="/Items.html">Items</a>
-            <a class="mdl-navigation__link" href="/charSelection_v2.html">charSelection</a>
+            <a class="mdl-navigation__link" href="/charSelection.html">charSelection</a>
             <a class="mdl-navigation__link" href="/dungeonSelection.html">dungeonSelection</a>
-            <a class="mdl-navigation__link" href="/Inventory_Items.html">itemSelection</a>
+            <a class="mdl-navigation__link" href="/itemSelection.html">itemSelection</a>
         </nav>
     </div>
 
@@ -57,9 +55,10 @@
         <div class="page-content">
             {% block content %}
             {% endblock %}
-        <!--   DIV END MDL PAGE CONTENT-->
+        <!--   DIV END MDL class="page-content"-->
         </div>
-    <!-- END mdl-layout__content-->
+    <!-- main END class="mdl-layout__content"-->
+    <!-- main END class="mdl-layout__content"-->
     </main>
 
 

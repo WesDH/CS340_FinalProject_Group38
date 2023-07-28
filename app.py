@@ -90,7 +90,7 @@ def index():
 def char_page():
     return render_template('charPage.html')
 
-@app.route("/charSelection_v2.html", methods=['GET', 'PATCH', 'POST'])
+@app.route("/charSelection.html", methods=['GET', 'PATCH', 'POST'])
 def char_selection_v2():
 
     
@@ -114,7 +114,7 @@ def char_selection_v2():
         print("all_chars =", all_chars, file=sys.stderr)
         print("username =", username, file=sys.stderr)
 
-        return render_template('charSelection_v2.html',
+        return render_template('charSelection.html',
                            username=username,
                            all_chars=all_chars,
                            user_chars=user_chars)
@@ -143,7 +143,7 @@ def char_selection_v2():
 
         
 
-            return render_template('charSelection_v2.html',
+            return render_template('charSelection.html',
                                     username=username,
                                     all_chars=all_chars,
                                     user_chars=user_chars)
@@ -172,7 +172,7 @@ def char_selection_v2():
 
         
 
-            return render_template('charSelection_v2.html',
+            return render_template('charSelection.html',
                                     username=username,
                                     all_chars=all_chars,
                                     user_chars=user_chars)
@@ -202,7 +202,7 @@ def char_selection_v2():
 
         
 
-            return render_template('charSelection_v2.html',
+            return render_template('charSelection.html',
                                     username=username,
                                     all_chars=all_chars,
                                     user_chars=user_chars)
@@ -248,20 +248,17 @@ def dungeon_selection():
                            user_dungeons=user_dungeons)
 
 
-# TODO : Deprecated route
-# @app.route("/charSelection.html", methods=['GET'])
-# def char_selection():
-#     return render_template('charSelection.html')
+# @app.route("/itemPage.html", methods=['GET'])
+# def item_page():
+#     return render_template('itemPage.html')
 
-
-@app.route("/itemPage.html", methods=['GET'])
-def item_page():
-    return render_template('itemPage.html')
-
-
+@app.route("/itemPage.html", methods=['GET', 'POST'])
 @app.route("/Items.html", methods=['GET', 'POST'])
 def items():
     if request.method == 'GET':
+        if "?" in request.url:
+            print("Single item view clicked")
+            return render_template('itemPage.html')
         cur = mysql.connection.cursor()
         items_info = cur.execute(sql.get_all_item_info)
         if items_info > 0:
@@ -288,31 +285,70 @@ def items():
         return "route /items.html only accepts GET or POST requests", 505
 
 
-@app.route("/Inventory_Items.html", methods=['GET', 'POST'])
+@app.route("/itemSelection.html", methods=['GET', 'POST'])
 def item_selection():
-    cur = mysql.connection.cursor()
-    join_chars_items = cur.execute(sql.chars_items_qty)
-    if join_chars_items > 0:
-        left_table_rows = cur.fetchall()
+    if request.method == 'GET':
+        cur = mysql.connection.cursor()
+        join_chars_items = cur.execute(sql.chars_items_qty)
+        left_table_rows = cur.fetchall() if join_chars_items > 0 else ()
 
-    join_user_items = cur.execute(sql.individual_char_items)
-    if join_user_items > 0:
-        right_table_rows = cur.fetchall()
+        join_user_items = cur.execute(sql.individual_char_items)
+        right_table_rows = cur.fetchall() if join_user_items > 0 else ()
 
-    # The following 2 queries are for dynamic dropdown input functionality:
-    chars = cur.execute(sql.get_char_names)
-    if chars > 0:
-        char_list = cur.fetchall()
+        # The following 2 queries are for dynamic dropdown input functionality:
+        chars = cur.execute(sql.get_char_list)
+        char_list = cur.fetchall() if chars > 0 else ()
+        all_items = cur.execute(sql.get_item_list)
+        item_list = cur.fetchall() if all_items > 0 else ()
 
-    items = cur.execute(sql.get_item_list)
-    if items > 0:
-        item_list = cur.fetchall()
+        return render_template('itemSelection.html',
+                               left_table_rows=left_table_rows,
+                               right_table_rows=right_table_rows,
+                               char_list=char_list,
+                               item_list=item_list)
+    if request.method == 'POST':
+        try:
+            print(request.form)
+            if "delete_btn" in request.form.keys():
+                print("delete clicked from inventory items panel")
+                inventory_id = request.form['delete_btn'].split("=").pop(-1)
+                print(sql.delete_item_from_inv % inventory_id)
+                cur = mysql.connection.cursor()
+                cur.execute(sql.delete_item_from_inv, (inventory_id))
+                mysql.connection.commit()
+                cur.close()
+            elif "update_btn" in request.form.keys():
+                print("update clicked from inventory items panel")
+                inventory_id = request.form['update_btn'].split("=").pop(-1)
+                character_name = request.form['character_name']
+                item_name = request.form['item_name']
+                item_desc = request.form['item_description']
+                item_qty = request.form['item_quantity']
 
-    return render_template('Inventory_Items.html',
-                           left_table_rows=left_table_rows,
-                           right_table_rows=right_table_rows,
-                           char_list=char_list,
-                           item_list=item_list)
+                print("SQL statement to be executed:")
+                query_parsed = (sql.update_inventory_items % (character_name, item_qty, item_name, item_desc, inventory_id))
+                print(query_parsed)
+                cur = mysql.connection.cursor()
+                cur.execute(query_parsed)
+                mysql.connection.commit()
+                cur.close()
+            elif "insert_btn" in request.form.keys():
+                print("insert clicked from bottom panel")
+                char_id = request.form['character_id']
+                item_id = request.form['item_id']
+                item_qty = request.form['item_quantity']
+                cur = mysql.connection.cursor()
+                cur.execute(sql.insert_inv_items, (char_id, item_id, item_qty))
+                mysql.connection.commit()
+                cur.close()
+            else:
+                flash("Unknown POST sent to itemSelection route on Flask.", "error")
+            return redirect(url_for("item_selection"))
+        except Exception as exc:
+            print(exc)
+            flash(f"Error on Item_Selection POST route: {exc}", "error")
+            return redirect(url_for("item_selection"))
+
 
 
 @app.route("/reload_the_db", methods=['POST'])

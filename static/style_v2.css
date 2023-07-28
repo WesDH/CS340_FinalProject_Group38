@@ -122,6 +122,8 @@ tr:nth-child(odd):hover {
     background-color: var(--hovercol2) !important;
 }
 
+
+
 /*General main background color*/
 
 .mdl-layout__content {
@@ -183,6 +185,11 @@ td p {
 
 .mdl-card-attribute:nth-child(3n+2) {
     background-color: var(--hovercol2);
+}
+
+ /* This is the third card container, usually the INSERT container on the bottom*/
+.table_left:nth-child(3) {
+    background-color: #a8c4bc;
 }
 
 .mdl-card-attribute:nth-child(3n+3) {
