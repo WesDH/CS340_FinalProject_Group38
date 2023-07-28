@@ -42,8 +42,8 @@ def generate_ddl():
 # ddbtest.sql is as single line of the schema as .execute only
 # Executes one line per execute.
 with app.app_context():
-    #generate_ddl()  # Comment this during development to save some time
-    pass
+    generate_ddl()  # Comment this during development to save some time
+    #pass
 
 
 def flash_err(e):
@@ -90,11 +90,7 @@ def index():
 def char_page():
     return render_template('charPage.html')
 
-
-
-
-# TODO : New char_selection route
-@app.route("/charSelection_v2.html", methods=['GET', 'POST'])
+@app.route("/charSelection_v2.html", methods=['GET', 'PATCH', 'POST'])
 def char_selection_v2():
 
     
@@ -210,7 +206,9 @@ def char_selection_v2():
                                     username=username,
                                     all_chars=all_chars,
                                     user_chars=user_chars)
-
+    elif request.method == "PATCH":
+        print(request.json)
+        return "OK", 202
 
 
 
