@@ -5,17 +5,18 @@
 
 {% block content %}
 
-
+{% if dungeon %}
+<form action="/dungeonPage.html/dungeon_id={{dungeon_id}}" method="GET">
 <div class="single_attribute_container">
 
     <div class="mdl-card-attribute mdl-shadow--2dp">
-        <div class="mdl-card__title mdl-card--expand">
+        <div class="mdl-card__title mdl-card--expand"> 
             <h4>
-                Zora's Domain
+		{{dungeon[0]}}
             </h4>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-            dungeon_name
+            Dungeon Name
             <div class="mdl-layout-spacer"></div>
             <i class="material-icons md-36">public</i>
         </div>
@@ -24,11 +25,11 @@
     <div class="mdl-card-attribute mdl-shadow--2dp">
         <div class="mdl-card__title mdl-card--expand">
             <h4>
-                A cave with water and fountains
+                {{dungeon[2]}}
             </h4>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-            dungeon_description
+            Dungeon Description
             <div class="mdl-layout-spacer"></div>
             <i class="material-icons md-36">menu_book</i>
         </div>
@@ -46,10 +47,10 @@
             <tbody>
                 <tr>
                     <td>
-                        Demon
+			    {{dungeon[1]}}
                     </td>
                     <td>
-                        2
+			    {{dungeon[3]}}
                     </td>
                 </tr>
             </tbody>
@@ -64,7 +65,14 @@
 
 <!--END div class single_attribute_container-->
 </div>
+</form>
 
+{% else %}
+
+<h1>No Dungeon Selected Yet</h1>
+
+
+{% endif %} 
 
 
 

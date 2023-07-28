@@ -123,7 +123,7 @@ def char_selection_v2():
     elif request.method == "POST":
         print("button clicked =", request.form['button_press'], file=sys.stderr)
         if request.form['button_press'] == "insert":
-            print("insert was clicked")
+            print("insert was clicked on charSelection page")
             try:
                 char_name = request.form['char_name']
                 char_race = request.form['char_race']
@@ -150,7 +150,7 @@ def char_selection_v2():
 
 
         elif request.form['button_press'][0] == "d":
-            print("delete was clicked")
+            print("delete was clicked on charSelection page")
             char_id = request.form['button_press'][1:]
             print("char_id =", char_id)
             try:
@@ -172,14 +172,14 @@ def char_selection_v2():
 
         
 
-            return render_template('charSelection.html',
-                                    username=username,
-                                    all_chars=all_chars,
-                                    user_chars=user_chars)
+            # return render_template('charSelection.html',
+            #                         username=username,
+            #                         all_chars=all_chars,
+            #                         user_chars=user_chars)
 
 
         elif request.form['button_press'][0] == "u":
-            print("update was clicked")
+            print("update was clicked on charSelection page")
             char_id = request.form['button_press'][1:]
             print("char_id =", char_id)
             try:
@@ -202,19 +202,37 @@ def char_selection_v2():
 
         
 
-            return render_template('charSelection.html',
-                                    username=username,
-                                    all_chars=all_chars,
-                                    user_chars=user_chars)
-    elif request.method == "PATCH":
-        print(request.json)
-        return "OK", 202
+           # return render_template('charSelection.html',
+           #                         username=username,
+           #                         all_chars=all_chars,
+           #                         user_chars=user_chars)
+    # elif request.method == "PATCH":
+    #     print(request.json)
+    #     return "OK", 202
 
 
 
-@app.route("/dungeonPage.html", methods=['GET'])
-def dungeon_page():
-    return render_template('dungeonPage.html')
+# @app.route("/dungeonPage.html", methods=['GET'])
+@app.route("/dungeonPage.html/dungeon_id=<dungeon_id>", methods=['GET'])
+def dungeon_page(dungeon_id):
+    print("dungeon_id =", dungeon_id)
+    if request.method == "GET":
+        cur = mysql.connection.cursor()
+        if dungeon_id:
+            dungeon = cur.execute(sql.get_dungeon, [dungeon_id])
+            if dungeon > 0:
+                dungeon = cur.fetchall()[0]
+            print("dungeon =", dungeon)
+            return render_template('dungeonPage.html', 
+                                   dungeon_id=dungeon_id, 
+                                   dungeon=dungeon)
+        else:
+            dungeon = None
+            return render_template('dungeonPage.html', 
+                                   dungeon_id=dungeon_id, 
+                                   dungeon=dungeon)
+
+
 
 
 
@@ -246,6 +264,66 @@ def dungeon_selection():
                            username=username,
                            all_dungeons=all_dungeons,
                            user_dungeons=user_dungeons)
+
+
+    elif request.method == "POST":
+        print("button clicked =", request.form['button_press'], file=sys.stderr)
+        if request.form['button_press'] == "insert":
+            print("insert was clicked on dungeonSelection page")
+            try:
+                dungeon_name = request.form['dungeon_name']
+                dungeon_type = request.form['dungeon_type']
+                dungeon_description = request.form['dungeon_description']
+                damage_multiplier = request.form['damage_multiplier']
+                cur = mysql.connection.cursor()
+                cur.execute(sql.add_dungeon, (dungeon_name, dungeon_type, dungeon_description, damage_multiplier))
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row inserted for dungeon: {dungeon_name}", "info")
+                return redirect(url_for("dungeon_selection"))
+            except Exception as exc:
+                flash_err(exc)
+                return redirect(url_for("dungeon_selection"))
+
+
+        elif request.form['button_press'][0] == "d":
+            print("delete was clicked on dungeonSelection page")
+            dungeon_id = request.form['button_press'][1:]
+            print("dungeon_id =", dungeon_id)
+            try:
+                dungeon_name = request.form['dungeon_name']
+                dungeon_type = request.form['dungeon_type']
+                dungeon_description = request.form['dungeon_description']
+                damage_multiplier = request.form['damage_multiplier']
+                cur = mysql.connection.cursor()
+                cur.execute(sql.delete_dungeon, [dungeon_id])
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row deleted for dungeon: {dungeon_name}", "info")
+                return redirect(url_for("dungeon_selection"))
+            except Exception as exc:
+                flash_err(exc)
+                return redirect(url_for("dungeon_selection"))
+
+
+        elif request.form['button_press'][0] == "u":
+            print("update was clicked on dungeonSelection page")
+            dungeon_id = request.form['button_press'][1:]
+            print("dungeon_id =", dungeon_id)
+            try:
+                dungeon_name = request.form['dungeon_name']
+                dungeon_type = request.form['dungeon_type']
+                dungeon_description = request.form['dungeon_description']
+                damage_multiplier = request.form['damage_multiplier']
+                cur = mysql.connection.cursor()
+                cur.execute(sql.update_dungeon, (dungeon_name, dungeon_type, dungeon_description, damage_multiplier, dungeon_id))
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row updated for dungeon: {dungeon_name}", "info")
+                return redirect(url_for("dungeon_selection"))
+            except Exception as exc:
+                flash_err(exc)
+                return redirect(url_for("dungeon_selection"))
 
 
 # @app.route("/itemPage.html", methods=['GET'])

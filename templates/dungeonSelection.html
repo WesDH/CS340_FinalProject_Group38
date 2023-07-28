@@ -7,7 +7,7 @@
 
 <div class="table_data table_left mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">All Dungeons View</h2>
+        <h2 class="mdl-card__title-text">All Dungeons</h2>
     </div>
     <div class="mdl-card__supporting-text">
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
@@ -23,145 +23,224 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+		{% for dungeon in all_dungeons %}
+		<form action="/dungeonSelection.html" method="POST">
+                <tr dungeon_id="{{dungeon[0]}}">
                     <td>
                         <div class="mdl-textfield fat mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" value="Zora's Domain">
+                            <input 
+			    	class="mdl-textfield__input" 
+				type="text" 
+				name="dungeon_name" 
+				value="{{dungeon[1]}}">
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield fatter mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" value="A cave with water and fountains">
+                            <input 
+			    	class="mdl-textfield__input" 
+				type="text" 
+				name="dungeon_type" 
+				value="{{dungeon[2]}}">
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" value="Demon">
-                            <label class="mdl-textfield__label" ></label>
+                            <input 
+			    	class="mdl-textfield__input" 
+				type="text" 
+				name="dungeon_description" 
+				value="{{dungeon[3]}}">
+			    <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield thinner mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="number" value="2">
+                            <input 
+			    	class="mdl-textfield__input" 
+				type="text" 
+				name="damage_multiplier" 
+				value="{{dungeon[4]}}">
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
-                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
+				type="submit" 
+				name="button_press" 
+				value="d{{dungeon[0]}}"
+				>
                             <i class="material-icons md-18">close</i>
                         </button>
                     </td>
                     <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
+				type="submit" 
+				name="button_press" 
+				value="u{{dungeon[0]}}"
+				>
                             Update
                         </button>
                     </td>
                     <td>
-                        <a class="view_link" href="/charPage.html">View</a>
+			    <a class="view_link" href="/dungeonPage.html/dungeon_id={{dungeon[0]}}">View</a>
                     </td>
                 </tr>
+		</form>
+		{% endfor %}
             </tbody>
         </table>
     </div>
 </div>
 
+
+
+{% if username %}
 <div class="table_data table_right mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Only Ranger_Rick's Dungeons</h2>
+	    <h2 class="mdl-card__title-text">{{username[0][0]}}'s Dungeons</h2>
     </div>
     <div class="mdl-card__supporting-text">
         <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
+		    <th>Character</th>
+                    <th>Ability</th>
                     <th>Dungeon Name</th>
                     <th>Type</th>
                     <th>Description</th>
-                    <th>Damage Multiplier</th>
-                    <th>View</th>
+                    <th>Dmg Multiplier</th>
+		    <th>View</th>
                 </tr>
             </thead>
             <tbody>
+		{% if user_dungeons %} 
+		{% for user_dungeon in user_dungeons %}
                 <tr>
-                    <td>
-                        Zora's Domain
-                    </td>
-                    <td>
-                        A cave with water and fountains
-                    </td>
-                    <td>
-                        Demon
-                    </td>
-                    <td>
-                        2
-                    </td>
-                    <td>
-                        <a class="view_link" href="/dungeonPage.html">View</a>
+		    <td>
+			    {{user_dungeon[1]}}
+		    </td>
+		    <td>
+			    {{user_dungeon[2]}}
+		    </td>
+		    <td>
+			    {{user_dungeon[3]}}
+		    </td>
+		    <td>
+			    {{user_dungeon[4]}}
+		    </td>
+		    <td>
+			    {{user_dungeon[5]}}
+		    </td>
+		    <td>
+			    {{user_dungeon[6]}}
+		    </td>
+		    <td>
+			    <a class="view_link" href="/dungeonPage.html/dungeon_id={{user_dungeon[0]}}">View</a>
                     </td>
                 </tr>
+		{% endfor %} 
+		{% endif %}
             </tbody>
         </table>
     </div>
 </div>
 
+{% else %}
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+	    <h2 class="mdl-card__title-text">Select a User to view their Dungeons</h2>
+    </div>
+</div>
 
-
-
-
+{% endif %}
 
 
 
 <div class="table_data table_left mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Create a new dungeon:</h2>
+        <h2 class="mdl-card__title-text">Create a New Dungeon:</h2>	
     </div>
+
     <div class="mdl-card__supporting-text">
+	<form action="/dungeonSelection.html" method="POST">
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
                     <th>Dungeon Name</th>
                     <th>Type</th>
                     <th>Description</th>
-                    <th>Damage<br>Multiplier</th>
-                    <th>Insert</th>
+                    <th>Dmg Multiplier</th>
+		    <th>Insert</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
                         <div class="mdl-textfield fat mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" value="">
+                            <input 
+			    	class="mdl-textfield__input" 
+				type="text" 
+				name="dungeon_name"
+				value=""
+				>
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" value="">
+                            <input 
+			    	class="mdl-textfield__input" 
+				type="text" 
+				name="dungeon_type"
+				value=""
+				>
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" value="">
+                            <input 
+			    	class="mdl-textfield__input" 
+				type="text" 
+				name="dungeon_description"
+				value=""
+				>
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="number" value="">
+                            <input 
+			    	class="mdl-textfield__input" 
+				type="text" 
+				name="damage_multiplier"
+				value=""
+				>
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        <button 
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
+				type="submit" 
+				name="button_press" 
+				value="insert"
+				>
                            INSERT
                         </button>
                     </td>
-                </tr>
+		</tr>
             </tbody>
         </table>
+	</form>
     </div>
 </div>
+
+
+
+
 
 {% endblock %}
