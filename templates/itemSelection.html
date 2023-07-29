@@ -24,7 +24,7 @@
             <tbody>
                 {% for row in left_table_rows %}
                 <form action="/itemSelection.html" method="POST">
-                    <tr>
+                    <tr class="tr_with_forms">
                         <td>
                             <div class="mdl-textfield normal mdl-js-textfield">
                                 <input class="mdl-textfield__input" type="text" name="character_name" value="{{row[0]}}">

@@ -7,6 +7,39 @@ window.addEventListener('DOMContentLoaded', () =>
     let page = window.location.pathname.split("/").pop();
     console.log("Name of current page: ", page);
 
+
+    let reload_db_link = document.getElementById("reload_the_db");
+    //console.log(reload_db_link);
+    let ul_reload_container = document.getElementById("ul_load_bar");
+    console.log(ul_reload_container)
+    reload_db_link.addEventListener("click", (e) => {
+        e.preventDefault();
+        ul_reload_container.innerHTML = "<div id=\"db_reloader_bar\" class=\"mdl-progress mdl-js-progress mdl-progress__indeterminate\"></div>";
+        componentHandler.upgradeDom() // MDL specific to update dom for MDL elements
+        console.log(reload_db_link)
+        fetch
+        ('/reload_the_db',
+            {
+                method: 'POST',
+                headers: {"Content-Type": "application/json"}
+            }
+        ).then(response => {
+            if (response.ok) {
+                //insert_usr_btn.innerText = "OK!";
+                console.log("Reload OK")
+                ul_reload_container.innerHTML = "Reload OK!"
+
+            } else {
+                console.log("Reload NOT OK")
+                ul_reload_container.innerHTML = "Error on DB reload"
+                //insert_usr_btn.innerText = "Error! Try again?";
+            }
+            window.location.reload();
+        });
+    });
+
+
+
     switch(page) {
     case '':
     case '/':
@@ -23,8 +56,6 @@ window.addEventListener('DOMContentLoaded', () =>
 });
 
 function bind_char_selection() {
-
-
     // Assumption is the FIRST table is the CRUD table based on our layout:
     let table = document.getElementById("cruddy_tbody");
     let route = "/charSelection.html"
@@ -53,92 +84,10 @@ function bind_char_selection() {
                 update_payload[attribute] = value
             }
             if (i === cols ) {
-                //console.log("Payload to be bound: ", update_payload);
                 btn_bind_and_fetch(input_btn, cols, route, method);
             }
-            // console.log(i);
-            // console.log(cols);
         });
     });
-
-
-// Not needed: Works with standard HTML forms:
-    // let insert_char_btn = document.getElementById("insert_char_btn")
-    // insert_char_btn.addEventListener("click", (e) =>
-    // {
-    //     e.preventDefault();
-    //     insert_char_btn.innerText = "...Sending Request...";
-    //     insert_char_btn.setAttribute("disabled", "");
-    //
-    //     let td_list = e.currentTarget.parentElement.parentElement;
-    //
-    //     console.log(td_list);
-    //
-    //     let single_td = td_list.children;
-    //     let character_name = single_td[0].children[0].children[0].value;
-    //     let race = single_td[1].children[0].children[0].value;
-    //     let char_class = single_td[2].children[0].children[0].value;
-    //     let type = single_td[3].children[0].children[0].value;
-    //     let alignment = single_td[4].children[0].children[0].value;
-    //
-    //     let user_payload = {
-    //         table: "Characters",
-    //         character_name: character_name,
-    //         race: race,
-    //         char_class: char_class,
-    //         type: type,
-    //         alignment: alignment
-    //     };
-    //
-    //     console.log(user_payload);
-    //
-    //     throw new error();
-
-        // if (username === "" || password === "" || email === "") {
-        //     console.log("Empty field imput");
-        //     insert_usr_btn.removeAttribute("disabled")
-        //     insert_usr_btn.innerText = "INSERT";
-        //     return;
-        // }
-        //
-        // if (single_td[2].children[0].children[0].validationMessage !== '') {
-        //     console.log("Email is invalid format");
-        //     insert_usr_btn.removeAttribute("disabled")
-        //     insert_usr_btn.innerText = "INSERT";
-        //     return;
-        // }
-
-
-    //
-    //     let i = 0;
-    //     for (let item of single_td) {
-    //         if (i === single_td.length - 1) break;
-    //         console.log(item.children[0].children[0].value);
-    //         i++;
-    //     }
-    //
-    //     fetch
-    //     ('/',
-    //     {
-    //             method: 'POST',
-    //             headers: {"Content-Type": "application/json"},
-    //             body : JSON.stringify(user_payload),
-    //         }
-    //     ).then(response =>
-    //         {
-    //             insert_usr_btn.removeAttribute("disabled")
-    //             if (response.ok)
-    //             {
-    //                 insert_usr_btn.innerText = "OK!";
-    //                 //window.location.reload();
-    //             }
-    //             else
-    //             {
-    //                 insert_usr_btn.innerText = "Error! Try again?";
-    //             }
-    //         })
-    // });
-
 }
 
 function bind_index() {
@@ -147,8 +96,8 @@ function bind_index() {
     // And send username to Flask with POST request
     document.getElementById("select_user")
     .addEventListener("change", (e) => {
-        localStorage.setItem("saved_username", e.target.value);
-        console.log("Saved username", localStorage.getItem("saved_username"));
+        //localStorage.setItem("saved_username", e.target.value);
+        //console.log("Saved username", localStorage.getItem("saved_username"));
         fetch
         ('/',
         {
@@ -157,7 +106,7 @@ function bind_index() {
                 body : JSON.stringify(
                 {
                     table: 'User_Accounts',
-                    username: localStorage.getItem("saved_username"),
+                    username: e.target.value,
                 }
             ),
             }
@@ -178,7 +127,7 @@ function bind_index() {
     insert_usr_btn.addEventListener("click", (e) =>
     {
         e.preventDefault();
-        insert_usr_btn.innerText = "...Sending Request...";
+        //insert_usr_btn.innerText = "...Sending Request...";
         insert_usr_btn.setAttribute("disabled", "");
 
         let td_list = e.currentTarget.parentElement.parentElement
@@ -225,11 +174,12 @@ function bind_index() {
             }
         ).then(response => {
             insert_usr_btn.removeAttribute("disabled")
+            window.location.reload();
             if (response.ok) {
-                insert_usr_btn.innerText = "OK!";
-                window.location.reload();
+                //insert_usr_btn.innerText = "OK!";
+                //window.location.reload();
             } else {
-                insert_usr_btn.innerText = "Error! Try again?";
+                //insert_usr_btn.innerText = "Error! Try again?";
             }
         });
 

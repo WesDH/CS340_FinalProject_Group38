@@ -63,9 +63,9 @@ def flash_err(e):
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index.html", methods=['GET', 'POST'])
 def index():
-    if "username" in session:
-        print("index.html username selected: ", session["username"])
     if request.method == "GET":
+        if "username" in session:
+            print("index.html username selected: ", session["username"])
 
         # Set default username to None
         if "username" not in session:
@@ -73,33 +73,35 @@ def index():
 
         cur = mysql.connection.cursor()
         user_info = cur.execute(sql.get_all_users)
-        if user_info > 0:
-            user_rows = cur.fetchall()
+        user_rows = cur.fetchall() if user_info > 0 else ()
 
         return render_template('index.html',
-                               user_rows=user_rows)
+                               user_rows=user_rows,
+                               username=session["username"])
     if request.method == "POST":
         try:
             req = request.json
             if len(req) > 0:
                 if len(req) == 2:
                     # save in session dict{} the username that was selected
-                    print("table: ", req["table"])
-                    print("username: ", req["username"])
+                    # print("table: ", req["table"])
+                    # print("username: ", req["username"])
                     if req["username"] == "None765":
                         session["username"] = None
                     else:
                         session["username"] = req["username"]
+                    print("index.html username selected: ", session["username"])
                 else:
                     cur = mysql.connection.cursor()
                     cur.execute(sql.insert_user, (req["username"], req["password"], req["email"]))
                     mysql.connection.commit()
                     cur.close()
-                return render_template('index.html')
-            return "Empty request received", 500
+                    flash(f"User Account '{req['username']}' added", "info")
+                return "OK", 202  # JS is handling the page reload
         except Exception as exc:
             print(exc)
-            return f"Exception on POST to / route: {exc}", 500
+            flash_err(exc)
+            return "NotOK", 500 # JS is handling the page reload
 
 
 @app.route("/charPage.html", methods=['GET'])

@@ -31,7 +31,7 @@
             <tbody id="cruddy_tbody">  <!-- cruddy_tbody ID grabbed by JS query selector -->
 		{% for char in all_chars %}
 		<form action="/charSelection.html" method="POST">
-                <tr char_id="{{char[0]}}">
+                <tr char_id="{{char[0]}}" class="tr_with_forms">
 		    <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
 				<input 
@@ -204,7 +204,7 @@
                     <th>Class</th>
                     <th>Type</th>
                     <th>Alignment</th>
-                    <th>Insert</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

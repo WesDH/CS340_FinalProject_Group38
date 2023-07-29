@@ -109,13 +109,13 @@ td {
 }
 
 /* Make table rows iterate on colors */
-tbody:nth-child(even) {
+tr:nth-child(even) {
     background-color: var(--row_col1);
 }
 tr:nth-child(odd) {
     background-color: var(--row_col2);
 }
-tr:hover {
+tr:nth-child(even):hover {
     background-color: var(--hovercol1) !important;
 }
 tr:nth-child(odd):hover {
@@ -161,7 +161,12 @@ td p {
     color: #000000;
 }
 
-
+select {
+    width: 100%;
+    font-size: 18px;
+    border: 1px solid var(--bg_col_personal_card);
+    border-radius: 4px;
+}
 
 
 /* Styling for "single item" pages */
@@ -202,26 +207,6 @@ font-size: 36px !important;
 height: 36px !important;
 width: 36px !important;
 }
-
-
- /*This is for the reload database on bottom of navbar*/
-/*https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize*/
-.inline-icon {
-   vertical-align: middle;
-   font-size: 24px !important;
-}
-.inline-icon:hover {
-   color: var(--link_hover);
-}
-a[title="RELOAD DATABASE"]:hover {
-  color: var(--link_hover);
-}
-
-
-
-
-
-
 /* Define custom class widths for input fields */
 .mdl-textfield__input {
     color: #000000;
@@ -280,5 +265,65 @@ a[title="RELOAD DATABASE"]:hover {
     .mdl-textfield.thinner {
         width: calc(30px / 1.2);
     }
+}
+
+ /* Fine tailored element/page specific CSS below */
+
+/* Fix for <tables> that have <tr> and <form> as children */
+/* tr class="tr_with_forms" */
+tr.tr_with_forms:nth-child(4n) {
+    background-color: var(--row_col2);
+}
+tr.tr_with_forms:nth-child(4n):hover {
+    background-color: var(--hovercol2) !important;
+}
+
+ /*This is for the reload database on bottom of navbar*/
+/*https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize*/
+.inline-icon {
+   vertical-align: middle;
+   font-size: 18px !important;
+}
+.inline-icon:hover {
+   color: var(--link_hover);
+}
+a[title="RELOAD DATABASE"]:hover {
+  color: var(--link_hover);
+}
+
+.mdl-data-table #index_th_set_username {
+    text-align: center;
+}
+
+#index_td_set_username {
+    display: flex;
+    justify-content: center;
+}
+
+#db_reloader_bar {
+    display: inline-block;
+    align-self: flex-end;
+    /*font-size: 24px !important;*/
+    width: 100px;
+}
+
+.flash_box {
+    /*padding: 5px;*/
+    /*display: flex;*/
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+}
+
+.info {
+    color: #545454;
+}
+
+.success {
+    color: #177a00;
+}
+
+.error {
+    color: #c70000;
 }
 

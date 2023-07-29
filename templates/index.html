@@ -50,17 +50,21 @@
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
-                    <th>Set Username</th>
+                    <th  id="index_th_set_username">Set Username</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>
+                    <td id="index_td_set_username">
                         <div class="mdl-selectfield mdl-js-selectfield">
                             <select id="select_user" name="select_user" class="mdl-selectfield__select">
-                                <option value="None765" selected>None</option>
+                                <option value="None765" {% if username is none %}selected{% endif %}>
+                                    None
+                                </option>
                                 {% for row in user_rows %}
-                                <option value="{{row[1]}}">{{row[1]}}</option>
+                                <option value="{{row[1]}}" {% if row[1] == username %}selected{% endif %}>
+                                    {{row[1]}}
+                                </option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -102,13 +106,13 @@
                 <tr>
                     <td>
                         <div class="mdl-textfield fatter mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" value="" maxlength="100">
+                            <input class="mdl-textfield__input" type="text" value="" maxlength="50">
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield fatter mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="password" value="" maxlength="100">
+                            <input class="mdl-textfield__input" type="text" value="" maxlength="50">
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>

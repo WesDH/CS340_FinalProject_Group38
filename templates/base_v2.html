@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style_v2.css') }}">
 </head>
 <body>
-
 <!-- START MDL LAYOUT   -->
 <div class="mdl-layout mdl-js-layout">
 
@@ -22,7 +21,8 @@
             <!-- Title -->
             <span class="mdl-layout-title">Dungeons and Dragons Character Manager</span>
             <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-layout-spacer">
+            </div>
             <!-- Navigation -->
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="/index.html">userAccounts</a>
@@ -67,11 +67,32 @@
             <div class = mdl-mini-footer__link-list>
                 <ul>CS 340 Summer 2023 Final Project: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens</ul>
                 <ul>|</ul>
-                <ul>
-                    <a href="/reload_the_db" title="RELOAD DATABASE">
+                <ul id="ul_load_bar">
+                    <a id="reload_the_db" href="reload_the_db" title="RELOAD DATABASE">
                         <i class="inline-icon material-icons">refresh</i>
                         &nbsp&nbsp&nbspReload Database</a>
                 </ul>
+
+                {% with alerts = get_flashed_messages(with_categories=true) %}
+                    {% if alerts %}
+                        <ul>|</ul>
+                    {% endif %}
+                        <!--
+                        1 # Havens, W (July 2023)
+                            Citation for the following Jinja templating
+                        2 # Date accessed: 07/23/2023
+                        3 # Copied code snippet from "Message Flashing",
+                            with slight modifications
+                        5 # Source URL:
+                            https://flask.palletsprojects.com/en/2.3.x/patterns/flashing/
+                        -->
+                        {% if alerts %}
+                            {% for category, msg in alerts %}
+                                <ul class="{{category}}">{{msg}}</ul>
+                            {% endfor %}
+                        {% endif %}
+                {% endwith %}
+
             </div>
         </div>
     </footer>

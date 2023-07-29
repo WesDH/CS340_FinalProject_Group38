@@ -22,10 +22,10 @@
                     <th>View</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
 		{% for dungeon in all_dungeons %}
 		<form action="/dungeonSelection.html" method="POST">
-                <tr dungeon_id="{{dungeon[0]}}">
+                <tr dungeon_id="{{dungeon[0]}}" class="tr_with_forms">
                     <td>
                         <div class="mdl-textfield fat mdl-js-textfield">
                             <input 
@@ -37,7 +37,7 @@
                         </div>
                     </td>
                     <td>
-                        <div class="mdl-textfield fatter mdl-js-textfield">
+                        <div class="mdl-textfield normal mdl-js-textfield">
                             <input 
 			    	class="mdl-textfield__input" 
 				type="text" 
@@ -47,7 +47,7 @@
                         </div>
                     </td>
                     <td>
-                        <div class="mdl-textfield normal mdl-js-textfield">
+                        <div class="mdl-textfield fattest mdl-js-textfield">
                             <input 
 			    	class="mdl-textfield__input" 
 				type="text" 
@@ -173,7 +173,7 @@
                     <th>Type</th>
                     <th>Description</th>
                     <th>Dmg Multiplier</th>
-		    <th>Insert</th>
+		            <th></th>
                 </tr>
             </thead>
             <tbody>
