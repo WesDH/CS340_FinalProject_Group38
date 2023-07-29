@@ -17,12 +17,17 @@
     justify-content: space-evenly;
     align-content: space-between;
     flex-wrap: wrap;
-    min-height : 80vh;
+    max-height : 90vh;
     overflow: auto;
+    position: relative;
+}
+.mdl-layout {
+    background-color: var(--bg_col_dark);
 }
 
 .mdl-layout__header {
     background-color: var(--primcol1);
+    border-bottom: 1px solid black;
     color: #000000;
 }
 
@@ -126,20 +131,34 @@ tr:nth-child(odd):hover {
 
 /*General main background color*/
 
-.mdl-layout__content {
-        background-color: var(--bg_col_dark);
-}
 
-.mdl-layout {
-    background-color: var(--bg_col_dark);
-}
+
+
+
+
 
 /* footer css */
 .mdl-mini-footer {
+    border-top: 1px solid black;
+    position: absolute;
+    left: 0px; bottom: 0px;
+    z-index: 2;
+    width: 100vw;
     background-color: var(--primcol1);
     color: black;
-    margin: 25px 0 0 0;
+    margin: 0 0 0 0;
     padding: 0;
+    max-height: 5vh;
+    overflow: hidden;
+}
+/*footer to apply to smaller width devices*/
+.mdl-mini-footer--link-list, .mdl-mini-footer__link-list {
+    max-height: 4vh;
+    overflow: hidden;
+}
+/*Applies to text vertical alignment in the footer*/
+ul, ol {
+    line-height: 12px;
 }
 
 /* <a class="view_link"> hyper link text colors */
@@ -230,7 +249,28 @@ width: 36px !important;
 .mdl-textfield.thinner {
     width: 30px;
 }
+
+@media (max-width: 750px){
+    .table_data.mdl-card {
+        position: static;
+        width: 95vw;
+        min-width: 80vw;
+        overflow: auto;
+    }
+
+
+}
 @media (max-width: 1800px){
+
+    .mdl-mini-footer {
+        position: absolute;
+        left: 0px; bottom: -4vh;
+}
+
+    .page-content {
+        max-height: 95vh;
+    }
+
     .mdl-data-table th {
         font-size: 14px;
         width: 0;
@@ -326,4 +366,7 @@ a[title="RELOAD DATABASE"]:hover {
 .error {
     color: #c70000;
 }
+
+
+
 

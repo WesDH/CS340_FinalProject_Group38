@@ -80,7 +80,7 @@
             {% elif username is none %}
                 Select user from userAccounts page to view their Character's inventory items here.
             {% else %}
-                No Characters for '{{username}}' have any items in their inventory!
+                Username '{{username}}' has no characters with any items in their inventory.
             {% endif %}
         </h2>
     </div>
@@ -147,18 +147,18 @@
                 <form action="/itemSelection.html" method="POST">
                     <tr>
                         <td>
-                            <select id="Characters" name="character_id">
+                            <select id="Characters" name="character_id_name">
                                 <option value="" selected="selected" disabled>Select Char</option>
                                 {% for char in char_list %}
-                                <option value="{{char[0]}}">{{char[1]}}</option>
+                                <option value="{{char[0]}},{{char[1]}}">{{char[1]}}</option>
                                 {% endfor %}
                             </select>
                         </td>
                         <td>
-                            <select id="Items" name="item_id">
+                            <select id="Items" name="item_id_name">
                                 <option value="" selected="selected" disabled >Select Item</option>
                                 {% for item in item_list %}
-                                <option value="{{item[0]}}">{{item[1]}}</option>
+                                <option value="{{item[0]}},{{item[1]}}">{{item[1]}}</option>
                                 {% endfor %}
                             </select>
                         </td>

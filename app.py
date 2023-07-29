@@ -392,7 +392,7 @@ def items():
                 cur.execute(sql.insert_new_item, (item_name, item_desc, is_weapon))
                 mysql.connection.commit()
                 cur.close()
-            flash(f"Row inserted for item: {item_name}", "info")
+            flash(f"Created new entry for item: {item_name}", "info")
             return redirect(url_for("items"))
         except Exception as exc:
             flash_err(exc)
@@ -442,9 +442,12 @@ def item_selection():
                 inventory_id = request.form['delete_btn'].split("=").pop(-1)
                 print(sql.delete_item_from_inv % inventory_id)
                 cur = mysql.connection.cursor()
-                cur.execute(sql.delete_item_from_inv, (inventory_id))
+                cur.execute(sql.delete_item_from_inv, (inventory_id,))
                 mysql.connection.commit()
                 cur.close()
+                flash(f"Removed {request.form['item_quantity']} "
+                      f"{request.form['item_name']}"
+                      f" from {request.form['character_name']}'s inventory", "info")
             elif "update_btn" in request.form.keys():
                 print("update clicked from inventory items panel")
                 inventory_id = request.form['update_btn'].split("=").pop(-1)
@@ -460,15 +463,25 @@ def item_selection():
                 cur.execute(query_parsed)
                 mysql.connection.commit()
                 cur.close()
+                flash(f"Update {request.form['character_name']}"
+                      f" with {request.form['item_quantity']}"
+                      f" of {request.form['item_name']}"
+                      f": \"{request.form['item_description']}\"", "info")
+
             elif "insert_btn" in request.form.keys():
                 print("insert clicked from bottom panel")
-                char_id = request.form['character_id']
-                item_id = request.form['item_id']
+                char_id = request.form['character_id_name'].split(",").pop(0)
+                char_name = request.form['character_id_name'].split(",").pop(1)
+                item_id = request.form['item_id_name'].split(",").pop(0)
+                item_name = request.form['item_id_name'].split(",").pop(1)
                 item_qty = request.form['item_quantity']
                 cur = mysql.connection.cursor()
                 cur.execute(sql.insert_inv_items, (char_id, item_id, item_qty))
                 mysql.connection.commit()
                 cur.close()
+                flash(f"Inserted {item_qty} "
+                      f"of {item_name} "
+                      f"into {char_name}'s inventory", "info")
             else:
                 flash("Unknown POST sent to itemSelection route on Flask.", "error")
             return redirect(url_for("item_selection"))
