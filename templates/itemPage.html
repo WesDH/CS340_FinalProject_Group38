@@ -5,51 +5,57 @@
 
 {% block content %}
 
-<div class="single_attribute_container">
+{% if item %}
+    <div class="single_attribute_container">
 
-    <div class="mdl-card-attribute mdl-shadow--2dp">
-        <div class="mdl-card__title mdl-card--expand">
-            <h4>
-                Healing Potion
-            </h4>
+        <div class="mdl-card-attribute mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--expand">
+                <h4>
+                    {{item[0]}}
+                </h4>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                item_name
+                <div class="mdl-layout-spacer"></div>
+                <i class="material-icons">construction</i>
+            </div>
         </div>
-        <div class="mdl-card__actions mdl-card--border">
-            item_name
-            <div class="mdl-layout-spacer"></div>
-            <i class="material-icons">construction</i>
+
+        <div class="mdl-card-attribute mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--expand">
+                <h4>
+                    {{item[1]}}
+                </h4>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                item_description
+                <div class="mdl-layout-spacer"></div>
+                <i class="material-icons">info</i>
+            </div>
         </div>
+
+        <div class="mdl-card-attribute mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--expand">
+                <h4>
+                    {% if item[2] == 1 %}
+                        True
+                    {% else %}
+                        False
+                    {% endif %}
+                </h4>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                is_weapon?
+                <div class="mdl-layout-spacer"></div>
+                <i class="material-icons">restaurant</i>
+            </div>
+        </div>
+
+    <!--END div class single_attribute_container-->
     </div>
-
-    <div class="mdl-card-attribute mdl-shadow--2dp">
-        <div class="mdl-card__title mdl-card--expand">
-            <h4>
-                heals 25 hp
-            </h4>
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            item_description
-            <div class="mdl-layout-spacer"></div>
-            <i class="material-icons">info</i>
-        </div>
-    </div>
-
-    <div class="mdl-card-attribute mdl-shadow--2dp">
-        <div class="mdl-card__title mdl-card--expand">
-            <h4>
-                False
-            </h4>
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            is_weapon?
-            <div class="mdl-layout-spacer"></div>
-            <i class="material-icons">restaurant</i>
-        </div>
-    </div>
-
-<!--END div class single_attribute_container-->
-</div>
-
-
+{% else %}
+    <h1>No Item Selected Yet</h1>
+{% endif %}
 
 
 

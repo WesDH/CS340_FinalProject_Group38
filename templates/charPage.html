@@ -1,9 +1,15 @@
-{% extends "base.html" %}
+{% extends "base_v2.html" %}
 {% block title %}
     Spells/Abilities: Shows Spells/Abilities for all chars by default. Also plan to show individual char if char was viewed from charSelection page. Here users can also insert a new Spell or new Ability to the Spells and Abilities tables.
 {% endblock %}
 
 {% block content %}
+    <h1>Under construction. Up to you-- Return to char Single view and/or also have Spells/Abilities all view on another page/route? </h1>
+{% endblock %}
+
+
+
+<!--OLD HTML BELOW:-->
 
 <!--<div class="char_container content_div">-->
 <!--    <h1>Evil Mage</h1>-->
@@ -18,22 +24,7 @@
 <!--    <br>-->
 <!--</div>-->
 
-<div class="char_info content_div">
-    <h1>(M:N) All Chars Spells</h1><br>
-    <small>Note: We plan that this will only display Spells for a certain character if that char was VIEWED on charPage.</small>
-    <table class="table">
-        <tr>
-            <th scope="col">Character name</th>
-            <th scope="col">spell name</th>
-            <th scope="col">spell damage</th>
-        </tr>
-        <tr>
-            <td>Evil Mage</td>
-            <td>Elf Punch</td>
-            <td>5</td>
-        </tr>
-    </table>
-</div>
+
 
 <!--<div class="char_info content_div">-->
 <!--    <h1>(M:N) Evil Mage's Inventory</h1><br>-->
@@ -51,79 +42,90 @@
 <!--    </table>-->
 <!--</div>-->
 
-<div class="char_info content_div">
-    <h1>(M:N) All Chars' Abilities</h1><br>
-    <small>Note: We plan that this will only display Abilities for a certain character if that char was VIEWED on charPage.</small>
-    <table class="table">
-        <tr>
-            <th scope="col">Character name</th>
-            <th scope="col">ability name</th>
-            <th scope="col">ability damage</th>
-            <th scope="col">dungeon strength</th>
-        </tr>
-        <tr>
-            <td>Evil Mage</td>
-            <td>Hope</td>
-            <td>2</td>
-            <td>Temple of Time</td>
-        </tr>
-        <tr>
-            <td>Evil Mage</td>
-            <td>Dread</td>
-            <td>3</td>
-            <td>Temple of Time</td>
-        </tr>
-    </table>
-</div>
+<!--<div class="char_info content_div">-->
+<!--    <h1>(M:N) All Chars Spells</h1><br>-->
+<!--    <small>Note: We plan that this will only display Spells for a certain character if that char was VIEWED on charPage.</small>-->
+<!--    <table class="table">-->
+<!--        <tr>-->
+<!--            <th scope="col">Character name</th>-->
+<!--            <th scope="col">spell name</th>-->
+<!--            <th scope="col">spell damage</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Evil Mage</td>-->
+<!--            <td>Elf Punch</td>-->
+<!--            <td>5</td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</div>-->
 
-<div class="break"></div>
+<!--<div class="char_info content_div">-->
+<!--    <h1>(M:N) All Chars' Abilities</h1><br>-->
+<!--    <small>Note: We plan that this will only display Abilities for a certain character if that char was VIEWED on charPage.</small>-->
+<!--    <table class="table">-->
+<!--        <tr>-->
+<!--            <th scope="col">Character name</th>-->
+<!--            <th scope="col">ability name</th>-->
+<!--            <th scope="col">ability damage</th>-->
+<!--            <th scope="col">dungeon strength</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Evil Mage</td>-->
+<!--            <td>Hope</td>-->
+<!--            <td>2</td>-->
+<!--            <td>Temple of Time</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Evil Mage</td>-->
+<!--            <td>Dread</td>-->
+<!--            <td>3</td>-->
+<!--            <td>Temple of Time</td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</div>-->
 
-<div class="bottom_div_container content_div">
-    <h3 class="create_char_h3">Create a New Spell</h3>
+<!--<div class="break"></div>-->
 
-    <form class="footer_form" method="POST">
-        <table class="table">
-            <tr>
-                <th scope="col">spell name</th>
-                <th scope="col">spell damage</th>
-            </tr>
-            <tr>
-                <td><input type="text" value=""></td>
-                <td><input type="text" value=""></td>
-            </tr>
-        </table>
+<!--<div class="bottom_div_container content_div">-->
+<!--    <h3 class="create_char_h3">Create a New Spell</h3>-->
 
-        <input type="submit" value="INSERT">
+<!--    <form class="footer_form" method="POST">-->
+<!--        <table class="table">-->
+<!--            <tr>-->
+<!--                <th scope="col">spell name</th>-->
+<!--                <th scope="col">spell damage</th>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td><input type="text" value=""></td>-->
+<!--                <td><input type="text" value=""></td>-->
+<!--            </tr>-->
+<!--        </table>-->
 
-    </form>
+<!--        <input type="submit" value="INSERT">-->
 
-</div>
+<!--    </form>-->
 
-<div class="bottom_div_container content_div">
-    <h3 class="create_char_h3">Create a New Ability</h3>
+<!--</div>-->
 
-    <form class="footer_form" method="POST">
-        <table class="table">
-            <tr>
-                <th scope="col">ability name</th>
-                <th scope="col">ability damage</th>
-                <th scope="col">dungeon strength</th>
-            </tr>
-            <tr>
-                <td><input type="text" value=""></td>
-                <td><input type="text" value=""></td>
-                <td><input type="text" value=""></td>
-            </tr>
-        </table>
+<!--<div class="bottom_div_container content_div">-->
+<!--    <h3 class="create_char_h3">Create a New Ability</h3>-->
 
-        <input type="submit" value="INSERT">
+<!--    <form class="footer_form" method="POST">-->
+<!--        <table class="table">-->
+<!--            <tr>-->
+<!--                <th scope="col">ability name</th>-->
+<!--                <th scope="col">ability damage</th>-->
+<!--                <th scope="col">dungeon strength</th>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td><input type="text" value=""></td>-->
+<!--                <td><input type="text" value=""></td>-->
+<!--                <td><input type="text" value=""></td>-->
+<!--            </tr>-->
+<!--        </table>-->
 
-    </form>
+<!--        <input type="submit" value="INSERT">-->
 
-</div>
+<!--    </form>-->
 
-
-
-
-
-{% endblock %}
+<!--</div>-->

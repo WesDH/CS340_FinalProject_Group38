@@ -3,6 +3,14 @@
     SQL queries can go here
 """
 
+# -- *****************************************************************************
+# -- Queries that act on index page (Users table)  --
+# -- *****************************************************************************
+
+# -- for loading the Dungeon details onto the Dungeon Page
+insert_user = "INSERT INTO User_Accounts (username, password, email) VALUES (%s,%s,%s);"
+
+
 
 # -- *****************************************************************************
 # -- Queries that act on dungeonPage  --
@@ -11,6 +19,12 @@
 # -- for loading the Dungeon details onto the Dungeon Page
 get_dungeon = "SELECT dungeon_name, dungeon_type, dungeon_description, damage_multiplier FROM Dungeons WHERE dungeon_id = %s;"
 
+# -- *****************************************************************************
+# -- Queries that act on itemPage  --
+# -- *****************************************************************************
+
+# -- for loading the Dungeon details onto the Dungeon Page
+get_item = "SELECT item_name, item_description, is_weapon FROM Items WHERE item_id = %s;"
 
 # -- *****************************************************************************
 # -- Queries that act on dungeonSelection Page  --
@@ -64,18 +78,15 @@ delete_char = "DELETE FROM Characters WHERE character_id = %s;"
 # -- *****************************************************************************
 # -- Inventory Items Junction Table associated queries:  --
 # -- *****************************************************************************
+
 # -- select all inventory items
 chars_items_qty = "SELECT Characters.character_name, Items.item_name, Items.item_description, Inventory_Items.quantity, Inventory_Items.inventory_id, Items.item_id, Characters.character_id from Characters " \
                  "INNER JOIN Inventory_Items ON Characters.character_id=Inventory_Items.Characters_character_id " \
                  "INNER JOIN Items ON Inventory_Items.Items_item_id=Items.item_id " \
                  "ORDER BY Characters.character_name ASC;"
 
-# -- select user specific inventory items
-individual_char_items = "SELECT Characters.character_name, Items.item_name, Items.item_description, Inventory_Items.quantity, Inventory_Items.inventory_id from Items " \
-                 "INNER JOIN Inventory_Items ON Items.item_id=Inventory_Items.Items_item_id " \
-                 "INNER JOIN Characters ON Inventory_Items.Characters_character_id=Characters.character_id " \
-                 "INNER JOIN User_Accounts ON Characters.Users_user_id=User_Accounts.user_id " \
-                 "WHERE User_Accounts.user_id='3'"
+# -- Select inventory items based on User_Accounts.username:
+individual_char_items = "SELECT User_Accounts.username, Characters.character_name, Items.item_name, Items.item_description,Inventory_Items.quantity, Items.item_id from User_Accounts INNER JOIN Characters on User_Accounts.user_id=Characters.Users_user_id INNER JOIN Inventory_Items ON Characters.character_id=Inventory_Items.Characters_character_id INNER JOIN Items ON Inventory_Items.Items_item_id=Items.item_id WHERE User_Accounts.username='%s';"
 
 # -- for when a user deletes an inventory item
 delete_item_from_inv = "DELETE FROM Inventory_Items WHERE inventory_id = %s;"
@@ -93,6 +104,7 @@ get_char_list = "SELECT Characters.character_id, Characters.character_name FROM 
 # -- *****************************************************************************
 # -- Items Table associated queries:  --
 # -- *****************************************************************************
+
 get_all_item_info =  "SELECT Items.item_id, Items.item_name, Items.item_description, Items.is_weapon FROM Items"
 insert_new_item = "INSERT INTO Items (item_name, item_description, is_weapon) VALUES (%s,%s,%s);"
 
@@ -101,6 +113,7 @@ insert_new_item = "INSERT INTO Items (item_name, item_description, is_weapon) VA
 # -- *****************************************************************************
 # -- Queries used by User_Accounts (login) page: --
 # -- *****************************************************************************
+
 get_all_users = "SELECT * FROM User_Accounts;"
 
 

@@ -1,44 +1,111 @@
-{% extends "base.html" %}
+{% extends "base_v2.html" %}
 {% block title %}
     Items:   allows for insertion of a new item into the Items table. A character can then add these Items to their Inventory.
 {% endblock %}
 
 {% block content %}
-    <div class="left_div_container content_div">
-        <h1>Items</h1><br>
-        <table class="table">
-            <tr>
-                <th scope="col">item_name</th>
-                <th scope="col">item_description</th>
-                <th scope="col">is_weapon?</th>
-            </tr>
-            {% for row in item_rows %}
-            <tr>
-                <td>{{row[1]}}</td>
-                <td>{{row[2]}}</td>
-                <td>{{row[3]}}</td>
-            </tr>
-            {% endfor %}
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">All Items View</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Is Weapon?</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--  Items.item_id, Items.item_name, Items.item_description, Items.is_weapon -->
+                {% for row in item_rows %}
+                <tr>
+                    <td>
+                        {{row[1]}}
+                    </td>
+                    <td>
+                        {{row[2]}}
+                    </td>
+                    <td>
+                        {% if row[3] == 1 %}
+                             True
+                        {% else %}
+                             False
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="view_link" href="/itemPage.html/item_id={{row[0]}}">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
+</div>
 
-    <div class="break"></div>
-    <!-- HTML form  -->
-    <div>
-        <h3>Create a new item: (working demo)</h3>
 
-        <form class="footer_form" method="POST" action="/Items.html">
-            <input type="text" id="item_name" name="name" placeholder="Item name" min="1" max="2147483647">
-            <input type="text" id="item_description" name="description" placeholder="Item description" min="1" max="2147483647">
-            <label for="is_weapon">Is weapon?</label>
-            <select id="is_weapon" name="is_weapon">
-                <option value="" selected="selected" disabled>Select</option>
-                <option value="True">True</option>
-                <option value="False">False</option>
-            </select>
-        <input id="Items_INSERT" type="submit" value="INSERT">
-        </form>
 
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Create a New Item</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Item Description</th>
+                    <th>Is weapon?</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <form action="/items.html" method="POST">
+                    <tr>
+                        <td>
+                            <div class="mdl-textfield normal mdl-js-textfield">
+                                <input class="mdl-textfield__input" name="Item Name" type="text" value="">
+                                <label class="mdl-textfield__label" ></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mdl-textfield normal mdl-js-textfield">
+                                <input class="mdl-textfield__input" name="Item Description" type="text" value="">
+                                <label class="mdl-textfield__label" ></label>
+                            </div>
+                        </td>
+                        <td>
+                            <select id="Items" name="is_weapon">
+                                <option value="" selected="selected" disabled >Select Item</option>
+                                <option value="True">True</option>
+                                <option value="False">False</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                                    type="submit" name="insert_btn">
+                               INSERT
+                            </button>
+                        </td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 {% endblock %}
+
+<!--        <form class="footer_form" method="POST" action="/Items.html">-->
+<!--            <input type="text" id="item_name" name="name" placeholder="Item name" min="1" max="2147483647">-->
+<!--            <input type="text" id="item_description" name="description" placeholder="Item description" min="1" max="2147483647">-->
+<!--            <label for="is_weapon">Is weapon?</label>-->
+<!--            <select id="is_weapon" name="is_weapon">-->
+<!--                <option value="" selected="selected" disabled>Select</option>-->
+<!--                <option value="True">True</option>-->
+<!--                <option value="False">False</option>-->
+<!--            </select>-->
+<!--        <input id="Items_INSERT" type="submit" value="INSERT">-->
+<!--        </form>-->

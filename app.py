@@ -7,6 +7,7 @@ from flask_mysqldb import MySQL
 from env.credentials import *
 import queries as sql
 import sys, logging
+from datetime import timedelta
 
 app = Flask(__name__)
 
@@ -14,7 +15,11 @@ app.config['MYSQL_HOST'] = ENV_HOST
 app.config['MYSQL_USER'] = ENV_USERNAME
 app.config['MYSQL_PASSWORD'] = ENV_PASSWORD
 app.config['MYSQL_DB'] = ENV_DATABASE
+
+# Sessions are only used for personalized table views,
+# And for method .flash() to send user feedback
 app.secret_key = session_key
+app.permanent_session_lifetime = timedelta(hours=1)
 
 # app.config.from_pyfile(".env")
 
@@ -42,8 +47,8 @@ def generate_ddl():
 # ddbtest.sql is as single line of the schema as .execute only
 # Executes one line per execute.
 with app.app_context():
-    #generate_ddl()  # Comment this during development to save some time
-    pass
+    generate_ddl()  # Comment this during development to save some time
+    #pass
 
 
 def flash_err(e):
@@ -54,12 +59,18 @@ def flash_err(e):
     else:
         flash(f"Row insertion error: {e}", "error")
 
-@app.route("/logout", methods=['GET'])
+
 @app.route("/", methods=['GET', 'POST'])
-@app.route("/index.html", methods=['GET'])
+@app.route("/index.html", methods=['GET', 'POST'])
 def index():
+    if "username" in session:
+        print("index.html username selected: ", session["username"])
     if request.method == "GET":
-        session["default"] = "default_session"
+
+        # Set default username to None
+        if "username" not in session:
+            session["username"] = None
+
         cur = mysql.connection.cursor()
         user_info = cur.execute(sql.get_all_users)
         if user_info > 0:
@@ -72,14 +83,19 @@ def index():
             req = request.json
             if len(req) > 0:
                 if len(req) == 2:
+                    # save in session dict{} the username that was selected
                     print("table: ", req["table"])
                     print("username: ", req["username"])
+                    if req["username"] == "None765":
+                        session["username"] = None
+                    else:
+                        session["username"] = req["username"]
                 else:
-                    print("table: ", req["table"])
-                    print("username: ", req["username"])
-                    print("password: ", req["password"])
-                    print("email: ", req["email"])
-                return "OK", 200
+                    cur = mysql.connection.cursor()
+                    cur.execute(sql.insert_user, (req["username"], req["password"], req["email"]))
+                    mysql.connection.commit()
+                    cur.close()
+                return render_template('index.html')
             return "Empty request received", 500
         except Exception as exc:
             print(exc)
@@ -92,8 +108,8 @@ def char_page():
 
 @app.route("/charSelection.html", methods=['GET', 'PATCH', 'POST'])
 def char_selection_v2():
-
-    
+    if "username" in session:
+        print("charSelection username selected: ", session["username"])
     if request.method == "GET":
         cur = mysql.connection.cursor()
             
@@ -211,6 +227,25 @@ def char_selection_v2():
     #     return "OK", 202
 
 
+# @app.route("/dungeonPage.html", methods=['GET'])
+@app.route("/itemPage.html/item_id=<item_id>", methods=['GET'])
+def item_page(item_id):
+    print("item_id =", item_id)
+    if request.method == "GET":
+        cur = mysql.connection.cursor()
+        if item_id:
+            #char_list = cur.fetchall() if chars > 0 else ()
+            item = cur.execute(sql.get_item, [item_id])
+            cur_item = cur.fetchall()[0] if item > 0 else ()
+
+            print("item =", cur_item)
+            return render_template('itemPage.html',
+                                   item=cur_item)
+        else:
+            cur_item = None
+            return render_template('itemPage.html',
+                                   item=cur_item)
+
 
 # @app.route("/dungeonPage.html", methods=['GET'])
 @app.route("/dungeonPage.html/dungeon_id=<dungeon_id>", methods=['GET'])
@@ -238,6 +273,8 @@ def dungeon_page(dungeon_id):
 
 @app.route("/dungeonSelection.html", methods=['GET', 'POST'])
 def dungeon_selection():
+    if "username" in session:
+        print("dungeonSelection username selected: ", session["username"])
     if request.method == "GET":
         cur = mysql.connection.cursor()
 
@@ -330,13 +367,12 @@ def dungeon_selection():
 # def item_page():
 #     return render_template('itemPage.html')
 
-@app.route("/itemPage.html", methods=['GET', 'POST'])
-@app.route("/Items.html", methods=['GET', 'POST'])
+@app.route("/items.html", methods=['GET', 'POST'])
 def items():
     if request.method == 'GET':
-        if "?" in request.url:
-            print("Single item view clicked")
-            return render_template('itemPage.html')
+        # if "?" in request.url:
+        #     print("Single item view clicked")
+        #     return render_template('itemPage.html')
         cur = mysql.connection.cursor()
         items_info = cur.execute(sql.get_all_item_info)
         if items_info > 0:
@@ -346,13 +382,14 @@ def items():
                                item_rows=item_rows)
     elif request.method == 'POST':
         try:
-            item_name = request.form['name']
-            item_desc = request.form['description']
-            is_weapon = 1 if request.form['is_weapon'] == 'True' else 0
-            cur = mysql.connection.cursor()
-            cur.execute(sql.insert_new_item, (item_name, item_desc, is_weapon))
-            mysql.connection.commit()
-            cur.close()
+            if "insert_btn" in request.form.keys():
+                item_name = request.form['Item Name']
+                item_desc = request.form['Item Description']
+                is_weapon = 1 if request.form['is_weapon'] == 'True' else 0
+                cur = mysql.connection.cursor()
+                cur.execute(sql.insert_new_item, (item_name, item_desc, is_weapon))
+                mysql.connection.commit()
+                cur.close()
             flash(f"Row inserted for item: {item_name}", "info")
             return redirect(url_for("items"))
         except Exception as exc:
@@ -366,12 +403,22 @@ def items():
 @app.route("/itemSelection.html", methods=['GET', 'POST'])
 def item_selection():
     if request.method == 'GET':
+
+        # Logic to get the current user rows, or if no user then empty tuple ()
+        cur_user_inv_table_rows = ()
+        if "username" in session:
+            if session["username"] is not None:
+                #print("itemSelection username selected: ", session["username"])
+                cur = mysql.connection.cursor()
+                cur_usr = session["username"]
+                #print(sql.individual_char_items % cur_usr)
+                parsed = (sql.individual_char_items % cur_usr)
+                cur_user_inv_items = cur.execute(parsed)
+                cur_user_inv_table_rows = cur.fetchall() if cur_user_inv_items > 0 else ()
+
         cur = mysql.connection.cursor()
         join_chars_items = cur.execute(sql.chars_items_qty)
         left_table_rows = cur.fetchall() if join_chars_items > 0 else ()
-
-        join_user_items = cur.execute(sql.individual_char_items)
-        right_table_rows = cur.fetchall() if join_user_items > 0 else ()
 
         # The following 2 queries are for dynamic dropdown input functionality:
         chars = cur.execute(sql.get_char_list)
@@ -381,7 +428,7 @@ def item_selection():
 
         return render_template('itemSelection.html',
                                left_table_rows=left_table_rows,
-                               right_table_rows=right_table_rows,
+                               right_table_rows=cur_user_inv_table_rows,
                                char_list=char_list,
                                item_list=item_list)
     if request.method == 'POST':

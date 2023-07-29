@@ -10,7 +10,7 @@
 
 <div class="table_data table_left mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">User_Accounts Table Administrator Panel View</h2>
+        <h2 class="mdl-card__title-text">User_Accounts Table Admin Panel</h2>
     </div>
     <div class="mdl-card__supporting-text">
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
@@ -58,7 +58,7 @@
                     <td>
                         <div class="mdl-selectfield mdl-js-selectfield">
                             <select id="select_user" name="select_user" class="mdl-selectfield__select">
-                                <option value="" disabled selected>Select</option>
+                                <option value="None765" selected>None</option>
                                 {% for row in user_rows %}
                                 <option value="{{row[1]}}">{{row[1]}}</option>
                                 {% endfor %}

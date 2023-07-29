@@ -62,7 +62,7 @@
                             </button>
                         </td>
                         <td>
-                            <a class="view_link" href="/itemPage.html?item_id={{row[5]}}">View</a>
+                            <a class="view_link" href="/itemPage.html/item_id={{row[5]}}">View</a>
                         </td>
                     </tr>
                 </form>
@@ -74,7 +74,13 @@
 
 <div class="table_data table_right mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Only Items Belonging to Daniel</h2>
+        <h2 class="mdl-card__title-text">
+            {% if right_table_rows %}
+                Only Items Belonging to Characters of {{right_table_rows[0][0]}}
+            {% else %}
+                Personalized view: No rows found
+            {% endif %}
+        </h2>
     </div>
     <div class="mdl-card__supporting-text">
         <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
@@ -88,23 +94,25 @@
                 </tr>
             </thead>
             <tbody>
+            {% for row in right_table_rows %}
                 <tr>
                     <td>
-                        Zora's Domain
+                        {{row[1]}}
                     </td>
                     <td>
-                        A cave with water and fountains
+                        {{row[2]}}
                     </td>
                     <td>
-                        Demon
+                        {{row[3]}}
                     </td>
                     <td>
-                        2
+                        {{row[4]}}
                     </td>
                     <td>
-                        <a class="view_link" href="/dungeonPage.html">View</a>
+                        <a class="view_link" href="/itemPage.html/item_id={{row[5]}}">View</a>
                     </td>
                 </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

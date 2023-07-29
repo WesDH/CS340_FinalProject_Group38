@@ -227,7 +227,7 @@ function bind_index() {
             insert_usr_btn.removeAttribute("disabled")
             if (response.ok) {
                 insert_usr_btn.innerText = "OK!";
-                //window.location.reload();
+                window.location.reload();
             } else {
                 insert_usr_btn.innerText = "Error! Try again?";
             }
