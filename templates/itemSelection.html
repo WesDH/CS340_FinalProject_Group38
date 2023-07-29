@@ -77,11 +77,14 @@
         <h2 class="mdl-card__title-text">
             {% if right_table_rows %}
                 Only Items Belonging to Characters of {{right_table_rows[0][0]}}
+            {% elif username is none %}
+                Select user from userAccounts page to view their Character's inventory items here.
             {% else %}
-                Personalized view: No rows found
+                No Characters for '{{username}}' have any items in their inventory!
             {% endif %}
         </h2>
     </div>
+    {% if username is not none  %}
     <div class="mdl-card__supporting-text">
         <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
             <thead>
@@ -116,6 +119,7 @@
             </tbody>
         </table>
     </div>
+    {% endif %}
 </div>
 
 

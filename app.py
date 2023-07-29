@@ -43,12 +43,12 @@ def generate_ddl():
     cur.close()
 
 
-# Populate the DB once on startup, for now, like this:
+# Populate the DB once on startup:
 # ddbtest.sql is as single line of the schema as .execute only
 # Executes one line per execute.
 with app.app_context():
-    generate_ddl()  # Comment this during development to save some time
-    #pass
+    #generate_ddl()  # Comment this during development to save some time
+    pass
 
 
 def flash_err(e):
@@ -430,7 +430,8 @@ def item_selection():
                                left_table_rows=left_table_rows,
                                right_table_rows=cur_user_inv_table_rows,
                                char_list=char_list,
-                               item_list=item_list)
+                               item_list=item_list,
+                               username=session["username"])
     if request.method == 'POST':
         try:
             print(request.form)
