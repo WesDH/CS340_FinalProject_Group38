@@ -27,6 +27,8 @@ mysql = MySQL(app)
 
 curr_user_id = 1
 
+
+
 def generate_ddl():
     """
         Executes DB Schema
@@ -34,12 +36,16 @@ def generate_ddl():
     :return: None
     """
     cur = mysql.connection.cursor()
-    schema = open('db/ddbtest.sql', mode='r')
-    for statement in schema.readlines():
-        statement = statement.rstrip()
-        cur.execute(statement)
-        mysql.connection.commit()
-        print(statement)
+    schema = open('db/ddb.sql', mode='r')
+    statement_so_far = ''
+    for line in schema.readlines():
+        line = line.rstrip()
+        statement_so_far += '\r\n' + line
+        if line.endswith(';'):
+            cur.execute(statement_so_far)
+            mysql.connection.commit()
+            print(statement_so_far)
+            statement_so_far = ''
     cur.close()
 
 
