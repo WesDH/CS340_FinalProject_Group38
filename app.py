@@ -31,7 +31,7 @@ curr_user_id = 1
 
 def generate_ddl():
     """
-        Executes DB Schema
+        Executes ddl.sql DB Schema
         Drops all tables and recreates default DB with sample data
     :return: None
     """
@@ -50,8 +50,6 @@ def generate_ddl():
 
 
 # Populate the DB once on startup:
-# ddl.sql is as single line of the schema as .execute only
-# Executes one line per execute.
 with app.app_context():
     generate_ddl()  # Comment this during development to save some time
     pass
