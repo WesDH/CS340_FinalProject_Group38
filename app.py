@@ -417,6 +417,8 @@ def item_selection():
                 parsed = (sql.individual_char_items % cur_usr)
                 cur_user_inv_items = cur.execute(parsed)
                 cur_user_inv_table_rows = cur.fetchall() if cur_user_inv_items > 0 else ()
+        else:
+            session["username"] = None
 
         cur = mysql.connection.cursor()
         join_chars_items = cur.execute(sql.chars_items_qty)
