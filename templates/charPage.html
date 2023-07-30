@@ -4,128 +4,195 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Under construction. Up to you-- Return to char Single view and/or also have Spells/Abilities all view on another page/route? </h1>
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">
+            All Abilities View (Under construction)
+        </h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Ability Name</th>
+                    <th>Ability Damage</th>
+                    <th>Dungeon ID</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in all_abilities %}
+                <tr>
+                    <td>
+                        {{row[1]}}
+                    </td>
+                    <td>
+                        {{row[2]}}
+                    </td>
+                    <td>
+                        {{row[3]}}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">
+            All Spells View (Under construction)
+        </h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Spell Name</th>
+                    <th>Spell Damage</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in all_spells %}
+                <tr>
+                    <td>
+                        {{row[1]}}
+                    </td>
+                    <td>
+                        {{row[2]}}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Create a New Ability (Under Construction)</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text">
+	<form action="#" method="">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Ability Name</th>
+                    <th>Damage</th>
+                    <th>Dungeon Select</th>
+		            <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="mdl-textfield fat mdl-js-textfield">
+                            <input
+			    	class="mdl-textfield__input"
+				type="text"
+				name="ability_name"
+				value=""
+				>
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input
+			    	class="mdl-textfield__input"
+				type="number"
+				name="damage"
+				value=""
+				>
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <select id="Dungeons" name="Abilities">
+                            <option value="" selected="selected" disabled>Select</option>
+                            <option value="">Bowser's Castle</option>
+                            <option value="">Temple of Time</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+				type="submit"
+				name="button_press"
+				value="insert"
+				>
+                           INSERT
+                        </button>
+                    </td>
+		</tr>
+            </tbody>
+        </table>
+	</form>
+    </div>
+</div>
+
+
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Create a New Spell (Under Construction)</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text">
+	<form action="#" method="">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Spell Name</th>
+                    <th>Damage</th>
+		            <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="mdl-textfield fat mdl-js-textfield">
+                            <input
+			    	class="mdl-textfield__input"
+				type="text"
+				name="spell_name"
+				value=""
+				>
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input
+			    	class="mdl-textfield__input"
+				type="number"
+				name="damage"
+				value=""
+				>
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <button
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+				type="submit"
+				name="button_press"
+				value="insert"
+				>
+                           INSERT
+                        </button>
+                    </td>
+		</tr>
+            </tbody>
+        </table>
+	</form>
+    </div>
+</div>
+
+
+
+
+
 {% endblock %}
-
-
-
-<!--OLD HTML BELOW:-->
-
-<!--<div class="char_container content_div">-->
-<!--    <h1>Evil Mage</h1>-->
-<!--    <br>-->
-<!--</div>-->
-
-<!--<div class="char_container content_div">-->
-<!--    <h5>Race: Other</h5>-->
-<!--    <h5>Class: Magician</h5>-->
-<!--    <h5>Creature Type: Demon</h5>-->
-<!--    <h5>Alignment: Chaotic Evil</h5>-->
-<!--    <br>-->
-<!--</div>-->
-
-
-
-<!--<div class="char_info content_div">-->
-<!--    <h1>(M:N) Evil Mage's Inventory</h1><br>-->
-<!--    <table class="table">-->
-<!--        <tr>-->
-<!--            <th scope="col">item name</th>-->
-<!--            <th scope="col">item description</th>-->
-<!--            <th scope="col">quantity</th>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Healing Potion</td>-->
-<!--            <td>Heals 25 hit-points</td>-->
-<!--            <td>8</td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</div>-->
-
-<!--<div class="char_info content_div">-->
-<!--    <h1>(M:N) All Chars Spells</h1><br>-->
-<!--    <small>Note: We plan that this will only display Spells for a certain character if that char was VIEWED on charPage.</small>-->
-<!--    <table class="table">-->
-<!--        <tr>-->
-<!--            <th scope="col">Character name</th>-->
-<!--            <th scope="col">spell name</th>-->
-<!--            <th scope="col">spell damage</th>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Evil Mage</td>-->
-<!--            <td>Elf Punch</td>-->
-<!--            <td>5</td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</div>-->
-
-<!--<div class="char_info content_div">-->
-<!--    <h1>(M:N) All Chars' Abilities</h1><br>-->
-<!--    <small>Note: We plan that this will only display Abilities for a certain character if that char was VIEWED on charPage.</small>-->
-<!--    <table class="table">-->
-<!--        <tr>-->
-<!--            <th scope="col">Character name</th>-->
-<!--            <th scope="col">ability name</th>-->
-<!--            <th scope="col">ability damage</th>-->
-<!--            <th scope="col">dungeon strength</th>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Evil Mage</td>-->
-<!--            <td>Hope</td>-->
-<!--            <td>2</td>-->
-<!--            <td>Temple of Time</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Evil Mage</td>-->
-<!--            <td>Dread</td>-->
-<!--            <td>3</td>-->
-<!--            <td>Temple of Time</td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</div>-->
-
-<!--<div class="break"></div>-->
-
-<!--<div class="bottom_div_container content_div">-->
-<!--    <h3 class="create_char_h3">Create a New Spell</h3>-->
-
-<!--    <form class="footer_form" method="POST">-->
-<!--        <table class="table">-->
-<!--            <tr>-->
-<!--                <th scope="col">spell name</th>-->
-<!--                <th scope="col">spell damage</th>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td><input type="text" value=""></td>-->
-<!--                <td><input type="text" value=""></td>-->
-<!--            </tr>-->
-<!--        </table>-->
-
-<!--        <input type="submit" value="INSERT">-->
-
-<!--    </form>-->
-
-<!--</div>-->
-
-<!--<div class="bottom_div_container content_div">-->
-<!--    <h3 class="create_char_h3">Create a New Ability</h3>-->
-
-<!--    <form class="footer_form" method="POST">-->
-<!--        <table class="table">-->
-<!--            <tr>-->
-<!--                <th scope="col">ability name</th>-->
-<!--                <th scope="col">ability damage</th>-->
-<!--                <th scope="col">dungeon strength</th>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td><input type="text" value=""></td>-->
-<!--                <td><input type="text" value=""></td>-->
-<!--                <td><input type="text" value=""></td>-->
-<!--            </tr>-->
-<!--        </table>-->
-
-<!--        <input type="submit" value="INSERT">-->
-
-<!--    </form>-->
-
-<!--</div>-->

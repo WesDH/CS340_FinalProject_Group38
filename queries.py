@@ -11,6 +11,16 @@
 insert_user = "INSERT INTO User_Accounts (username, password, email) VALUES (%s,%s,%s);"
 
 
+# -- *****************************************************************************
+# -- Queries that act on Spells/Abilities --
+# -- *****************************************************************************
+
+# -- for loading the Abilities table onto the Spells/Abilities page
+get_all_abilities = "SELECT * FROM Abilities;"
+
+# -- for loading the Abilities table onto the Spells/Abilities page
+get_all_spells = "SELECT * FROM Spells;"
+
 
 # -- *****************************************************************************
 # -- Queries that act on dungeonPage  --

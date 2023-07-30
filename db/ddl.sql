@@ -24,7 +24,7 @@ SET AUTOCOMMIT = 0;
 DROP TABLE IF EXISTS `Dungeons` ;
 
 CREATE TABLE IF NOT EXISTS `Dungeons` (
-  `dungeon_id` INT(11) NOT NULL AUTO_INCREMENT UNIQUE,
+  `dungeon_id` INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
   `dungeon_name` VARCHAR(100) NOT NULL UNIQUE,
   `dungeon_type` VARCHAR(50) NOT NULL,
   `dungeon_description` VARCHAR(255) NULL,
@@ -43,15 +43,15 @@ CREATE TABLE IF NOT EXISTS `Abilities` (
   `ability_id` INT(11) NOT NULL AUTO_INCREMENT UNIQUE,
   `ability_name` VARCHAR(100) NOT NULL UNIQUE,
   `ability_damage` INT(11) NULL DEFAULT NULL,
-  `Dungeons_dungeon_id` INT(11) NOT NULL,
+  `Dungeons_dungeon_id` INT(11),
   PRIMARY KEY (`ability_id`),
   INDEX `fk_Abilities_Dungeons1_idx` (`Dungeons_dungeon_id` ASC) VISIBLE,
   UNIQUE INDEX `ability_id_UNIQUE` (`ability_id` ASC) VISIBLE,
   CONSTRAINT `fk_Abilities_Dungeons1`
     FOREIGN KEY (`Dungeons_dungeon_id`)
     REFERENCES `Dungeons` (`dungeon_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

@@ -1,4 +1,8 @@
-console.log("Saved username", localStorage.getItem("saved_username"));
+/*
+-- GROUP 38: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens
+--
+-- Contains some custom JS logic for a few event listeners.
+ */
 
 window.addEventListener('DOMContentLoaded', () =>
 {
@@ -63,8 +67,6 @@ function bind_char_selection() {
 
     let cols = 5;
     Array.from(table.children).forEach(function (single_tr) {
-        //console.log("outer loop", single_tr);
-        //console.log(single_tr.getAttribute("char_id"));
 
         // this gives us the index of the <td>'s,
         // UPDATE button is always inside second to last <td>:
@@ -91,13 +93,13 @@ function bind_char_selection() {
 }
 
 function bind_index() {
-
-    // Bind select user dropdown, save into page variable in JS
-    // And send username to Flask with POST request
+    /*
+       Logic for index.html
+       Binds for select user dropdown and insert user button
+     */
     document.getElementById("select_user")
     .addEventListener("change", (e) => {
-        //localStorage.setItem("saved_username", e.target.value);
-        //console.log("Saved username", localStorage.getItem("saved_username"));
+
         fetch
         ('/',
         {
@@ -122,22 +124,17 @@ function bind_index() {
                 }
             })
     });
-
+    // Bind and send FETCH request for INSERT user btn
     let insert_usr_btn = document.getElementById("insert_usr_btn")
     insert_usr_btn.addEventListener("click", (e) =>
     {
         e.preventDefault();
-        //insert_usr_btn.innerText = "...Sending Request...";
         insert_usr_btn.setAttribute("disabled", "");
-
         let td_list = e.currentTarget.parentElement.parentElement
-
         let single_td = td_list.children
-        console.log(single_td[2].children[0].children[0])
         let username = single_td[0].children[0].children[0].value;
         let password = single_td[1].children[0].children[0].value;
         let email = single_td[2].children[0].children[0].value;
-
         if (username === "" || password === "" || email === "") {
             console.log("Empty field imput");
             insert_usr_btn.removeAttribute("disabled")
@@ -151,7 +148,6 @@ function bind_index() {
             insert_usr_btn.innerText = "INSERT";
             return;
         }
-
         let user_payload = {
             table: "User_Accounts",
             username: username,
@@ -182,11 +178,8 @@ function bind_index() {
                 //insert_usr_btn.innerText = "Error! Try again?";
             }
         });
-
     });
-
 }
-
 
 
 // to parameterize:
@@ -202,8 +195,6 @@ function btn_bind_and_fetch(button, cols, route, method_type) {
             //button.preventDefault();
             button.innerText = "......";
             button.setAttribute("disabled", "");
-
-
 
             let tr = button.parentNode.parentNode;
 
@@ -229,9 +220,6 @@ function btn_bind_and_fetch(button, cols, route, method_type) {
 
 
             console.log("Payload prior to fetch ", payload);
-
-
-
 
 
             fetch(route, {

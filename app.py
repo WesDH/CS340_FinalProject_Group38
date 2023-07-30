@@ -1,8 +1,12 @@
 """
-    Starter flask app to define primary routes.
+-- CS340 Final Project, Summer 2023: Dungeons and Dragons Character Manager
+-- GROUP 38: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens
+--
+-- App.py is the logic for handling DB and UI interactions via routes with Flask
 """
 
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, \
+    session
 from flask_mysqldb import MySQL
 from env.credentials import *
 import queries as sql
@@ -17,7 +21,7 @@ app.config['MYSQL_PASSWORD'] = ENV_PASSWORD
 app.config['MYSQL_DB'] = ENV_DATABASE
 
 # Sessions are only used for personalized table views,
-# And for method .flash() to send user feedback
+# And for method .flash() to send user feedback:
 app.secret_key = session_key
 app.permanent_session_lifetime = timedelta(hours=1)
 
@@ -26,7 +30,6 @@ app.permanent_session_lifetime = timedelta(hours=1)
 mysql = MySQL(app)
 
 curr_user_id = 1
-
 
 
 def generate_ddl():
@@ -51,11 +54,16 @@ def generate_ddl():
 
 # Populate the DB once on startup:
 with app.app_context():
-    generate_ddl()  # Comment this during development to save some time
+    # generate_ddl()  # Comment this during development to save some time
     pass
 
 
 def flash_err(e):
+    """
+        Provides more details for flash() messages on Exception
+    :param e: type Exception
+    :return:
+    """
     if len(e.args) > 1:
         flash(f"Row insertion error: {e.args[1]}", "error")
     elif e.args:
@@ -67,6 +75,10 @@ def flash_err(e):
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index.html", methods=['GET', 'POST'])
 def index():
+    """
+    Handles home route (User_Accounts Table)
+    :return: response 202 OK, 500 Exception
+    """
     if request.method == "GET":
         if "username" in session:
             print("index.html username selected: ", session["username"])
@@ -94,10 +106,12 @@ def index():
                         session["username"] = None
                     else:
                         session["username"] = req["username"]
-                    print("index.html username selected: ", session["username"])
+                    print("index.html username selected: ",
+                          session["username"])
                 else:
                     cur = mysql.connection.cursor()
-                    cur.execute(sql.insert_user, (req["username"], req["password"], req["email"]))
+                    cur.execute(sql.insert_user, (
+                    req["username"], req["password"], req["email"]))
                     mysql.connection.commit()
                     cur.close()
                     flash(f"User Account '{req['username']}' added", "info")
@@ -105,20 +119,48 @@ def index():
         except Exception as exc:
             print(exc)
             flash_err(exc)
-            return "NotOK", 500 # JS is handling the page reload
+            return "NotOK", 503  # JS is handling the page reload
 
 
 @app.route("/charPage.html", methods=['GET'])
 def char_page():
+    """
+    Under construction: In future this may provide a single user detail for
+    Characters/Spells/Abilities/Inventory Items
+    For now-- Send to template engine contents of Abilities/Spells Tables
+    """
+    try:
+        cur = mysql.connection.cursor()
+        ability_info = cur.execute(sql.get_all_abilities)
+        ability_rows = cur.fetchall() if ability_info > 0 else ()
+
+        cur = mysql.connection.cursor()
+        spell_info = cur.execute(sql.get_all_spells)
+        spell_rows = cur.fetchall() if spell_info > 0 else ()
+
+        return render_template('charPage.html',
+                               all_abilities=ability_rows,
+                               all_spells=spell_rows)
+
+    except Exception as exc:
+        flash_err(exc)
+        # Send the user to home page for now if Excpetion:
+        return redirect(url_for("index"))
+
     return render_template('charPage.html')
+
 
 @app.route("/charSelection.html", methods=['GET', 'PATCH', 'POST'])
 def char_selection_v2():
+    """
+    char_selection_v2 handles CRUD functionality for charSelection.html
+    :return:
+    """
     if "username" in session:
         print("charSelection username selected: ", session["username"])
     if request.method == "GET":
         cur = mysql.connection.cursor()
-            
+
         if curr_user_id:
             username = cur.execute(sql.get_user, [curr_user_id])
             if username > 0:
@@ -131,19 +173,20 @@ def char_selection_v2():
 
         all_chars = cur.execute(sql.get_all_chars)
         if all_chars > 0:
-            all_chars = cur.fetchall() 
+            all_chars = cur.fetchall()
 
         print("all_chars =", all_chars, file=sys.stderr)
         print("username =", username, file=sys.stderr)
 
         return render_template('charSelection.html',
-                           username=username,
-                           all_chars=all_chars,
-                           user_chars=user_chars)
+                               username=username,
+                               all_chars=all_chars,
+                               user_chars=user_chars)
 
 
     elif request.method == "POST":
-        print("button clicked =", request.form['button_press'], file=sys.stderr)
+        print("button clicked =", request.form['button_press'],
+              file=sys.stderr)
         if request.form['button_press'] == "insert":
             print("insert was clicked on charSelection page")
             try:
@@ -153,7 +196,9 @@ def char_selection_v2():
                 char_type = request.form['char_type']
                 char_alignment = request.form['char_alignment']
                 cur = mysql.connection.cursor()
-                cur.execute(sql.add_char, (char_name, char_race, char_class, char_type, char_alignment, curr_user_id))
+                cur.execute(sql.add_char, (
+                char_name, char_race, char_class, char_type, char_alignment,
+                curr_user_id))
                 mysql.connection.commit()
                 cur.close()
                 flash(f"Row inserted for char: {char_name}", "info")
@@ -162,14 +207,10 @@ def char_selection_v2():
                 flash_err(exc)
                 return redirect(url_for("char_selection_v2"))
 
-
-        
-
             return render_template('charSelection.html',
-                                    username=username,
-                                    all_chars=all_chars,
-                                    user_chars=user_chars)
-
+                                   username=username,
+                                   all_chars=all_chars,
+                                   user_chars=user_chars)
 
         elif request.form['button_press'][0] == "d":
             print("delete was clicked on charSelection page")
@@ -191,15 +232,6 @@ def char_selection_v2():
                 flash_err(exc)
                 return redirect(url_for("char_selection_v2"))
 
-
-        
-
-            # return render_template('charSelection.html',
-            #                         username=username,
-            #                         all_chars=all_chars,
-            #                         user_chars=user_chars)
-
-
         elif request.form['button_press'][0] == "u":
             print("update was clicked on charSelection page")
             char_id = request.form['button_press'][1:]
@@ -212,7 +244,9 @@ def char_selection_v2():
                 char_type = request.form['char_type']
                 char_alignment = request.form['char_alignment']
                 cur = mysql.connection.cursor()
-                cur.execute(sql.update_char, (char_name, char_race, char_class, char_type, char_alignment, char_id))
+                cur.execute(sql.update_char, (
+                char_name, char_race, char_class, char_type, char_alignment,
+                char_id))
                 mysql.connection.commit()
                 cur.close()
                 flash(f"Row updated for char: {char_name}", "info")
@@ -222,25 +256,19 @@ def char_selection_v2():
                 return redirect(url_for("char_selection_v2"))
 
 
-        
-
-           # return render_template('charSelection.html',
-           #                         username=username,
-           #                         all_chars=all_chars,
-           #                         user_chars=user_chars)
-    # elif request.method == "PATCH":
-    #     print(request.json)
-    #     return "OK", 202
-
-
 # @app.route("/dungeonPage.html", methods=['GET'])
 @app.route("/itemPage.html/item_id=<item_id>", methods=['GET'])
 def item_page(item_id):
+    """
+    item_page generates single item view from Items table
+    :param item_id: the Items.item_id PK
+    :return: render_template
+    """
     print("item_id =", item_id)
     if request.method == "GET":
         cur = mysql.connection.cursor()
         if item_id:
-            #char_list = cur.fetchall() if chars > 0 else ()
+            # char_list = cur.fetchall() if chars > 0 else ()
             item = cur.execute(sql.get_item, [item_id])
             cur_item = cur.fetchall()[0] if item > 0 else ()
 
@@ -256,6 +284,11 @@ def item_page(item_id):
 # @app.route("/dungeonPage.html", methods=['GET'])
 @app.route("/dungeonPage.html/dungeon_id=<dungeon_id>", methods=['GET'])
 def dungeon_page(dungeon_id):
+    """
+    dungeon_page generates single item view from Dungeons table
+    :param dungeon_id: the Dungeons.dungeon_id PK
+    :return: render_template
+    """
     print("dungeon_id =", dungeon_id)
     if request.method == "GET":
         cur = mysql.connection.cursor()
@@ -264,21 +297,23 @@ def dungeon_page(dungeon_id):
             if dungeon > 0:
                 dungeon = cur.fetchall()[0]
             print("dungeon =", dungeon)
-            return render_template('dungeonPage.html', 
-                                   dungeon_id=dungeon_id, 
+            return render_template('dungeonPage.html',
+                                   dungeon_id=dungeon_id,
                                    dungeon=dungeon)
         else:
             dungeon = None
-            return render_template('dungeonPage.html', 
-                                   dungeon_id=dungeon_id, 
+            return render_template('dungeonPage.html',
+                                   dungeon_id=dungeon_id,
                                    dungeon=dungeon)
-
-
-
 
 
 @app.route("/dungeonSelection.html", methods=['GET', 'POST'])
 def dungeon_selection():
+    """
+    dungeon_selection handles CRUD functionality for dungeonSelection.html
+    and Dungeons table
+    :return:
+    """
     if "username" in session:
         print("dungeonSelection username selected: ", session["username"])
     if request.method == "GET":
@@ -294,23 +329,21 @@ def dungeon_selection():
         else:
             username, user_dungeons = None, None
 
-
-
         all_dungeons = cur.execute(sql.get_all_dungeons)
         if all_dungeons > 0:
             all_dungeons = cur.fetchall()
 
-
         # print("username =", username, file=sys.stderr)
         # print("all_dungeons =", all_dungeons, file=sys.stderr)
         return render_template('dungeonSelection.html',
-                           username=username,
-                           all_dungeons=all_dungeons,
-                           user_dungeons=user_dungeons)
+                               username=username,
+                               all_dungeons=all_dungeons,
+                               user_dungeons=user_dungeons)
 
 
     elif request.method == "POST":
-        print("button clicked =", request.form['button_press'], file=sys.stderr)
+        print("button clicked =", request.form['button_press'],
+              file=sys.stderr)
         if request.form['button_press'] == "insert":
             print("insert was clicked on dungeonSelection page")
             try:
@@ -319,7 +352,9 @@ def dungeon_selection():
                 dungeon_description = request.form['dungeon_description']
                 damage_multiplier = request.form['damage_multiplier']
                 cur = mysql.connection.cursor()
-                cur.execute(sql.add_dungeon, (dungeon_name, dungeon_type, dungeon_description, damage_multiplier))
+                cur.execute(sql.add_dungeon, (
+                dungeon_name, dungeon_type, dungeon_description,
+                damage_multiplier))
                 mysql.connection.commit()
                 cur.close()
                 flash(f"Row inserted for dungeon: {dungeon_name}", "info")
@@ -359,7 +394,9 @@ def dungeon_selection():
                 dungeon_description = request.form['dungeon_description']
                 damage_multiplier = request.form['damage_multiplier']
                 cur = mysql.connection.cursor()
-                cur.execute(sql.update_dungeon, (dungeon_name, dungeon_type, dungeon_description, damage_multiplier, dungeon_id))
+                cur.execute(sql.update_dungeon, (
+                dungeon_name, dungeon_type, dungeon_description,
+                damage_multiplier, dungeon_id))
                 mysql.connection.commit()
                 cur.close()
                 flash(f"Row updated for dungeon: {dungeon_name}", "info")
@@ -369,12 +406,12 @@ def dungeon_selection():
                 return redirect(url_for("dungeon_selection"))
 
 
-# @app.route("/itemPage.html", methods=['GET'])
-# def item_page():
-#     return render_template('itemPage.html')
-
 @app.route("/items.html", methods=['GET', 'POST'])
 def items():
+    """
+    items() creates the Items table view and handles INSERT of new Items
+    :return:
+    """
     if request.method == 'GET':
         # if "?" in request.url:
         #     print("Single item view clicked")
@@ -393,7 +430,8 @@ def items():
                 item_desc = request.form['Item Description']
                 is_weapon = 1 if request.form['is_weapon'] == 'True' else 0
                 cur = mysql.connection.cursor()
-                cur.execute(sql.insert_new_item, (item_name, item_desc, is_weapon))
+                cur.execute(sql.insert_new_item,
+                            (item_name, item_desc, is_weapon))
                 mysql.connection.commit()
                 cur.close()
             flash(f"Created new entry for item: {item_name}", "info")
@@ -408,16 +446,22 @@ def items():
 
 @app.route("/itemSelection.html", methods=['GET', 'POST'])
 def item_selection():
+    """
+    item_selection handles CRUD functionality for Inventory_Items junction
+    table, and relates Characters and Items tables as well
+    and Dungeons table
+    :return: render_template, redirect
+    """
     if request.method == 'GET':
 
         # Logic to get the current user rows, or if no user then empty tuple ()
         cur_user_inv_table_rows = ()
         if "username" in session:
             if session["username"] is not None:
-                #print("itemSelection username selected: ", session["username"])
+                # print("itemSelection username selected: ", session["username"])
                 cur = mysql.connection.cursor()
                 cur_usr = session["username"]
-                #print(sql.individual_char_items % cur_usr)
+                # print(sql.individual_char_items % cur_usr)
                 parsed = (sql.individual_char_items % cur_usr)
                 cur_user_inv_items = cur.execute(parsed)
                 cur_user_inv_table_rows = cur.fetchall() if cur_user_inv_items > 0 else ()
@@ -453,7 +497,8 @@ def item_selection():
                 cur.close()
                 flash(f"Removed {request.form['item_quantity']} "
                       f"{request.form['item_name']}"
-                      f" from {request.form['character_name']}'s inventory", "info")
+                      f" from {request.form['character_name']}'s inventory",
+                      "info")
             elif "update_btn" in request.form.keys():
                 print("update clicked from inventory items panel")
                 inventory_id = request.form['update_btn'].split("=").pop(-1)
@@ -463,7 +508,8 @@ def item_selection():
                 item_qty = request.form['item_quantity']
 
                 print("SQL statement to be executed:")
-                query_parsed = (sql.update_inventory_items % (character_name, item_qty, item_name, item_desc, inventory_id))
+                query_parsed = (sql.update_inventory_items % (
+                character_name, item_qty, item_name, item_desc, inventory_id))
                 print(query_parsed)
                 cur = mysql.connection.cursor()
                 cur.execute(query_parsed)
@@ -489,7 +535,8 @@ def item_selection():
                       f"of {item_name} "
                       f"into {char_name}'s inventory", "info")
             else:
-                flash("Unknown POST sent to itemSelection route on Flask.", "error")
+                flash("Unknown POST sent to itemSelection route on Flask.",
+                      "error")
             return redirect(url_for("item_selection"))
         except Exception as exc:
             print(exc)
@@ -497,9 +544,12 @@ def item_selection():
             return redirect(url_for("item_selection"))
 
 
-
 @app.route("/reload_the_db", methods=['POST'])
 def reload_the_db():
+    """
+    Route to handle reload the DB being clicked on UI
+    :return: Status code 202 OK, Status code 500 not OK
+    """
     try:
         generate_ddl()
         flash("Database reloaded!", "success")
@@ -507,7 +557,7 @@ def reload_the_db():
     except Exception as exc:
         print(exc)
         flash(f"Database reload error: {exc}", "error")
-        return "Backend Exception on DB reload", 506
+        return "Backend Exception on DB reload", 500
 
 
 if __name__ == "__main__":

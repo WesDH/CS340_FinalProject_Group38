@@ -131,12 +131,6 @@ tr:nth-child(odd):hover {
 
 /*General main background color*/
 
-
-
-
-
-
-
 /* footer css */
 .mdl-mini-footer {
     border-top: 1px solid black;
@@ -366,7 +360,3 @@ a[title="RELOAD DATABASE"]:hover {
 .error {
     color: #c70000;
 }
-
-
-
-
