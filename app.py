@@ -36,24 +36,24 @@ def generate_ddl():
     :return: None
     """
     cur = mysql.connection.cursor()
-    schema = open('db/ddb.sql', mode='r')
+    schema = open('db/ddl.sql', mode='r')
     statement_so_far = ''
     for line in schema.readlines():
         line = line.rstrip()
         statement_so_far += '\r\n' + line
         if line.endswith(';'):
+            print(statement_so_far)
             cur.execute(statement_so_far)
             mysql.connection.commit()
-            print(statement_so_far)
             statement_so_far = ''
     cur.close()
 
 
 # Populate the DB once on startup:
-# ddbtest.sql is as single line of the schema as .execute only
+# ddl.sql is as single line of the schema as .execute only
 # Executes one line per execute.
 with app.app_context():
-    #generate_ddl()  # Comment this during development to save some time
+    generate_ddl()  # Comment this during development to save some time
     pass
 
 
