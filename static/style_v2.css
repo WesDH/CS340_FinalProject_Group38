@@ -11,15 +11,20 @@
     --link_hover: #af4aef;
 }
 
+.body {
+    background-color: var(--bg_col_dark) !important;
+}
+
+
 .page-content {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-content: space-between;
     flex-wrap: wrap;
-    max-height : 90vh;
+    height : 90vh;
     overflow: auto;
-    position: relative;
+    position: fixed;
 }
 .mdl-layout {
     background-color: var(--bg_col_dark);
@@ -214,7 +219,12 @@ select {
     background-color: var(--bg_col_personal_card);
 }
 
-/*https://github.com/angular/material/issues/3776*/
+/*
+MDL styling fix from:
+https://github.com/angular/material/issues/3776
+Date accessed: July 28th, 2023
+Havensw
+*/
 .material-icons.md-36 {
 font-size: 36px !important;
 height: 36px !important;
@@ -313,7 +323,10 @@ tr.tr_with_forms:nth-child(4n):hover {
 }
 
  /*This is for the reload database on bottom of navbar*/
-/*https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize*/
+/*https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize
+Date accessed: July 28th, 2023
+Havensw
+*/
 .inline-icon {
    vertical-align: middle;
    font-size: 18px !important;

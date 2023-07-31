@@ -1,4 +1,4 @@
--- Project Step 3 Draft Version: Design HTML Interface + DML SQL (Group / On Ed Discussion)
+-- Project Step 4 Draft Version: Design HTML Interface + DML SQL (Group / On Ed Discussion)
 -- GROUP 38: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens
 --
 -- DML queries that define the front-end/database interactions
