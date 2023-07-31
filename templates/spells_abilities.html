@@ -1,0 +1,377 @@
+{% extends "base_v2.html" %}
+{% block title %}
+    Spells/Abilities: Shows Spells/Abilities for all chars by default. Also plan to show individual char if char was viewed from charSelection page. Here users can also insert a new Spell or new Ability to the Spells and Abilities tables.
+{% endblock %}
+
+{% block content %}
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">
+            All Abilities
+        </h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+	{% if not username %}
+	    <h5 class="mdl-card__title-text">Select a User to add Abilities to that User's Characters</h5>
+	{% endif %}	
+        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Ability Name</th>
+                    <th>Ability Damage</th>
+                    <th>Dungeon</th>
+		    {% if username %}
+		    <th>{{username}}'s Characters</th>
+		    {% endif %}
+		    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ability in all_abilities %}
+	    <form action="/spells_abilities.html" method="POST">
+                <tr>
+                    <td>
+                        {{ability[1]}}
+                    </td>
+                    <td>
+                        {{ability[2]}}
+                    </td>
+                    <td>
+                        {{ability[3]}}
+                    </td>
+		    {% if username %} 
+		    <td>
+                        <select id="chars" name="ability_user_char">
+                                <option value="" selected="selected" disabled >Add Ability to Character</option>
+                                {% for user_char in user_chars %}
+                                <option value="{{user_char[0]}}">{{user_char[1]}}</option>
+                                {% endfor %}
+                        </select>
+                    </td> 
+		    <td>
+                        <button
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+				type="submit"
+				name="button_press"
+				value="adda{{ability[0]}}"
+				>
+                           ADD
+                        </button>
+                    </td>
+		    {% else %}
+		    <td>
+                        <button
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+				type="submit"
+				name="button_press"
+				value="adda{{ability[0]}}"
+				disabled=True
+				>
+                           ADD
+                        </button>
+                    </td>
+		    {% endif %}
+                </tr>
+		</form>
+            {% endfor %}
+            </tbody>
+        </table>	
+    </div>
+</div>
+
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">
+            All Spells
+        </h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+	{% if not username %}
+	    <h5 class="mdl-card__title-text">Select a User to add Spells to that User's Characters</h5>
+	{% endif %}
+        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Spell Name</th>
+                    <th>Spell Damage</th>
+		    {% if username %}
+		    <th>{{username}}'s Characters</th>
+		    {% endif %}
+		    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for spell in all_spells %}
+	    <form action="/spells_abilities.html" method="POST">
+                <tr>
+                    <td>
+                        {{spell[1]}}
+                    </td>
+                    <td>
+                        {{spell[2]}}
+                    </td>
+		    {% if username %} 
+		    <td>
+                        <select id="chars" name="spell_user_char">
+                                <option value="" selected="selected" disabled >Add Spell to Character</option>
+                                {% for user_char in user_chars %}
+                                <option value="{{user_char[0]}}">{{user_char[1]}}</option>
+                                {% endfor %}
+                        </select>
+                    </td> 
+		    <td>
+                        <button
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+				type="submit"
+				name="button_press"
+				value="adds{{spell[0]}}"
+				>
+                           ADD
+                        </button>
+                    </td>
+		    {% else %}
+		    <td>
+                        <button
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+				type="submit"
+				name="button_press"
+				value="adds{{spell[0]}}"
+				disabled=True
+				>
+                           ADD
+                        </button>
+                    </td>
+		    {% endif %}
+                </tr>
+	    </form>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% if username %}
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+	    <h2 class="mdl-card__title-text">Abilities of {{username}}'s Characters</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+		    <th>Ability</th>
+                    <th>Ability Damage</th>
+                    <th>Dungeon</th>
+                    <th>Character</th>
+		</tr>
+            </thead>
+            <tbody>
+		{% if user_abilities %} 
+		{% for user_ability in user_abilities %}
+                <tr>
+		    <td>
+			    {{user_ability[1]}}
+		    </td>
+		    <td>
+			    {{user_ability[2]}}
+		    </td>
+		    <td>
+			    {{user_ability[3]}}
+		    </td>
+		    <td>
+			    {{user_ability[4]}}
+		    </td>
+		</tr>
+		{% endfor %} 
+		{% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% else %}
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+	    <h2 class="mdl-card__title-text">Select a User to view their Abilities</h2>
+    </div>
+</div>
+
+{% endif %}
+
+
+{% if username %}
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+	    <h2 class="mdl-card__title-text">Spells of {{username}}'s Characters</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+		    <th>Spell</th>
+                    <th>Spell Damage</th>
+		    <th>Character</th>
+		</tr>
+            </thead>
+            <tbody>
+		{% if user_spells %} 
+		{% for user_spell in user_spells %}
+                <tr>
+		    <td>
+			    {{user_spell[1]}}
+		    </td>
+		    <td>
+			    {{user_spell[2]}}
+		    </td>
+		    <td>
+			    {{user_spell[3]}}
+		    </td>
+		</tr>
+		{% endfor %} 
+		{% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% else %}
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+	    <h2 class="mdl-card__title-text">Select a User to view their Spells</h2>
+    </div>
+</div>
+
+{% endif %}
+
+
+
+
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Create a New Ability</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text">
+	<form action="/spells_abilities.html" method="POST">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Ability Name</th>
+                    <th>Damage</th>
+                    <th>Dungeon Select</th>
+		            <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="mdl-textfield fat mdl-js-textfield">
+                            <input
+			    	class="mdl-textfield__input"
+				type="text"
+				name="ability_name"
+				value=""
+				>
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input
+			    	class="mdl-textfield__input"
+				type="number"
+				name="ability_damage"
+				value=""
+				>
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <select id="Dungeon" name="ability_dungeon">
+                                <option value="" selected="selected" disabled >Select Dungeon</option>
+				<option value="No Dungeon">No Dungeon</option>
+                                {% for dungeon in all_dungeons %}
+                                <option value="{{dungeon[0]}}">{{dungeon[1]}}</option>
+                                {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <button
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+				type="submit"
+				name="button_press"
+				value="ability_insert"
+				>
+                           INSERT
+                        </button>
+                    </td>
+		</tr>
+            </tbody>
+        </table>
+	</form>
+    </div>
+</div>
+
+
+<div class="table_data table_right mdl-card mdl-shadow--6dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Create a New Spell</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text">
+	<form action="/spells_abilities.html" method="POST">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th>Spell Name</th>
+                    <th>Damage</th>
+		            <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="mdl-textfield fat mdl-js-textfield">
+                            <input
+			    	class="mdl-textfield__input"
+				type="text"
+				name="spell_name"
+				value=""
+				>
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input
+			    	class="mdl-textfield__input"
+				type="number"
+				name="spell_damage"
+				value=""
+				>
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+                    <td>
+                        <button
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+				type="submit"
+				name="button_press"
+				value="spell_insert"
+				>
+                           INSERT
+                        </button>
+                    </td>
+		</tr>
+            </tbody>
+        </table>
+	</form>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,195 +1,78 @@
 {% extends "base_v2.html" %}
 {% block title %}
-    Spells/Abilities: Shows Spells/Abilities for all chars by default. Also plan to show individual char if char was viewed from charSelection page. Here users can also insert a new Spell or new Ability to the Spells and Abilities tables.
+    Character Page:    represents a single character viewed from the Characters table
 {% endblock %}
 
 {% block content %}
-<div class="table_data table_left mdl-card mdl-shadow--6dp">
-    <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">
-            All Abilities View (Under construction)
-        </h2>
+
+{% if dungeon %}
+<!--<form action="/dungeonPage.html/dungeon_id={{dungeon_id}}" method="GET">-->
+<div class="single_attribute_container">
+
+    <div class="mdl-card-attribute mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand"> 
+            <h4>
+		{{dungeon[0]}}
+            </h4>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            Dungeon Name
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons md-36">public</i>
+        </div>
     </div>
-    <div class="mdl-card__supporting-text">
-        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
+
+    <div class="mdl-card-attribute mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+            <h4>
+                {{dungeon[2]}}
+            </h4>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            Dungeon Description
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons md-36">menu_book</i>
+        </div>
+    </div>
+
+    <div class="mdl-card-attribute mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
-                    <th>Ability Name</th>
-                    <th>Ability Damage</th>
-                    <th>Dungeon ID</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for row in all_abilities %}
-                <tr>
-                    <td>
-                        {{row[1]}}
-                    </td>
-                    <td>
-                        {{row[2]}}
-                    </td>
-                    <td>
-                        {{row[3]}}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="table_data table_right mdl-card mdl-shadow--6dp">
-    <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">
-            All Spells View (Under construction)
-        </h2>
-    </div>
-    <div class="mdl-card__supporting-text">
-        <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
-            <thead>
-                <tr>
-                    <th>Spell Name</th>
-                    <th>Spell Damage</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for row in all_spells %}
-                <tr>
-                    <td>
-                        {{row[1]}}
-                    </td>
-                    <td>
-                        {{row[2]}}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
-
-<div class="table_data table_left mdl-card mdl-shadow--6dp">
-    <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Create a New Ability (Under Construction)</h2>
-    </div>
-
-    <div class="mdl-card__supporting-text">
-	<form action="#" method="">
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-            <thead>
-                <tr>
-                    <th>Ability Name</th>
-                    <th>Damage</th>
-                    <th>Dungeon Select</th>
-		            <th></th>
+                    <th>Dungeon Type</th>
+                    <th>Damage Multiplier</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        <div class="mdl-textfield fat mdl-js-textfield">
-                            <input
-			    	class="mdl-textfield__input"
-				type="text"
-				name="ability_name"
-				value=""
-				>
-                            <label class="mdl-textfield__label" ></label>
-                        </div>
+			    {{dungeon[1]}}
                     </td>
                     <td>
-                        <div class="mdl-textfield normal mdl-js-textfield">
-                            <input
-			    	class="mdl-textfield__input"
-				type="number"
-				name="damage"
-				value=""
-				>
-                            <label class="mdl-textfield__label" ></label>
-                        </div>
+			    {{dungeon[3]}}
                     </td>
-                    <td>
-                        <select id="Dungeons" name="Abilities">
-                            <option value="" selected="selected" disabled>Select</option>
-                            <option value="">Bowser's Castle</option>
-                            <option value="">Temple of Time</option>
-                        </select>
-                    </td>
-                    <td>
-                        <button
-				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-				type="submit"
-				name="button_press"
-				value="insert"
-				>
-                           INSERT
-                        </button>
-                    </td>
-		</tr>
-            </tbody>
-        </table>
-	</form>
-    </div>
-</div>
-
-
-<div class="table_data table_left mdl-card mdl-shadow--6dp">
-    <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Create a New Spell (Under Construction)</h2>
-    </div>
-
-    <div class="mdl-card__supporting-text">
-	<form action="#" method="">
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-            <thead>
-                <tr>
-                    <th>Spell Name</th>
-                    <th>Damage</th>
-		            <th></th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="mdl-textfield fat mdl-js-textfield">
-                            <input
-			    	class="mdl-textfield__input"
-				type="text"
-				name="spell_name"
-				value=""
-				>
-                            <label class="mdl-textfield__label" ></label>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="mdl-textfield normal mdl-js-textfield">
-                            <input
-			    	class="mdl-textfield__input"
-				type="number"
-				name="damage"
-				value=""
-				>
-                            <label class="mdl-textfield__label" ></label>
-                        </div>
-                    </td>
-                    <td>
-                        <button
-				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-				type="submit"
-				name="button_press"
-				value="insert"
-				>
-                           INSERT
-                        </button>
-                    </td>
-		</tr>
             </tbody>
         </table>
-	</form>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            Dungeon Details
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons">explore</i>
+        </div>
     </div>
+
+<!--END div class single_attribute_container-->
 </div>
+<!--</form>-->
+
+{% else %}
+
+<h1>No Dungeon Selected Yet</h1>
+
+
+{% endif %} 
 
 
 
