@@ -9,19 +9,23 @@ from flask import Flask, render_template, request, redirect, url_for, flash, \
     session
 from flask_mysqldb import MySQL
 from env.credentials import *
-import queries as sql
-import sys, logging
+from db import queries as sql
+import sys
 from datetime import timedelta
 
 app = Flask(__name__)
 
+# Custom variables defined below:
+# Please create env/credentials.py to define these 4 ENV variables
 app.config['MYSQL_HOST'] = ENV_HOST
 app.config['MYSQL_USER'] = ENV_USERNAME
 app.config['MYSQL_PASSWORD'] = ENV_PASSWORD
 app.config['MYSQL_DB'] = ENV_DATABASE
 
 # Sessions are only used for personalized table views,
-# And for method .flash() to send user feedback:
+# and for method .flash() to send user feedback
+# "session_key" is defined in env/credentials.py
+# And may be any string
 app.secret_key = session_key
 app.permanent_session_lifetime = timedelta(hours=1)
 
@@ -39,9 +43,11 @@ def generate_ddl():
     cur = mysql.connection.cursor()
     schema = open('db/ddl.sql', mode='r')
     statement_so_far = ''
+    # Convert multiline SQL statements into single line statements:
     for line in schema.readlines():
         line = line.rstrip()
         statement_so_far += '\r\n' + line
+        # Execute a SQL statement when we encounter a ';' in the DDL
         if line.endswith(';'):
             print(statement_so_far)
             cur.execute(statement_so_far)
@@ -52,17 +58,17 @@ def generate_ddl():
 
 # Populate the DB once on startup:
 with app.app_context():
-    # generate_ddl()  # Comment this during development to save some time
+    # generate_ddl()  # Comment this line during development to save some time
     pass
 
 
 def flash_err(e):
     """
         Provides more details for flash() messages on Exception
-    :param e: type Exception
-    :return:
+    :param e: type() Exception
+    :return: None
     """
-    if len(e.args) > 1:
+    if len(e.args) > 1:  # This will give more info back to the UX
         flash(f"Row insertion error: {e.args[1]}", "error")
     elif e.args:
         flash(f"Column: {e.args[0]}: {e}", "error")
@@ -85,43 +91,52 @@ def index():
         if "username" not in session:
             session["username"] = None
 
+        # SELECT from users table to build frontend table
         cur = mysql.connection.cursor()
         user_info = cur.execute(sql.get_all_users)
+
+        # Get user rows from cursor or set to empty tuple
         user_rows = cur.fetchall() if user_info > 0 else ()
 
+        # pass user rows and current user to Jinja templating for index.html
         return render_template('index.html',
                                user_rows=user_rows,
                                username=session["username"])
     if request.method == "POST":
         try:
+            # Grab the payload passed with fetch/POST from UX
             req = request.json
             if len(req) > 0:
+                # If payload only has 2 key:value pairs it must be the
+                # username dropdown:
                 if len(req) == 2:
-                    # save in session dict{} the username that was selected
-                    # print("table: ", req["table"])
-                    # print("username: ", req["username"])
+                    # Magic number just in case a user "None" exists:
                     if req["username"] == "None765":
-                        session["username"] = None
+                        session["username"] = None # Store None as username
                     else:
+                        # Store username selected from dropdown
                         session["username"] = req["username"]
+                    # For debugging purposes print this out:
                     print("index.html username selected: ",
                           session["username"])
+                # Otherwise payload must be from the INSERT username button:
                 else:
                     cur = mysql.connection.cursor()
+
                     cur.execute(sql.insert_user, (
                     req["username"], req["password"], req["email"]))
+
                     mysql.connection.commit()
                     cur.close()
+
+                    # Send feedback to UX with flash()
                     flash(f"User Account '{req['username']}' added", "info")
                 return "OK", 202  # JS is handling the page reload
         except Exception as exc:
+            # Exception handling, provide feedback to console and UX
             print(exc)
             flash_err(exc)
             return "NotOK", 503  # JS is handling the page reload
-
-
-
-
 
 @app.route("/spells_abilities.html", methods=['GET', 'POST'])
 def spells_abilities_page():
@@ -135,8 +150,7 @@ def spells_abilities_page():
         if session["username"]:
             username = session["username"]
             curr_user_id = cur.execute(sql.get_user_id, [username])
-            if curr_user_id > 0:
-                curr_user_id = cur.fetchall()
+            curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
             print("curr_user_id =", curr_user_id)
 
             user_abilities = cur.execute(sql.get_user_abilities, [curr_user_id][0][0])
@@ -273,8 +287,7 @@ def spells_abilities_page():
         if session["username"]:
             username = session["username"]
             curr_user_id = cur.execute(sql.get_user_id, [username])
-            if curr_user_id > 0:
-                curr_user_id = cur.fetchall()
+            curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
             print("curr_user_id =", curr_user_id)
 
         if request.form['button_press'] == "ability_insert":
@@ -362,13 +375,11 @@ def char_selection():
         if session["username"]:
             username = session["username"]
             curr_user_id = cur.execute(sql.get_user_id, [username])
-            if curr_user_id > 0:
-                curr_user_id = cur.fetchall()
+            curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
             print("curr_user_id =", curr_user_id)
 
             user_chars = cur.execute(sql.get_user_chars, [curr_user_id][0][0])
-            if user_chars > 0:
-                user_chars = cur.fetchall()
+            user_chars = cur.fetchall() if user_chars > 0 else ()
         else:
             username, user_chars = None, None
 
@@ -396,8 +407,7 @@ def char_selection():
         if session["username"]:
             username = session["username"]
             curr_user_id = cur.execute(sql.get_user_id, [username])
-            if curr_user_id > 0:
-                curr_user_id = cur.fetchall()
+            curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
             print("curr_user_id =", curr_user_id)
 
         if request.form['button_press'] == "insert":
@@ -482,8 +492,7 @@ def dungeon_page(dungeon_id):
         cur = mysql.connection.cursor()
         if dungeon_id:
             dungeon = cur.execute(sql.get_dungeon, [dungeon_id])
-            if dungeon > 0:
-                dungeon = cur.fetchall()[0]
+            dungeon = cur.fetchall()[0] if dungeon > 0 else ()
             print("dungeon =", dungeon)
             return render_template('dungeonPage.html',
                                    dungeon_id=dungeon_id,
@@ -508,12 +517,10 @@ def dungeon_selection():
         if session["username"]:
             username = session["username"]
             curr_user_id = cur.execute(sql.get_user_id, [username])
-            if curr_user_id > 0:
-                curr_user_id = cur.fetchall()
+            curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
             print("curr_user_id =", curr_user_id)
             user_dungeons = cur.execute(sql.get_user_dungeons, [curr_user_id][0][0])
-            if user_dungeons > 0:
-                user_dungeons = cur.fetchall()
+            user_dungeons = cur.fetchall() if user_dungeons > 0 else ()
         else:
             username, user_dungeons = None, None
 
@@ -630,8 +637,8 @@ def items():
         #     return render_template('itemPage.html')
         cur = mysql.connection.cursor()
         items_info = cur.execute(sql.get_all_item_info)
-        if items_info > 0:
-            item_rows = cur.fetchall()
+
+        item_rows = cur.fetchall() if items_info > 0 else ()
 
         return render_template('items.html',
                                item_rows=item_rows)

@@ -1,12 +1,11 @@
+<!-- Every page utilizes base_v2.html -->
 {% extends "base_v2.html" %}
 {% block title %}
     Character Selection:   displays 1-2 tables, one of all characters from all users on the site, and another for characters made from a sole selected user. If the user is not selected, then only the "all characters" table displays. This page also allows for insertion into the Characters table, as well as updates and deletes.
 {% endblock %}
 
 {% block content %}
-
-
-
+<!-- This is the template to display UX for Characters Table -->
 <div class="table_data table_left mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">All Characters</h2>	
@@ -25,92 +24,92 @@
                     <th>View</th>
                 </tr>
             </thead>
-            <tbody id="cruddy_tbody">  <!-- cruddy_tbody ID grabbed by JS query selector -->
-		{% for char in all_chars %}
-		<form action="/charSelection.html" method="POST">
+            <tbody>
+            <!-- Build HTML table for Characters -->
+            {% for char in all_chars %}
+            <form action="/charSelection.html" method="POST">
                 <tr char_id="{{char[0]}}" class="tr_with_forms">
-		    <td>
+                    <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
-				<input 
-				    class="mdl-textfield__input" 
-				    type="text" 
-				    name="char_name"
-				    value="{{char[1]}}">
+                            <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_name"
+                            value="{{char[1]}}">
                             <label class="mdl-textfield__label" ></label>
                         </div>
-		    </td>
-		    <td>
+                    </td>
+                    <td>
                         <div class="mdl-textfield thin mdl-js-textfield">
-				<input 
-				    class="mdl-textfield__input" 
-				    type="text" 
-				    name="char_race" 
-				    value="{{char[2]}}"
-				    >
+                            <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_race"
+                            value="{{char[2]}}"
+                            >
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
-		    <td>
+                    <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
-				<input 
-				    class="mdl-textfield__input" 
-				    type="text" 
-				    name="char_class" 
-				    value="{{char[3]}}">
+                            <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_class"
+                            value="{{char[3]}}">
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
-		    <td>
+                    <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
-				<input 
-				    class="mdl-textfield__input" 
-				    type="text" 
-				    name="char_type" 
-				    value="{{char[4]}}">
+                            <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_type"
+                            value="{{char[4]}}">
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
-		    <td>
+                    <td>
                         <div class="mdl-textfield fat mdl-js-textfield">
-				<input 
-				    class="mdl-textfield__input" 
-				    type="text" 
-				    name="char_alignment"  
-				    value="{{char[5]}}">
+                            <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_alignment"
+                            value="{{char[5]}}">
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
-		    
-		    <td>
-                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
-				type="submit" 
-				name="button_press" 
-				value="d{{char[0]}}"
-				>
-                            <i class="material-icons md-18">close</i>
+                    <td>
+                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="d{{char[0]}}"
+                        >
+                        <i class="material-icons md-18">close</i>
                         </button>
                     </td>
                     <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
-				type="submit" 
-				name="button_press" 
-				value="u{{char[0]}}"
-				>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="u{{char[0]}}"
+                        >
                             Update
                         </button>
-                    </td> 
+                    </td>
                     <td>
                         <a class="view_link" href="/charPage.html/char_id={{char[0]}}">View</a>
                     </td>
-		</tr>
-		</form>
-		{% endfor %} 
+                </tr>
+            </form>
+            {% endfor %}
             </tbody>	
         </table>
     </div>
 </div>
 
-
+<!-- Build personalized right panel if username passed from Flask app -->
 {% if username %}
 <div class="table_data table_right mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
@@ -129,53 +128,49 @@
                 </tr>
             </thead>
             <tbody>
-		{% if user_chars %} 
-		{% for user_char in user_chars %}
-                <tr>
-		    <td>
-			    {{user_char[1]}}
-		    </td>
-		    <td>
-			    {{user_char[2]}}
-		    </td>
-		    <td>
-			    {{user_char[3]}}
-		    </td>
-		    <td>
-			    {{user_char[4]}}
-		    </td>
-		    <td>
-			    {{user_char[5]}}
-		    </td>
-                    <td>
-                        <a class="view_link" href="/charPage.html/char_id={{user_char[0]}}">View</a>
-                    </td>
-                </tr>
-		{% endfor %} 
-		{% endif %}
+            <!-- Populate rows of user's dungeons only if they have Characters -->
+            {% if user_chars %}
+                {% for user_char in user_chars %}
+                    <tr>
+                        <td>
+                            {{user_char[1]}}
+                        </td>
+                        <td>
+                            {{user_char[2]}}
+                        </td>
+                        <td>
+                            {{user_char[3]}}
+                        </td>
+                        <td>
+                            {{user_char[4]}}
+                        </td>
+                        <td>
+                            {{user_char[5]}}
+                        </td>
+                        <td>
+                            <a class="view_link" href="/charPage.html/char_id={{user_char[0]}}">View</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
             </tbody>
         </table>
     </div>
 </div>
-
+<!-- Otherwise show table prompting to select a user for this view -->
 {% else %}
 <div class="table_data table_right mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
-	    <h2 class="mdl-card__title-text">Select a User to view their Characters</h2>
+        <h2 class="mdl-card__title-text">Select a User to view their Characters</h2>
     </div>
 </div>
-
 {% endif %}
 
-
-
-
-
+<!-- Build INSERT form for Characters -->
 <div class="table_data table_left mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">Create a New Character:</h2>	
     </div>
-
     <div class="mdl-card__supporting-text">
 	{% if not username %}
 	    <h5 class="mdl-card__title-text">Select a User to add a Character to that User</h5>
@@ -197,91 +192,84 @@
                     <td>
                         <div class="mdl-textfield fat mdl-js-textfield">
                             <input 
-			    	class="mdl-textfield__input" 
-				type="text" 
-				name="char_name"
-				value=""
-				>
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_name"
+                            value=""
+                            >
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
                             <input 
-			    	class="mdl-textfield__input" 
-				type="text" 
-				name="char_race"
-				value=""
-				>
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_race"
+                            value=""
+                            >
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
                             <input 
-			    	class="mdl-textfield__input" 
-				type="text" 
-				name="char_class"
-				value=""
-				>
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_class"
+                            value=""
+                            >
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
                             <input 
-			    	class="mdl-textfield__input" 
-				type="text" 
-				name="char_type"
-				value=""
-				>
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_type"
+                            value=""
+                            >
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
                     <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
                             <input 
-			    	class="mdl-textfield__input" 
-				type="text" 
-				name="char_alignment"
-				value=""
-				>
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="char_alignment"
+                            value=""
+                            >
                             <label class="mdl-textfield__label" ></label>
                         </div>
                     </td>
-		    {% if username %}
-                    <td>
-                        <button 
-				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
-				type="submit" 
-				name="button_press" 
-				value="insert"
-				>
+		            {% if username %}
+                        <td>
+                            <button
+                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                            type="submit"
+                            name="button_press"
+                            value="insert"
+                            >
+                               INSERT
+                            </button>
+                        </td>
+		            {% else %}
+                        <td>
+                        <button
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        disabled=True
+                        >
                            INSERT
                         </button>
                     </td>
-		    {% else %}
-		    <td>
-                        <button 
-				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
-				type="submit"
-				disabled=True
-				>
-                           INSERT
-                        </button>
-                    </td>
-	   	    {% endif %}
+	   	            {% endif %}
                 </tr>
             </tbody>
         </table>
 	</form>
     </div>
 </div>
-
-
-
-
-
 {% endblock %}
-
-

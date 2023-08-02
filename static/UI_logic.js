@@ -59,39 +59,6 @@ window.addEventListener('DOMContentLoaded', () =>
     }
 });
 
-function bind_char_selection() {
-    // Assumption is the FIRST table is the CRUD table based on our layout:
-    let table = document.getElementById("cruddy_tbody");
-    let route = "/charSelection.html"
-    let method = "PATCH";
-
-    let cols = 5;
-    Array.from(table.children).forEach(function (single_tr) {
-
-        // this gives us the index of the <td>'s,
-        // UPDATE button is always inside second to last <td>:
-        let number_of_tds = single_tr.children.length;
-        //console.log("btn to be bound: ",single_tr.children[number_of_tds - 2].children[0]);
-        let input_btn = single_tr.children[number_of_tds - 2].children[0];
-        let i = 0;
-        let update_payload = {}
-        update_payload["character_id"] = single_tr.getAttribute("char_id");
-        Array.from(single_tr.children).forEach(function (single_td) {
-            i++;
-            if (i <= cols) {
-                //console.log(single_td.children[0].children[0].getAttribute("name"));
-                let attribute = single_td.children[0].children[0].getAttribute("name");
-                //console.log(single_td.children[0].children[0].value)
-                let value = single_td.children[0].children[0].value;
-                update_payload[attribute] = value
-            }
-            if (i === cols ) {
-                btn_bind_and_fetch(input_btn, cols, route, method);
-            }
-        });
-    });
-}
-
 function bind_index() {
     /*
        Logic for index.html
