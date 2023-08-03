@@ -12,18 +12,20 @@
     </div>
     <div class="mdl-card__supporting-text">
 	{% if not username %}
-	    <h5 class="mdl-card__title-text">Select a User to add Abilities to that User's Characters</h5>
+	    <h5 class="mdl-card__title-text">Select a User to change the Abilities of that User's Characters</h5>
 	{% endif %}	
         <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
                     <th>Ability Name</th>
                     <th>Ability Damage</th>
-                    <th>Dungeon</th>
+                    <th>Dungeon</th> 
+		    <th>Delete</th>
+		    <th>Update</th>
 		    {% if username %}
 		    <th>{{username}}'s Characters</th>
 		    {% endif %}
-		    <th></th>
+		    <th>Add</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,18 +33,58 @@
 	    <form action="/spells_abilities.html" method="POST">
                 <tr>
                     <td>
-                        {{ability[1]}}
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="ability_name"
+                            value="{{ability[1]}}">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
                     </td>
                     <td>
-                        {{ability[2]}}
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="ability_damage"
+                            value="{{ability[2]}}">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
+                    </td>
+		    <td>
+                        <select id="Dungeon" name="ability_dungeon">
+				<option value="" selected="selected" disabled >{{ability[3]}}</option>
+				<option value="No Dungeon">No Dungeon</option>
+                                {% for dungeon in all_dungeons %}
+				{% if dungeon[1] != ability[3] %}
+				<option value="{{dungeon[0]}}">{{dungeon[1]}}</option>
+				{% endif %}
+                                {% endfor %}
+                        </select>
+                    </td> 
+		    {% if username %}
+		    <td>
+                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="dela{{ability[0]}}"
+                        >
+                        <i class="material-icons md-18">close</i>
+                        </button>
                     </td>
                     <td>
-                        {{ability[3]}}
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="upda{{ability[0]}}"
+                        >
+                            Update
+                        </button>
                     </td>
-		    {% if username %} 
 		    <td>
                         <select id="chars" name="ability_user_char">
-                                <option value="" selected="selected" disabled >Add Ability to Character</option>
+                                <option value="" selected="selected" disabled=True >Add Ability to Character</option>
                                 {% for user_char in user_chars %}
                                 <option value="{{user_char[0]}}">{{user_char[1]}}</option>
                                 {% endfor %}
@@ -59,6 +101,24 @@
                         </button>
                     </td>
 		    {% else %}
+	            <td>
+                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="dela{{ability[0]}}"
+                        >
+                        <i class="material-icons md-18">close</i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="upda{{ability[0]}}"
+                        >
+                            Update
+                        </button>
+                    </td>
 		    <td>
                         <button
 				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -87,30 +147,64 @@
     </div>
     <div class="mdl-card__supporting-text">
 	{% if not username %}
-	    <h5 class="mdl-card__title-text">Select a User to add Spells to that User's Characters</h5>
+	    <h5 class="mdl-card__title-text">Select a User to change the Spells of that User's Characters</h5>
 	{% endif %}
         <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
                     <th>Spell Name</th>
-                    <th>Spell Damage</th>
+                    <th>Spell Damage</th> 
+		    <th>Delete</th>
+		    <th>Update</th>
 		    {% if username %}
 		    <th>{{username}}'s Characters</th>
 		    {% endif %}
-		    <th></th>
+		    <th>Add</th>
                 </tr>
             </thead>
             <tbody>
             {% for spell in all_spells %}
 	    <form action="/spells_abilities.html" method="POST">
                 <tr>
-                    <td>
-                        {{spell[1]}}
+		    <td>
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="spell_name"
+                            value="{{spell[1]}}">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
                     </td>
                     <td>
-                        {{spell[2]}}
+                        <div class="mdl-textfield normal mdl-js-textfield">
+                            <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            name="spell_damage"
+                            value="{{spell[2]}}">
+                            <label class="mdl-textfield__label" ></label>
+                        </div>
                     </td>
 		    {% if username %} 
+		    <td>
+                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="dels{{spell[0]}}"
+                        >
+                        <i class="material-icons md-18">close</i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="upds{{spell[0]}}"
+                        >
+                            Update
+                        </button>
+                    </td>
 		    <td>
                         <select id="chars" name="spell_user_char">
                                 <option value="" selected="selected" disabled >Add Spell to Character</option>
@@ -130,6 +224,24 @@
                         </button>
                     </td>
 		    {% else %}
+	   	    <td>
+                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="dels{{spell[0]}}"
+                        >
+                        <i class="material-icons md-18">close</i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+                        value="upds{{spell[0]}}"
+                        >
+                            Update
+                        </button>
+                    </td>
 		    <td>
                         <button
 				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -164,11 +276,13 @@
                     <th>Ability Damage</th>
                     <th>Dungeon</th>
                     <th>Character</th>
+		    <th>Delete</th>
 		</tr>
             </thead>
             <tbody>
 		{% if user_abilities %} 
 		{% for user_ability in user_abilities %}
+		<form action="/spells_abilities.html" method="POST">
                 <tr>
 		    <td>
 			    {{user_ability[1]}}
@@ -180,9 +294,19 @@
 			    {{user_ability[3]}}
 		    </td>
 		    <td>
-			    {{user_ability[4]}}
-		    </td>
+                            {{user_ability[4]}} 
+                    </td>
+		    <td>
+                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+			value="a#{{user_ability[0]}}#{{user_ability[4]}}"
+                        >
+                        <i class="material-icons md-18">close</i>
+                        </button> 	
+                    </td> 
 		</tr>
+		</form>
 		{% endfor %} 
 		{% endif %}
             </tbody>
@@ -212,11 +336,13 @@
 		    <th>Spell</th>
                     <th>Spell Damage</th>
 		    <th>Character</th>
+		    <th>Delete</th>
 		</tr>
             </thead>
             <tbody>
 		{% if user_spells %} 
 		{% for user_spell in user_spells %}
+		<form action="/spells_abilities.html" method="POST">
                 <tr>
 		    <td>
 			    {{user_spell[1]}}
@@ -227,7 +353,17 @@
 		    <td>
 			    {{user_spell[3]}}
 		    </td>
+		    <td>
+                        <button class="mdl-button delete mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                        type="submit"
+                        name="button_press"
+			value="s#{{user_spell[0]}}#{{user_spell[3]}}"
+                        >
+                        <i class="material-icons md-18">close</i>
+                        </button>
+                    </td> 
 		</tr>
+		</form>
 		{% endfor %} 
 		{% endif %}
             </tbody>
@@ -236,7 +372,7 @@
 </div>
 
 {% else %}
-<div class="table_data table_right mdl-card mdl-shadow--6dp">
+<div class="table_data table_left mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
 	    <h2 class="mdl-card__title-text">Select a User to view their Spells</h2>
     </div>

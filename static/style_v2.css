@@ -4,7 +4,7 @@
     --hovercol2 : #add0ac;
     --row_col1: #f3ebde;
     --row_col2: #ddece2;
-    --bg_col_dark: #7a4444;
+    --bg_col_dark: #222d36;
     --bg_col_light: #9b6464;
     --bg_col_personal_card: #9ea49b;
     --link_color: #0b30b0;
@@ -117,6 +117,8 @@ div.mdl-layout__drawer.is-visible {
     padding-right: 5px
 }
 
+
+
 td {
     color: black;
 }
@@ -201,16 +203,32 @@ select {
     justify-content: space-evenly;
 }
 
+.single_attribute_container_char_page {
+    width: 100%;
+    padding: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 15vw;
+    row-gap: 15vh;
+}
+
 .single_attribute_container > * {
+    width: 30%;
+}
+
+.single_attribute_container_char_page > * {
     width: 30%;
 }
 
 .mdl-card-attribute:nth-child(3n+1) {
     background-color: var(--row_col1);
+    width: 500px; 
 }
 
 .mdl-card-attribute:nth-child(3n+2) {
     background-color: var(--hovercol2);
+    width: 500px;    
 }
 
  /* This is the third card container, usually the INSERT container on the bottom*/
@@ -375,4 +393,8 @@ a[title="RELOAD DATABASE"]:hover {
 
 .error {
     color: #c70000;
+}
+
+.char_details {
+    margin: 12px;
 }

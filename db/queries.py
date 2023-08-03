@@ -43,6 +43,24 @@ add_spell = "INSERT INTO Spells (spell_name, spell_damage) VALUES (%s, %s);"
 # -- link a Spell to a Character
 add_spell_to_char = "INSERT INTO Characters_has_Spells (Characters_character_id, Spells_spell_id) VALUES (%s, %s);"
 
+# for updating an Ability for all characters
+update_ability = "UPDATE Abilities SET ability_name = %s, ability_damage = %s, Dungeons_dungeon_id = %s WHERE ability_id = %s;"
+
+# for deleting an Ability for all characters
+delete_ability = "DELETE FROM Abilities WHERE ability_id = %s;"
+ 
+# for deleting a link from the Characters_has_Abilities table
+delete_user_ability = "DELETE FROM Characters_has_Abilities WHERE Abilities_ability_id = %s AND Characters_character_id = %s;"
+
+# for updating an Spell for all characters
+update_spell = "UPDATE Spells SET spell_name = %s, spell_damage = %s WHERE spell_id = %s;"
+
+# for deleting an Spell for all characters
+delete_spell = "DELETE FROM Spells WHERE spell_id = %s;"
+ 
+# for deleting a link from the Characters_has_Spells table
+delete_user_spell = "DELETE FROM Characters_has_Spells WHERE Spells_spell_id = %s AND Characters_character_id = %s;"
+
 
 # -- *****************************************************************************
 # -- Queries that act on Dungeons page --
@@ -50,6 +68,20 @@ add_spell_to_char = "INSERT INTO Characters_has_Spells (Characters_character_id,
 
 # -- for loading the Dungeon details onto the Dungeon Page
 get_dungeon = "SELECT dungeon_name, dungeon_type, dungeon_description, damage_multiplier FROM Dungeons WHERE dungeon_id = %s;"
+
+# -- *****************************************************************************
+# -- Queries that act on Characters page (charPage) --
+# -- *****************************************************************************
+
+# -- for loading the Character details onto the Character Page
+get_char = "SELECT character_name, race,  class, creature_type, alignment FROM Characters WHERE character_id = %s;"
+
+# -- get Spells of current selected single Character View
+get_char_spells =  "SELECT spell_id, spell_name, spell_damage, username FROM Spells JOIN Characters_has_Spells ON Spells.spell_id = Characters_has_Spells.Spells_spell_id JOIN Characters ON Characters_has_Spells.Characters_character_id = Characters.character_id JOIN User_Accounts ON Characters.Users_user_id = User_Accounts.user_id WHERE Characters.character_id = %s ORDER BY spell_name;"
+
+# -- get Abilities of current selected single Character View
+get_char_abilities = "SELECT ability_id, ability_name, ability_damage, Dungeons_dungeon_id, username FROM Abilities JOIN Characters_has_Abilities ON Abilities.ability_id = Characters_has_abilities.Abilities_ability_id JOIN Characters ON Characters_has_abilities.Characters_character_id = Characters.character_id JOIN User_Accounts ON Characters.Users_user_id = User_Accounts.user_id WHERE Characters.character_id = %s ORDER BY ability_name;"  
+
 
 # -- *****************************************************************************
 # -- Queries that act on Items pages --
@@ -142,6 +174,9 @@ get_item_list = "SELECT Items.item_id, Items.item_name FROM Items"
 
 # this gets the user's id from the sessions username
 get_user_id = "SELECT user_id FROM User_Accounts WHERE username = %s;"
+
+# this gets the char's id from the char's name
+get_char_id = "SELECT character_id FROM Characters WHERE character_name = %s;"
 
 # for loading all Dungeons in the “All Dungeons” list & for inserting a dungeon into an Ability
 get_all_dungeons = "SELECT dungeon_id, dungeon_name, dungeon_type, dungeon_description, damage_multiplier FROM Dungeons ORDER BY dungeon_name ASC;"

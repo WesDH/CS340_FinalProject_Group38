@@ -298,7 +298,7 @@ def spells_abilities_page():
                 ability_damage = request.form['ability_damage']
                 ability_dungeon_id = request.form['ability_dungeon']
                 if ability_dungeon_id == "No Dungeon":
-                    cur.execute("INSERT INTO Abilities (ability_name, ability_damage, Dungeons_dungeon_id) VALUES (%s, %s, %s)", (ability_name, ability_damage, None))
+                    cur.execute("INSERT INTO Abilities (ability_name, ability_damage, Dungeons_dungeon_id) VALUES (%s, %s, %s);", (ability_name, ability_damage, None))
                 else:
                     cur.execute(sql.add_ability, (ability_name, ability_damage, ability_dungeon_id))
                 mysql.connection.commit()
@@ -354,6 +354,113 @@ def spells_abilities_page():
                 mysql.connection.commit()
                 cur.close()
                 flash(f"Row inserted for Characters_has_Spells", "info")
+                return redirect(url_for("spells_abilities_page"))
+            except Exception as exc:
+                print(exc)
+                flash_err(exc)
+                return redirect(url_for("spells_abilities_page"))
+
+        elif request.form['button_press'][0:4] == "dela":
+            print("Ability DELETE was clicked on spells/abilities page")
+            try:
+                cur = mysql.connection.cursor()
+                ability_id = request.form['button_press'][4:]
+                cur.execute(sql.delete_ability, [ability_id])
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row Deleted for Abilities", "info")
+                return redirect(url_for("spells_abilities_page"))
+            except Exception as exc:
+                print(exc)
+                flash_err(exc)
+                return redirect(url_for("spells_abilities_page"))
+
+        elif request.form['button_press'][0:2] == "a#":
+            print("Characters_has_Abilities DELETE was clicked on spells/abilities page")
+            try:
+                cur = mysql.connection.cursor()
+                ability_id = request.form['button_press'].split('#')[1]
+                char_name = request.form['button_press'].split('#')[2]
+                char_id = cur.execute(sql.get_char_id, [char_name])
+                char_id = cur.fetchall() if char_id > 0 else None
+                cur.execute(sql.delete_user_ability, [ability_id, char_id])
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row Deleted for Characters_has_Abilities", "info")
+                return redirect(url_for("spells_abilities_page"))
+            except Exception as exc:
+                print(exc)
+                flash_err(exc)
+                return redirect(url_for("spells_abilities_page"))
+
+        elif request.form['button_press'][0:4] == "upda":
+            print("Ability UPDATE was clicked on spells/abilities page")
+            try:
+                cur = mysql.connection.cursor()
+                ability_id = request.form['button_press'][4:]
+                ability_name = request.form['ability_name']
+                ability_damage = request.form['ability_damage']
+                ability_dungeon_id = request.form['ability_dungeon']
+                print(ability_name, ability_damage, ability_dungeon_id, ability_id)
+                if ability_dungeon_id == "No Dungeon": 
+                    cur.execute("UPDATE Abilities SET ability_name = %s, ability_damage = %s, Dungeons_dungeon_id = %s WHERE ability_id = %s;", (ability_name, ability_damage, None, ability_id))
+                else:
+                    cur.execute(sql.update_ability, (ability_name, ability_damage, ability_dungeon_id, ability_id)) 
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row Updated for Abilities", "info")
+                return redirect(url_for("spells_abilities_page"))
+            except Exception as exc:
+                print(exc)
+                flash_err(exc)
+                return redirect(url_for("spells_abilities_page"))
+
+
+        elif request.form['button_press'][0:4] == "dels":
+            print("Spell DELETE was clicked on spells/abilities page")
+            try:
+                cur = mysql.connection.cursor()
+                spell_id = request.form['button_press'][4:]
+                cur.execute(sql.delete_spell, [spell_id])
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row Deleted for Spells", "info")
+                return redirect(url_for("spells_abilities_page"))
+            except Exception as exc:
+                print(exc)
+                flash_err(exc)
+                return redirect(url_for("spells_abilities_page"))
+
+        elif request.form['button_press'][0:2] == "s#":
+            print("Characters_has_Spells DELETE was clicked on spells/abilities page")
+            try:
+                cur = mysql.connection.cursor()
+                spell_id = request.form['button_press'].split('#')[1]
+                char_name = request.form['button_press'].split('#')[2]
+                char_id = cur.execute(sql.get_char_id, [char_name])
+                char_id = cur.fetchall() if char_id > 0 else None
+                cur.execute(sql.delete_user_spell, [spell_id, char_id])
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row Deleted for Characters_has_Spells", "info")
+                return redirect(url_for("spells_abilities_page"))
+            except Exception as exc:
+                print(exc)
+                flash_err(exc)
+                return redirect(url_for("spells_abilities_page"))
+
+        elif request.form['button_press'][0:4] == "upds":
+            print("Spell UPDATE was clicked on spells/abilities page")
+            try:
+                cur = mysql.connection.cursor()
+                spell_id = request.form['button_press'][4:]
+                spell_name = request.form['spell_name']
+                spell_damage = request.form['spell_damage']
+                print(spell_name, spell_damage, spell_id)
+                cur.execute(sql.update_spell, (spell_name, spell_damage, spell_id)) 
+                mysql.connection.commit()
+                cur.close()
+                flash(f"Row Updated for Spells", "info")
                 return redirect(url_for("spells_abilities_page"))
             except Exception as exc:
                 print(exc)
@@ -430,10 +537,6 @@ def char_selection():
                 flash_err(exc)
                 return redirect(url_for("char_selection"))
 
-            # return render_template('charSelection.html',
-            #                        username=username,
-            #                        all_chars=all_chars,
-            #                        user_chars=user_chars)
 
         elif request.form['button_press'][0] == "d":
             print("delete was clicked on charSelection page")
@@ -477,6 +580,61 @@ def char_selection():
             except Exception as exc:
                 flash_err(exc)
                 return redirect(url_for("char_selection"))
+
+
+@app.route("/charPage.html/char_id=<char_id>", methods=['GET'])
+def char_page(char_id):
+    """
+    char_page generates single item view from Characters table
+    :param char_id: the Characters.character_id PK
+    :return: render_template
+    """
+    print("char_id =", char_id)
+    if request.method == "GET":
+        cur = mysql.connection.cursor()
+
+        if session["username"]:
+            username = session["username"]
+            curr_user_id = cur.execute(sql.get_user_id, [username])
+            curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
+            print("curr_user_id =", curr_user_id)
+        else:
+            username = None
+
+        if char_id:
+            char = cur.execute(sql.get_char, [char_id])
+            char = cur.fetchall()[0] if char > 0 else ()
+            print("char =", char)        
+        else:
+            char = None
+
+        if username and char_id:
+            char_spells = cur.execute(sql.get_char_spells, [char_id])
+            char_spells = cur.fetchall() if char_spells > 0 else ()
+            char_abilities = cur.execute(sql.get_char_abilities, [char_id])
+            char_abilities = cur.fetchall() if char_abilities > 0 else ()
+            if char_spells:
+                if char_spells[0][3] != username:
+                    # user is selected but that user is viewing some other users' characters
+                    username = char_spells[0][3]
+            if char_abilities:
+                if char_abilities[0][4] != username:
+                    # user is selected but that user is viewing some other users' characters
+                    username = char_abilities[0][4]
+
+        elif char_id:
+            char_spells = cur.execute(sql.get_char_spells, [char_id])
+            char_spells = cur.fetchall() if char_spells > 0 else ()
+            char_abilities = cur.execute(sql.get_char_abilities, [char_id])
+            char_abilities = cur.fetchall() if char_abilities > 0 else ()
+
+
+        return render_template('charPage.html',
+                                username=username,
+                                char_id=char_id,
+                                char=char,
+                                char_spells=char_spells,
+                                char_abilities=char_abilities)
 
 
 # @app.route("/dungeonPage.html", methods=['GET'])
