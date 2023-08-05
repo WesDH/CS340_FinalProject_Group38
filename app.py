@@ -14,6 +14,7 @@ import sys
 from datetime import timedelta
 
 app = Flask(__name__)
+app_port = 19806
 
 # Custom variables defined below:
 # Please create env/credentials.py to define these 4 ENV variables
@@ -938,4 +939,4 @@ def reload_the_db():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+    app.run(port=app_port, debug=True)

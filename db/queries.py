@@ -81,7 +81,7 @@ get_char = "SELECT character_name, race,  class, creature_type, alignment FROM C
 get_char_spells =  "SELECT spell_id, spell_name, spell_damage, username FROM Spells JOIN Characters_has_Spells ON Spells.spell_id = Characters_has_Spells.Spells_spell_id JOIN Characters ON Characters_has_Spells.Characters_character_id = Characters.character_id JOIN User_Accounts ON Characters.Users_user_id = User_Accounts.user_id WHERE Characters.character_id = %s ORDER BY spell_name;"
 
 # -- get Abilities of current selected single Character View
-get_char_abilities = "SELECT ability_id, ability_name, ability_damage, Dungeons_dungeon_id, username FROM Abilities JOIN Characters_has_Abilities ON Abilities.ability_id = Characters_has_abilities.Abilities_ability_id JOIN Characters ON Characters_has_abilities.Characters_character_id = Characters.character_id JOIN User_Accounts ON Characters.Users_user_id = User_Accounts.user_id WHERE Characters.character_id = %s ORDER BY ability_name;"  
+get_char_abilities = "SELECT ability_id, ability_name, ability_damage, Dungeons_dungeon_id, username FROM Abilities JOIN Characters_has_Abilities ON Abilities.ability_id = Characters_has_Abilities.Abilities_ability_id JOIN Characters ON Characters_has_Abilities.Characters_character_id = Characters.character_id JOIN User_Accounts ON Characters.Users_user_id = User_Accounts.user_id WHERE Characters.character_id = %s ORDER BY ability_name;"
 
 
 # -- *****************************************************************************
