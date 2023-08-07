@@ -28,9 +28,9 @@ Variables "your_mysql_" are custom defined and depend on your database credentia
 Variable session_key can be set to <i>any</i> string value<br>
 <br>
 <br>
-Set global variable ```app_port``` within app.py to the port you would like app.py to run on.
+Set global variable ```APP_PORT``` within app.py to the port you would like app.py to run on.
 <br>
-Default: ```app_port = 19806```
+Default: ```APP_PORT = 19806```
 <br>
 <br>
 Next, from the base project directory, run these commands to start the Flask server:
@@ -49,6 +49,7 @@ Citation for:<br>
 &emsp; General usage and understanding throughout the project:<br>
 &emsp; Routes/Jinja templating<br>
 Date: June 26th-August 5th, 2023<br>
+Accessed by: Havensw, Houghtjo<br>
 Adapted from:<br>
 &emsp; Source Title: osu-cs340-ecampus / flask-starter-app<br>
 &emsp; Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app#setup
@@ -58,15 +59,17 @@ Citation for:<br>
 &emsp;Using sessions to save a username for personalized view<br>
 &emsp;Using Flask flash() functionality to send feedback to the UI<br>
 Date Accessed: July 22nd, 2023<br>
+Accessed by: Havensw, Houghtjo<br>
 Adapted from:<br>
 &emsp; Source Title: Flask Tutorials<br>
 &emsp; Source URL: https://www.youtube.com/playlist?list=PLzMcBGfZo4-n4vJJybUVV3Un_NFS5EOgX
 <br>
 <br>
 Citation for:<br>
-&emsp;Better understanding for how to: SELECT from db to display to UX<br>
-&emsp;and INSERT to insert from UX into DB<br>
+&emsp;Better understanding for how to: SELECT from DB to display table to UX<br>
+&emsp;and INSERT to add row from UX into the DB<br>
 Date Accessed: July 22nd, 2023<br>
+Accessed by: Havensw, Houghtjo<br>
 Adapted from:<br>
 &emsp; Source Title: Python Flask MySQL Database Example<br>
 &emsp; Source URL: https://www.youtube.com/watch?v=7r93l-sRmwI
@@ -75,6 +78,38 @@ Adapted from:<br>
 Citation for:<br>
 &emsp;Javascript FETCH request syntax<br>
 Date Accessed: July 27th, 2023<br>
+Accessed by: Havensw<br>
 Copied from previous CS290 final project:<br>
 &emsp; Source Title: CRUDapp<br>
 &emsp; Source URL: http://weshavens.info/CRUDapp/
+<br>
+<br>
+Citation for:<br>
+&emsp;Custom Google MDL CSS styling attributes applied throughout our HTML Pages<br>
+Date Accessed: July 22nd-July 31st, 2023<br>
+Accessed by: Havensw<br>
+Adapted from component examples (Tables, Cards, Navbar, Inputs):<br>
+&emsp; Source URL: https://getmdl.io/components/
+<br>
+<br>
+Citation for:<br>
+&emsp;MDL styling fix for MDL Icon Graphics<br>
+Date Accessed: July 25th, 2023<br>
+Accessed by: Havensw<br>
+Adapted from solution:<br>
+&emsp; Source URL: https://github.com/angular/material/issues/3776
+<br>
+<br>
+Citation for:<br>
+&emsp;MDL styling fix for database reload Icon with text<br>
+Accessed by: Havensw<br>
+Date Accessed: July 25th, 2023<br>
+Adapted from solution:<br>
+&emsp; Source URL: https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize
+
+# To import from parent directory:
+# https://stackoverflow.com/questions/30669474/beyond-top-level-package-error-in-relative-import
+
+How to fix circular import in Flask
+Robert Moskal
+https://stackoverflow.com/questions/28784849/how-to-fix-circular-import-in-flask-project-using-blueprints-mysql-w-o-sqlalchem

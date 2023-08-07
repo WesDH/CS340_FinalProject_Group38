@@ -169,7 +169,11 @@
 <!-- Build INSERT form for Characters -->
 <div class="table_data table_left mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Create a New Character:</h2>	
+        <h2 class="mdl-card__title-text">Create a New Character
+            {% if username %}
+                for {{username}}
+            {% endif %}
+            :</h2>
     </div>
     <div class="mdl-card__supporting-text">
 	{% if not username %}

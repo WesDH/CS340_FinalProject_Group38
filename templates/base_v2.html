@@ -69,8 +69,8 @@
     <footer class = "mdl-mini-footer">
         <div class = "mdl-mini-footer__left-section .mdl-typography--caption">
             <div class = mdl-mini-footer__link-list>
-                <ul>CS 340 Summer 2023 Final Project: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens</ul>
-                <ul>|</ul>
+                <ul class="navbar-credits" >CS 340 Summer 2023 Final Project: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens</ul>
+                <ul class="navbar-vertical-spacer">|</ul>
                 <ul id="ul_load_bar">
                     <a id="reload_the_db" href="reload_the_db" title="RELOAD DATABASE">
                         <i class="inline-icon material-icons">refresh</i>
@@ -79,7 +79,7 @@
 
                 {% with alerts = get_flashed_messages(with_categories=true) %}
                     {% if alerts %}
-                        <ul>|</ul>
+                        <ul class="navbar-vertical-spacer">|</ul>
                     {% endif %}
                         <!--
                         1 # Havens, W (July 2023)
