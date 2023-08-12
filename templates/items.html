@@ -1,3 +1,7 @@
+<!--
+This is the template for Items table view
+-->
+
 {% extends "base_v2.html" %}
 {% block title %}
     Items:   allows for insertion of a new item into the Items table. A character can then add these Items to their Inventory.
@@ -95,17 +99,4 @@
         </table>
     </div>
 </div>
-
 {% endblock %}
-
-<!--        <form class="footer_form" method="POST" action="/items.html">-->
-<!--            <input type="text" id="item_name" name="name" placeholder="Item name" min="1" max="2147483647">-->
-<!--            <input type="text" id="item_description" name="description" placeholder="Item description" min="1" max="2147483647">-->
-<!--            <label for="is_weapon">Is weapon?</label>-->
-<!--            <select id="is_weapon" name="is_weapon">-->
-<!--                <option value="" selected="selected" disabled>Select</option>-->
-<!--                <option value="True">True</option>-->
-<!--                <option value="False">False</option>-->
-<!--            </select>-->
-<!--        <input id="Items_INSERT" type="submit" value="INSERT">-->
-<!--        </form>-->

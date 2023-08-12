@@ -1,3 +1,10 @@
+<!--
+This is the template for Inventory_Items junction table view.
+It also displays relevant info from both Items and Characters tables,
+since Items:Characters share a M:M relationship through Inventory_Items
+junction table.
+-->
+
 {% extends "base_v2.html" %}
 {% block title %}   
     Item Selection:   displays 1-3 tables, one of all items from characters made from all users on the site, and another for items held by a character made from a sole selected user. If the user is not selected, then only the "all items" table displays. This page also allows for insertion into the Inventory_Items table for a given character, as well as updates and deletes.
@@ -122,13 +129,6 @@
     {% endif %}
 </div>
 
-
-
-
-
-
-
-
 <div class="table_data table_left mdl-card mdl-shadow--6dp">
     <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">Put a new item into inventory for a character:</h2>
@@ -181,32 +181,3 @@
     </div>
 </div>
 {% endblock %}
-
-
-<!--   &lt;!&ndash; HTML form  &ndash;&gt;-->
-<!--    <div>-->
-<!--        <h3>Insert a new item into inventory for a character:</h3>-->
-
-<!--        <form class="footer_form" method="POST" action="/Inventory_Items.html">-->
-<!--        <div>-->
-<!--            <label for="Characters">Choose a Character:</label>-->
-<!--            <select id="Characters" name="Characters">-->
-<!--                <option value="" selected="selected" disabled>Select Char</option>-->
-<!--                {% for char in char_list %}-->
-<!--                <option value="{{char[0]}}">{{char[0]}}</option>-->
-<!--                {% endfor %}-->
-<!--            </select>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <select id="Items" name="Items">-->
-<!--                <option value="" selected="selected" disabled >Select Item</option>-->
-<!--                {% for item in item_list %}-->
-<!--                <option value="{{item[0]}}">{{item[0]}}</option>-->
-<!--                {% endfor %}-->
-<!--            </select>-->
-<!--        </div>-->
-
-<!--<input type="number" id="quantity" name="quantity" placeholder="Item quantity" min="1" max="2147483647">-->
-
-<!--<input type="submit" value="INSERT">-->
-<!--</form>-->

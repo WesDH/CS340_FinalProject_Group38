@@ -1,6 +1,6 @@
-
 """
-    SQL queries can go here
+    All SQL queries that act on the DB are defined here. This matches our DML
+    but is Python valid syntax and variables.
 """
 
 # -- *****************************************************************************

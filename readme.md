@@ -48,6 +48,7 @@ $ python app.py
 Citation for:<br>
 - &emsp; General usage and understanding throughout the project:<br>
 - &emsp; Routes/Jinja templating<br>
+Scope: Module<br>
 Date: June 26th-August 5th, 2023<br>
 Accessed by: Havensw, Houghtjo<br>
 Adapted from:<br>
@@ -58,6 +59,7 @@ Adapted from:<br>
 Citation for:<br>
 - &emsp;Using sessions to save a username for personalized view<br>
 - &emsp;Using Flask flash() functionality to send feedback to the UI<br>
+Scope: Module<br>
 Date Accessed: July 22nd, 2023<br>
 Accessed by: Havensw, Houghtjo<br>
 Adapted from:<br>
@@ -67,6 +69,7 @@ Adapted from:<br>
 <br>
 Citation for:<br>
 - &emsp;Using Flask flash() messages with categories<br>
+Scope: Function<br>
 Date Accessed: July 22nd, 2023<br>
 Copied with modifications by: Havensw<br>
 Adapted from:<br>
@@ -77,6 +80,7 @@ Adapted from:<br>
 Citation for:<br>
 - &emsp;Better understanding for how to: SELECT from DB to display table to UX<br>
 - &emsp;and INSERT to add row from UX into the DB<br>
+Scope: Module<br>
 Date Accessed: July 22nd, 2023<br>
 Accessed by: Havensw, Houghtjo<br>
 Adapted from:<br>
@@ -86,6 +90,7 @@ Adapted from:<br>
 <br>
 Citation for:<br>
 - &emsp;Javascript FETCH request syntax<br>
+Scope: Function<br>
 Date Accessed: July 27th, 2023<br>
 Accessed by: Havensw<br>
 Modified from previous CS290 final project Javascript source:<br>
@@ -95,6 +100,7 @@ Modified from previous CS290 final project Javascript source:<br>
 <br>
 Citation for:<br>
 - &emsp;Custom Google MDL CSS styling attributes applied throughout our HTML Pages<br>
+Scope: Module<br>
 Date Accessed: July 22nd-July 31st, 2023<br>
 Accessed by: Havensw<br>
 Adapted from component examples (Tables, Cards, Navbar, Inputs):<br>
@@ -103,6 +109,7 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):<br>
 <br>
 Citation for:<br>
 - &emsp;MDL styling fix for MDL Icon Graphics<br>
+Scope: Line<br>
 Date Accessed: July 25th, 2023<br>
 Accessed by: Havensw<br>
 Adapted from solution:<br>
@@ -111,30 +118,34 @@ Adapted from solution:<br>
 <br>
 Citation for:<br>
 - &emsp;MDL styling fix for database reload Icon with text<br>
+Scope: Line<br>
 Accessed by: Havensw<br>
 Date Accessed: July 25th, 2023<br>
-Adapted from solution:<br>
+Copied from solution:<br>
 - &emsp; Source URL: https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize
 <br>
 <br>
 Citation for:<br>
 - &emsp;How to import from parent directory "../" in Python<br>
+Scope: Line<br>
 Accessed by: Havensw<br>
 Date Accessed: August 6th, 2023<br>
-Adapted from answer by user Jenish:<br>
+Copied from answer by user Jenish:<br>
 - &emsp; Source URL: https://stackoverflow.com/questions/30669474/beyond-top-level-package-error-in-relative-import
 <br>
 <br>
 Citation for:<br>
 - &emsp;How to fix circular import statements in Flask/Python with Blueprints<br>
+Scope: Line<br>
 Accessed by: Havensw<br>
 Date Accessed: August 6th, 2023<br>
-Adapted from answer by Robert Moskal:<br>
+Copied from answer by Robert Moskal:<br>
 - &emsp; Source URL: https://stackoverflow.com/questions/28784849/how-to-fix-circular-import-in-flask-project-using-blueprints-mysql-w-o-sqlalchem
 <br>
 <br>
 Citation for:<br>
 - &emsp;Favicon icon<br>
+Scope: Line<br>
 Accessed by: Havensw<br>
 Date Accessed: August 11th, 2023<br>
 Downloaded from:<br>
