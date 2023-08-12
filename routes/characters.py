@@ -1,3 +1,7 @@
+"""
+    This Flask/Python file handles route for "Characters" table in the DB
+    CRUD Functionality for this table implemented: Full CRUD
+"""
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports
 from flask import Blueprint, \
@@ -9,14 +13,12 @@ from functions import flash_err
 
 characters_bp = Blueprint('characters', __name__)
 
-
 @characters_bp.route("/charSelection.html", methods=['GET', 'PATCH', 'POST'])
 def char_selection():
     """
     handles CRUD functionality for character selection page
+    :return: render_template, redirect(url_for())
     """
-    # if "username" in session:
-    #     print("charSelection username selected: ", session["username"])
     if request.method == "GET":
         cur = mysql.connection.cursor()
 
@@ -44,7 +46,6 @@ def char_selection():
                                username=username,
                                all_chars=all_chars,
                                user_chars=user_chars)
-
 
     elif request.method == "POST":
         print("button clicked =", request.form['button_press'],

@@ -1,3 +1,8 @@
+"""
+    This Flask/Python file handles route for "Inventory_Items"
+    junction table in the DB.
+    CRUD Functionality for this table implemented: Full CRUD
+"""
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports
 from flask import Blueprint, \
@@ -13,8 +18,8 @@ inventory_bp = Blueprint('inventory', __name__)
 def item_selection():
     """
     Function item_selection() handles CRUD functionality for Inventory_Items
-    junction table, and also relates Characters, Items, and Dungeons tables
-    :return: render_template, redirect
+    junction table, and also relates Characters and Items tables
+    :return: render_template, redirect(url_for())
     """
     if request.method == 'GET':
         # Logic to get the current user rows, or if no user then empty tuple ()

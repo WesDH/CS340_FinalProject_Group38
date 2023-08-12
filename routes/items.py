@@ -1,3 +1,7 @@
+"""
+    This Flask/Python file handles route for "Items" table in the DB.
+    CRUD Functionality for this table implemented: SELECT, INSERT
+"""
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports
 from flask import Blueprint, \
@@ -9,25 +13,21 @@ from functions import flash_err
 
 items_bp = Blueprint('items', __name__)
 
+
 @items_bp.route("/items.html", methods=['GET', 'POST'])
 def items():
     """
     items() creates the Items table view and handles INSERT of new Items
-    :return:
+    :return: render_template or redirect(url_for())
     """
-    if request.method == 'GET':
-        # if "?" in request.url:
-        #     print("Single item view clicked")
-        #     return render_template('itemPage.html')
-        cur = mysql.connection.cursor()
-        items_info = cur.execute(sql.get_all_item_info)
-
-        item_rows = cur.fetchall() if items_info > 0 else ()
-
-        return render_template('items.html',
-                               item_rows=item_rows)
-    elif request.method == 'POST':
-        try:
+    try:
+        if request.method == 'GET':
+            cur = mysql.connection.cursor()
+            items_info = cur.execute(sql.get_all_item_info)
+            item_rows = cur.fetchall() if items_info > 0 else ()
+            return render_template('items.html',
+                                   item_rows=item_rows)
+        elif request.method == 'POST':
             if "insert_btn" in request.form.keys():
                 item_name = request.form['Item Name']
                 item_desc = request.form['Item Description']
@@ -41,9 +41,10 @@ def items():
             # Explain below 'items.items': first items is items.py,
             # second items is the function items()
             return redirect(url_for("items.items"))  # full page reload
-        except Exception as exc:
-            flash_err(exc)
-            return redirect(url_for("items.items"))
-    else:
-        flash("route /items.html only accepts GET or POST requests", "error")
-        return "route /items.html only accepts GET or POST requests", 505
+        else:
+            flash("route /items.html only accepts GET or POST requests",
+                  "error")
+            return "route /items.html only accepts GET or POST requests", 505
+    except Exception as exc:
+        flash_err(exc)
+        return redirect(url_for("items.items"))

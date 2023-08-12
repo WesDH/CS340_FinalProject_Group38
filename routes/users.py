@@ -1,12 +1,18 @@
+"""
+    This Flask/Python file handles route for "User_Accounts" table in the DB
+    CRUD Functionality for this table implemented: SELECT, INSERT
+"""
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports
 from flask import Blueprint, render_template, request, flash, session
 from db.mysql_initializer import mysql
 from db import queries as sql
+from functions import flash_err
 
 users_bp = Blueprint('users', __name__)
 
 
+# Users page doubles as our home page as well:
 @users_bp.route("/", methods=['GET', 'POST'])
 @users_bp.route("/index.html", methods=['GET', 'POST'])
 def index():

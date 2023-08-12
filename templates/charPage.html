@@ -1,6 +1,6 @@
 {% extends "base_v2.html" %}
 {% block title %}
-    Character Page:    represents a single character viewed from the Characters table
+    Character Page: Represents a single character viewed from the Characters table
 {% endblock %}
 
 {% block content %}
@@ -11,29 +11,29 @@
     <div class="mdl-card-attribute mdl-shadow--2dp">
         <div class="mdl-card__title mdl-card--expand"> 
             <h4>
-		{{char[0]}}
+		        {{char[0]}}
             </h4>
         </div>
         <div class="mdl-card__actions mdl-card--border">
             Character Name
             <div class="mdl-layout-spacer"></div>
-            <i class="material-icons md-36">public</i>
+            <i class="material-icons md-36">face</i>
         </div>
     </div>
 
     <div class="mdl-card-attribute mdl-shadow--2dp">
         <div class="mdl-card__title mdl-card--expand">
             <h4 class="char_details">
-                Race:  {{char[1]}}
-	    </h4>
-	    <h4 class="char_details">
-                Class:  {{char[2]}}
+                <u>Race:</u>  {{char[1]}}
+	        </h4>
+	        <h4 class="char_details">
+                <u>Class:</u>  {{char[2]}}
             </h4>
-	    <h4 class="char_details">
-                Creature Type:  {{char[3]}}
+	        <h4 class="char_details">
+                <u>Creature Type:</u>  {{char[3]}}
             </h4>
-	    <h4 class="char_details">
-                Alignment:  {{char[4]}}
+	        <h4 class="char_details">
+                <u>Alignment:</u>  {{char[4]}}
             </h4>
         </div>
         <div class="mdl-card__actions mdl-card--border">
@@ -49,30 +49,30 @@
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
-		    <th>Spell</th>
+		            <th>Spell</th>
                     <th>Spell Damage</th>
-		</tr>
+		        </tr>
             </thead>
             <tbody>
-		{% if char_spells %} 
-		{% for char_spell in char_spells %}
-                <tr>
-		    <td>
-			    {{char_spell[1]}}
-		    </td>
-		    <td>
-			    {{char_spell[2]}}
-		    </td>
-		</tr>
-		{% endfor %} 
-		{% endif %}
+            {% if char_spells %}
+            {% for char_spell in char_spells %}
+            <tr>
+                <td>
+                    {{char_spell[1]}}
+                </td>
+                <td>
+                    {{char_spell[2]}}
+                </td>
+		    </tr>
+            {% endfor %}
+            {% endif %}
             </tbody>
         </table>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-		Spells of {{username}}'s {{char[0]}}
+		    Spells of {{username}}'s {{char[0]}}
             <div class="mdl-layout-spacer"></div>
-            <i class="material-icons">explore</i>
+            <i class="material-icons">stars</i>
         </div>
     </div>
 
@@ -80,36 +80,36 @@
     <div class="mdl-card-attribute mdl-shadow--2dp">
         <div class="mdl-card__title mdl-card--expand">
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-	    <thead>
-                <tr>
-		    <th>Ability</th>
-                    <th>Ability Damage</th>
-                    <th>Dungeon</th>
-		</tr>
-            </thead> 
-            <tbody>
-		{% if char_abilities %} 
-		{% for char_ability in char_abilities %}
-                <tr>
-		    <td>
-			    {{char_ability[1]}}
-		    </td>
-		    <td>
-			    {{char_ability[2]}}
-		    </td>
-		    <td>
-			    {{char_ability[3]}}
-		    </td>
-		</tr>
-		{% endfor %} 
-		{% endif %}
-            </tbody>
+                <thead>
+                    <tr>
+                        <th>Ability</th>
+                        <th>Ability Damage</th>
+                        <th>Dungeon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if char_abilities %}
+                {% for char_ability in char_abilities %}
+                    <tr>
+                        <td>
+                            {{char_ability[1]}}
+                        </td>
+                        <td>
+                            {{char_ability[2]}}
+                        </td>
+                        <td>
+                            {{char_ability[3]}}
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
             </table>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-		Abilities of {{username}}'s {{char[0]}}
+		    Abilities of {{username}}'s {{char[0]}}
             <div class="mdl-layout-spacer"></div>
-            <i class="material-icons">explore</i>
+            <i class="material-icons">sports_martial_arts</i>
         </div>
     </div>
 
@@ -118,71 +118,70 @@
 <div class="mdl-card-attribute mdl-shadow--2dp">
         <div class="mdl-card__title mdl-card--expand">
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-	    <thead>
+                <thead>
+                    <tr>
+                        <th>Spell</th>
+                        <th>Spell Damage</th>
+                        <th>User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if char_spells %}
+                {% for char_spell in char_spells %}
                 <tr>
-		    <th>Spell</th>
-                    <th>Spell Damage</th>
-		    <th>User</th>
-		</tr>
-            </thead>
-            <tbody>
-		{% if char_spells %} 
-		{% for char_spell in char_spells %}
-                <tr>
-		    <td>
-			    {{char_spell[1]}}
-		    </td>
-		    <td>
-			    {{char_spell[2]}}
-		    </td>
-		    <td>
-			    {{char_spell[3]}}
-		    </td>
-		</tr>
-		{% endfor %} 
-		{% endif %}
-            </tbody>
+                    <td>
+                        {{char_spell[1]}}
+                    </td>
+                    <td>
+                        {{char_spell[2]}}
+                    </td>
+                    <td>
+                        {{char_spell[3]}}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
             </table>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-		Spells of {{char[0]}}
+		    Spells of {{char[0]}}
             <div class="mdl-layout-spacer"></div>
             <i class="material-icons">explore</i>
         </div>
     </div>
 
-
     <div class="mdl-card-attribute mdl-shadow--2dp">
         <div class="mdl-card__title mdl-card--expand">
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-            <thead>
-                <tr>
-		    <th>Ability</th>
-                    <th>Ability Damage</th>
-                    <th>Dungeon</th>
-		    <th>User</th>
-		</tr>
-            </thead> 
-            <tbody>
-		{% if char_abilities %} 
-		{% for char_ability in char_abilities %}
-                <tr>
-		    <td>
-			    {{char_ability[1]}}
-		    </td>
-		    <td>
-			    {{char_ability[2]}}
-		    </td>
-		    <td>
-			    {{char_ability[3]}}
-		    </td>
-		    <td>
-			    {{char_ability[4]}}
-		    </td>
-		</tr>
-		{% endfor %} 
-		{% endif %}
-            </tbody>
+                <thead>
+                    <tr>
+                        <th>Ability</th>
+                        <th>Ability Damage</th>
+                        <th>Dungeon</th>
+                        <th>User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if char_abilities %}
+                {% for char_ability in char_abilities %}
+                    <tr>
+                        <td>
+                            {{char_ability[1]}}
+                        </td>
+                        <td>
+                            {{char_ability[2]}}
+                        </td>
+                        <td>
+                            {{char_ability[3]}}
+                        </td>
+                        <td>
+                            {{char_ability[4]}}
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
         </table>
         </div>
         <div class="mdl-card__actions mdl-card--border">
@@ -191,21 +190,11 @@
             <i class="material-icons">explore</i>
         </div>
     </div>
-
 {% endif %}
-
-
 </div>
 
-
 {% else %}
-
 <h1>No Character Selected Yet</h1>
-
 {% endif %} 
 
-
-
 {% endblock %}
-
-

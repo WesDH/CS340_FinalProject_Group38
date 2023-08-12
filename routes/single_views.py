@@ -1,10 +1,13 @@
 """
-    For when website user clicks "view"
-    Generate corresponding single dungeon/item/character views
+    This Flask/Python file handles routes for single row views for tables:
+    Characters, Dungeons, Items
+    CRUD Functionality for this table implemented: SELECT
 """
+
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports
 from flask import Blueprint, render_template, request, session
+
 from db.mysql_initializer import mysql
 from db import queries as sql
 

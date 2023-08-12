@@ -1,3 +1,8 @@
+"""
+    This Flask/Python file handles route for two junction tables in the DB:
+    Character_has_Spells and Character_has_Abilities
+    CRUD Functionality for these tables implemented: Full CRUD
+"""
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports
 from flask import Blueprint, render_template, request, redirect, url_for, \
@@ -12,7 +17,7 @@ spells_abilities_bp = Blueprint('spells_abilities', __name__)
 @spells_abilities_bp.route("/spells_abilities.html", methods=['GET', 'POST'])
 def spells_abilities_page():
     """
-    handles CRUD functionality for spells and abilities
+    handles CRUD functionality for spells and abilities with junction tables
     """
     if request.method == "GET":
         cur = mysql.connection.cursor()

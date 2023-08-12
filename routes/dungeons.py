@@ -1,3 +1,7 @@
+"""
+    This Flask/Python file handles route for "Dungeons" table in the DB
+    CRUD Functionality for this table implemented: Full CRUD
+"""
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports
 from flask import Blueprint, \
@@ -13,6 +17,7 @@ dungeons_bp = Blueprint('dungeons', __name__)
 def dungeon_selection():
     """
     handles CRUD functionality for dungeon selection page
+    :return: render_template, redirect(url_for())
     """
     # if "username" in session:
     #     print("dungeonSelection username selected: ", session["username"])

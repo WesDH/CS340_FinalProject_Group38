@@ -46,70 +46,96 @@ $ python app.py
 ### Sources Cited:
 <br>
 Citation for:<br>
-&emsp; General usage and understanding throughout the project:<br>
-&emsp; Routes/Jinja templating<br>
+- &emsp; General usage and understanding throughout the project:<br>
+- &emsp; Routes/Jinja templating<br>
 Date: June 26th-August 5th, 2023<br>
 Accessed by: Havensw, Houghtjo<br>
 Adapted from:<br>
-&emsp; Source Title: osu-cs340-ecampus / flask-starter-app<br>
-&emsp; Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app#setup
+- &emsp; Source Title: osu-cs340-ecampus / flask-starter-app<br>
+- &emsp; Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app#setup
 <br>
 <br>
 Citation for:<br>
-&emsp;Using sessions to save a username for personalized view<br>
-&emsp;Using Flask flash() functionality to send feedback to the UI<br>
+- &emsp;Using sessions to save a username for personalized view<br>
+- &emsp;Using Flask flash() functionality to send feedback to the UI<br>
 Date Accessed: July 22nd, 2023<br>
 Accessed by: Havensw, Houghtjo<br>
 Adapted from:<br>
-&emsp; Source Title: Flask Tutorials<br>
-&emsp; Source URL: https://www.youtube.com/playlist?list=PLzMcBGfZo4-n4vJJybUVV3Un_NFS5EOgX
+- &emsp; Source Title: Flask Tutorials<br>
+- &emsp; Source URL: https://www.youtube.com/playlist?list=PLzMcBGfZo4-n4vJJybUVV3Un_NFS5EOgX
 <br>
 <br>
 Citation for:<br>
-&emsp;Better understanding for how to: SELECT from DB to display table to UX<br>
-&emsp;and INSERT to add row from UX into the DB<br>
+- &emsp;Using Flask flash() messages with categories<br>
+Date Accessed: July 22nd, 2023<br>
+Copied with modifications by: Havensw<br>
+Adapted from:<br>
+- &emsp; Source Title: Message Flashing<br>
+- &emsp; Source URL: https://flask.palletsprojects.com/en/2.3.x/patterns/flashing/
+<br>
+<br>
+Citation for:<br>
+- &emsp;Better understanding for how to: SELECT from DB to display table to UX<br>
+- &emsp;and INSERT to add row from UX into the DB<br>
 Date Accessed: July 22nd, 2023<br>
 Accessed by: Havensw, Houghtjo<br>
 Adapted from:<br>
-&emsp; Source Title: Python Flask MySQL Database Example<br>
-&emsp; Source URL: https://www.youtube.com/watch?v=7r93l-sRmwI
+- &emsp; Source Title: Python Flask MySQL Database Example<br>
+- &emsp; Source URL: https://www.youtube.com/watch?v=7r93l-sRmwI
 <br>
 <br>
 Citation for:<br>
-&emsp;Javascript FETCH request syntax<br>
+- &emsp;Javascript FETCH request syntax<br>
 Date Accessed: July 27th, 2023<br>
 Accessed by: Havensw<br>
-Copied from previous CS290 final project:<br>
-&emsp; Source Title: CRUDapp<br>
-&emsp; Source URL: http://weshavens.info/CRUDapp/
+Modified from previous CS290 final project Javascript source:<br>
+- &emsp; Source Title: CRUDapp<br>
+- &emsp; Source URL: http://weshavens.info/CRUDapp/
 <br>
 <br>
 Citation for:<br>
-&emsp;Custom Google MDL CSS styling attributes applied throughout our HTML Pages<br>
+- &emsp;Custom Google MDL CSS styling attributes applied throughout our HTML Pages<br>
 Date Accessed: July 22nd-July 31st, 2023<br>
 Accessed by: Havensw<br>
 Adapted from component examples (Tables, Cards, Navbar, Inputs):<br>
-&emsp; Source URL: https://getmdl.io/components/
+- &emsp; Source URL: https://getmdl.io/components/
 <br>
 <br>
 Citation for:<br>
-&emsp;MDL styling fix for MDL Icon Graphics<br>
+- &emsp;MDL styling fix for MDL Icon Graphics<br>
 Date Accessed: July 25th, 2023<br>
 Accessed by: Havensw<br>
 Adapted from solution:<br>
-&emsp; Source URL: https://github.com/angular/material/issues/3776
+- &emsp; Source URL: https://github.com/angular/material/issues/3776
 <br>
 <br>
 Citation for:<br>
-&emsp;MDL styling fix for database reload Icon with text<br>
+- &emsp;MDL styling fix for database reload Icon with text<br>
 Accessed by: Havensw<br>
 Date Accessed: July 25th, 2023<br>
 Adapted from solution:<br>
-&emsp; Source URL: https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize
-
-# To import from parent directory:
-# https://stackoverflow.com/questions/30669474/beyond-top-level-package-error-in-relative-import
-
-How to fix circular import in Flask
-Robert Moskal
-https://stackoverflow.com/questions/28784849/how-to-fix-circular-import-in-flask-project-using-blueprints-mysql-w-o-sqlalchem
+- &emsp; Source URL: https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize
+<br>
+<br>
+Citation for:<br>
+- &emsp;How to import from parent directory "../" in Python<br>
+Accessed by: Havensw<br>
+Date Accessed: August 6th, 2023<br>
+Adapted from answer by user Jenish:<br>
+- &emsp; Source URL: https://stackoverflow.com/questions/30669474/beyond-top-level-package-error-in-relative-import
+<br>
+<br>
+Citation for:<br>
+- &emsp;How to fix circular import statements in Flask/Python with Blueprints<br>
+Accessed by: Havensw<br>
+Date Accessed: August 6th, 2023<br>
+Adapted from answer by Robert Moskal:<br>
+- &emsp; Source URL: https://stackoverflow.com/questions/28784849/how-to-fix-circular-import-in-flask-project-using-blueprints-mysql-w-o-sqlalchem
+<br>
+<br>
+Citation for:<br>
+- &emsp;Favicon icon<br>
+Accessed by: Havensw<br>
+Date Accessed: August 11th, 2023<br>
+Downloaded from:<br>
+- &emsp; Source URL: https://www.flaticon.com/packs/yokai-8?word=character

@@ -1,3 +1,7 @@
+"""
+    This Flask/Python file handles route reload DB:
+    This executes the ddl
+"""
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports
 from flask import Blueprint, flash

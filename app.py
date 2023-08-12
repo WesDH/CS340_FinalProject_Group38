@@ -23,12 +23,12 @@ import routes.spells_abilities
 import routes.users
 import routes.inventory
 
+APP_PORT = 19806
+
 # Separate out MySQL connector so that python files in routes can import it too
 from db.mysql_initializer import mysql
 
 app = Flask(__name__)
-
-APP_PORT = 19807
 
 # Custom variables defined below:
 # Please create env/credentials.py to define these 4 ENV variables

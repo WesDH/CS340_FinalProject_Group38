@@ -1,9 +1,14 @@
 /*
--- GROUP 38: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens
---
--- Contains some custom JS logic for a few event listeners.
+ GROUP 38: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens
+
+This small Javascript file binds a few buttons on "items" page, which is our
+index.html
+
+It also defines custom behavior for the "reload db" icon on the footer.
  */
 
+
+// Wait for page to load before running the Javascript code:
 window.addEventListener('DOMContentLoaded', () =>
 {
     // Grab name of current html page so corresponding
@@ -12,15 +17,23 @@ window.addEventListener('DOMContentLoaded', () =>
     console.log("Name of current page: ", page);
 
 
+    // Grab the "reload db" container
     let reload_db_link = document.getElementById("reload_the_db");
-    //console.log(reload_db_link);
+    // Grab container for the reload bar icon that will be inserted on click
     let ul_reload_container = document.getElementById("ul_load_bar");
-    console.log(ul_reload_container)
+
+    // Create event listener for on click for reload db icon
     reload_db_link.addEventListener("click", (e) => {
-        e.preventDefault();
+        e.preventDefault();  // to prevent default link following on click
+
+        // Change to the MDL loading bar after click:
         ul_reload_container.innerHTML = "<div id=\"db_reloader_bar\" class=\"mdl-progress mdl-js-progress mdl-progress__indeterminate\"></div>";
-        componentHandler.upgradeDom() // MDL specific to update dom for MDL elements
-        console.log(reload_db_link)
+        // MDL specific JS to update dom for MDL elements below:
+        // Source: https://stackoverflow.com/questions/33061979/mdl-componenthandler-upgradedom-after-ajax-call
+        // Full citation on readme.md
+        componentHandler.upgradeDom()
+
+        // Send a fetch POST request to reload_the_db route:
         fetch
         ('/reload_the_db',
             {
@@ -29,21 +42,21 @@ window.addEventListener('DOMContentLoaded', () =>
             }
         ).then(response => {
             if (response.ok) {
-                //insert_usr_btn.innerText = "OK!";
-                console.log("Reload OK")
+                // Quickly change inner HTML to OK message:
                 ul_reload_container.innerHTML = "Reload OK!"
-
             } else {
-                console.log("Reload NOT OK")
+                // Quickly change inner HTML to ERROR message:
                 ul_reload_container.innerHTML = "Error on DB reload"
-                //insert_usr_btn.innerText = "Error! Try again?";
             }
+            // Either way, do full page reload to display flash() message
+            // Received from Flask:
             window.location.reload();
         });
     });
 
-
-
+    // We were using JS to bind buttons initially
+    // This is remnant code to bind all pages, but we only used it for
+    // index.html
     switch(page) {
     case '':
     case '/':
@@ -51,7 +64,6 @@ window.addEventListener('DOMContentLoaded', () =>
         bind_index();
         break;
     case 'charSelection.html':
-        bind_char_selection();
         break;
     default:
         console.log("Warning: UI_logic.js could not determine which .html doc " +
@@ -61,12 +73,14 @@ window.addEventListener('DOMContentLoaded', () =>
 
 function bind_index() {
     /*
-       Logic for index.html
+       JS Logic for index.html
        Binds for select user dropdown and insert user button
      */
+
+    // Custom bind for select user dropdown menu on change:
     document.getElementById("select_user")
     .addEventListener("change", (e) => {
-
+        // Send a POST with JSON payload containing the username selected:
         fetch
         ('/',
         {
@@ -91,43 +105,52 @@ function bind_index() {
                 }
             })
     });
+
     // Bind and send FETCH request for INSERT user btn
     let insert_usr_btn = document.getElementById("insert_usr_btn")
     insert_usr_btn.addEventListener("click", (e) =>
     {
-        e.preventDefault();
+        e.preventDefault();  // Prevent page reload on button press
+
+        // Disable button while waiting for response from backend:
         insert_usr_btn.setAttribute("disabled", "");
+
+        // Grab the values from the forms:
         let td_list = e.currentTarget.parentElement.parentElement
         let single_td = td_list.children
         let username = single_td[0].children[0].children[0].value;
         let password = single_td[1].children[0].children[0].value;
         let email = single_td[2].children[0].children[0].value;
+
+        // Pre-flight check make sure every field has something at least
         if (username === "" || password === "" || email === "") {
             console.log("Empty field imput");
+            // Change button back to functional:
             insert_usr_btn.removeAttribute("disabled")
             insert_usr_btn.innerText = "INSERT";
             return;
         }
 
+        // Check that the email form is has valid text
+        // If attribute validationMessage is NOT an empty string,
+        // Then there is invalid input in the email field:
         if (single_td[2].children[0].children[0].validationMessage !== '') {
             console.log("Email is invalid format");
             insert_usr_btn.removeAttribute("disabled")
             insert_usr_btn.innerText = "INSERT";
             return;
         }
+
+        // We did our pre-flight checks on the <inputs>
+        // Now create a JSON payload:
         let user_payload = {
             table: "User_Accounts",
             username: username,
             password: password,
             email: email
         };
-        let i = 0;
-        for (let item of single_td) {
-            if (i === single_td.length - 1) break;
-            console.log(item.children[0].children[0].value);
-            i++;
-        }
 
+        // Send fetch POST with the payload to backend:
         fetch
         ('/',
             {
@@ -135,72 +158,10 @@ function bind_index() {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(user_payload),
             }
-        ).then(response => {
+        ).then(() => {
             insert_usr_btn.removeAttribute("disabled")
+            // Full page reload to update changes
             window.location.reload();
-            if (response.ok) {
-                //insert_usr_btn.innerText = "OK!";
-                //window.location.reload();
-            } else {
-                //insert_usr_btn.innerText = "Error! Try again?";
-            }
         });
     });
-}
-
-
-// to parameterize:
-// METHOD, PAYLOAD, BUTTON
-function btn_bind_and_fetch(button, cols, route, method_type) {
-        console.log("btn bound function", button)
-
-
-
-        button.addEventListener("click", (e) =>
-        {
-            e.preventDefault();
-            //button.preventDefault();
-            button.innerText = "......";
-            button.setAttribute("disabled", "");
-
-            let tr = button.parentNode.parentNode;
-
-            // this gives us the index of the <td>'s,
-            // UPDATE button is always inside second to last <td>:
-            let number_of_tds = tr.children.length;
-            let i = 0;
-            let payload = {}
-            payload["character_id"] = tr.getAttribute("char_id");
-            Array.from(tr.children).forEach(function (single_td) {
-                i++;
-                if (i <= cols) {
-                    //console.log(single_td.children[0].children[0].getAttribute("name"));
-                    let attribute = single_td.children[0].children[0].getAttribute("name");
-                    //console.log(single_td.children[0].children[0].value)
-                    let value = single_td.children[0].children[0].value;
-                    payload[attribute] = value
-                }
-                if (i === cols ) {
-                    //console.log("Payload to be bound: ", update_payload);
-                }
-            });
-
-
-            console.log("Payload prior to fetch ", payload);
-
-
-            fetch(route, {
-                    method: method_type,
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify(payload)
-                }).then(response => {
-                button.removeAttribute("disabled")
-                if (response.ok) {
-                    button.innerText = "UPDATE";
-                    //window.location.reload();
-                } else {
-                    button.innerText = "UPDATE_ERR";
-                }
-            });
-    }, false);
 }

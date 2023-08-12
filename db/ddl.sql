@@ -87,6 +87,8 @@ CREATE TABLE IF NOT EXISTS `Characters` (
   PRIMARY KEY (`character_id`),
   INDEX `user_id_idx` (`Users_user_id` ASC) VISIBLE,
   UNIQUE INDEX `character_id_UNIQUE` (`character_id` ASC) VISIBLE,
+  CONSTRAINT `character_name_cant_be_empty_string`
+    CHECK (character_name <> ''),
   CONSTRAINT `user_id`
     FOREIGN KEY (`Users_user_id`)
     REFERENCES `User_Accounts` (`user_id`)
@@ -123,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `Items` (
   UNIQUE INDEX `item_name_UNIQUE` (`item_name` ASC) VISIBLE,
   UNIQUE INDEX `item_id_UNIQUE` (`item_id` ASC) VISIBLE,
   CONSTRAINT `item_name_cant_be_empty_string`
-        CHECK (item_name <> ''))
+    CHECK (item_name <> ''))
 ENGINE = InnoDB;
 
 
