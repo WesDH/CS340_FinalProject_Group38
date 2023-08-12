@@ -23,7 +23,7 @@ import routes.spells_abilities
 import routes.users
 import routes.inventory
 
-APP_PORT = 19806
+APP_PORT = 19807
 
 # Separate out MySQL connector so that python files in routes can import it too
 from db.mysql_initializer import mysql

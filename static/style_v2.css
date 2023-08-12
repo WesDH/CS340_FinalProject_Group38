@@ -413,6 +413,11 @@ a[title="RELOAD DATABASE"]:hover {
     width: 100px;
 }
 
+.table_left_inventories {
+    padding-top: 6px;
+    padding-bottom: 0px;
+}
+
 .flash_box {
     /*padding: 5px;*/
     /*display: flex;*/

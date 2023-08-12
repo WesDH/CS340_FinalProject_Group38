@@ -146,7 +146,7 @@ delete_char = "DELETE FROM Characters WHERE character_id = %s;"
 # -- select all inventory items
 chars_items_qty = "SELECT Characters.character_name, Items.item_name, Items.item_description, Inventory_Items.quantity, Inventory_Items.inventory_id, Items.item_id, Characters.character_id from Characters " \
                  "INNER JOIN Inventory_Items ON Characters.character_id=Inventory_Items.Characters_character_id " \
-                 "INNER JOIN Items ON Inventory_Items.Items_item_id=Items.item_id " \
+                 "LEFT JOIN Items ON Inventory_Items.Items_item_id=Items.item_id " \
                  "ORDER BY Characters.character_name ASC;"
 
 # -- Select inventory items based on User_Accounts.username:
@@ -157,6 +157,9 @@ delete_item_from_inv = "DELETE FROM Inventory_Items WHERE inventory_id=%s;"
 
 # -- Update query for 3 tables (Items, Inventory_Items, Characters)
 update_inventory_items = "UPDATE Characters, Inventory_Items, Items SET Characters.character_name='%s', Inventory_Items.quantity=%s, Items.item_name='%s', Items.item_description='%s' WHERE Items.item_id=Inventory_Items.Items_item_id AND Characters.character_id=Inventory_Items.Characters_character_id AND Inventory_Items.inventory_id='%s';"
+
+# -- Set a Inventory_Items.Items_item_id FK to NULL:
+update_inv_items_null = "UPDATE Characters, Inventory_Items SET Characters.character_name='%s', Inventory_Items.quantity=%s, Inventory_Items.Items_item_id=NULL WHERE Characters.character_id=Inventory_Items.Characters_character_id AND Inventory_Items.inventory_id='%s';"
 
 # -- INSERT into Inventory_Items table
 insert_inv_items = "INSERT INTO Inventory_Items (Characters_character_id, Items_item_id, quantity) VALUES (%s,%s,%s);"

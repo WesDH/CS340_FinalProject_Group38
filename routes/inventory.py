@@ -2,6 +2,7 @@
     This Flask/Python file handles route for "Inventory_Items"
     junction table in the DB.
     CRUD Functionality for this table implemented: Full CRUD
+    Also has functionality of NULL'able FK: Inventory_Items.Items_item_id
 """
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports
@@ -10,7 +11,6 @@ from flask import Blueprint, \
     flash, session
 from db.mysql_initializer import mysql
 from db import queries as sql
-from functions import flash_err
 
 inventory_bp = Blueprint('inventory', __name__)
 
@@ -76,18 +76,40 @@ def item_selection():
                 item_qty = request.form['item_quantity']
 
                 print("SQL statement to be executed:")
-                query_parsed = (sql.update_inventory_items % (
-                character_name, item_qty, item_name, item_desc, inventory_id))
+                # First query is logic to create a NULL'able FK,
+                # Set Inventory_Items.Items_item_id = NULL if the user requests:
+                if item_name.lower() == "none" or item_name.lower() == "null":
+                    query_parsed = (sql.update_inv_items_null % (
+                    character_name, item_qty, inventory_id))
+                # Otherwise do a standard update query:
+                else:
+                    query_parsed = (sql.update_inventory_items % (
+                    character_name, item_qty, item_name, item_desc, inventory_id))
                 print(query_parsed)
                 cur = mysql.connection.cursor()
-                cur.execute(query_parsed)
+                rows_affect = cur.execute(query_parsed)
                 mysql.connection.commit()
                 cur.close()
-                flash(f"Update {request.form['character_name']}"
-                      f" with {request.form['item_quantity']}"
-                      f" of {request.form['item_name']}"
-                      f": \"{request.form['item_description']}\"", "info")
 
+                # If the query affected zero rows, that means the relationship
+                # with Items table doesn't exist. This means that
+                # Items_items_id FK must be set to NULL:
+                if not rows_affect:
+                    flash(f"Item name/description can no longer be UPDATED as " 
+                          f"the relationship no longer exists. Try deleting row instead.",
+                          "error")
+                # else we may have updated with a NULLable FK request:
+                elif item_name.lower() == "none" or item_name.lower() == "null":
+                    flash(f"Update Char {request.form['character_name']}"
+                          f" SET Inventory_Items.Items_item_id=NULL", "info")
+                # All other cases means a standard UPDATE request
+                else:
+                    flash(f"Update {request.form['character_name']}"
+                          f" with {request.form['item_quantity']}"
+                          f" of {request.form['item_name']}"
+                          f": \"{request.form['item_description']}\"", "info")
+
+            # Logic to insert a new item and quantity into a char's inventory:
             elif "insert_btn" in request.form.keys():
                 print("insert clicked from bottom panel")
                 char_id = request.form['character_id_name'].split(",").pop(0)

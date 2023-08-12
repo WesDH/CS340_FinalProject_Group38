@@ -1,4 +1,4 @@
--- CS340 : Project Step 4 draft DDL SQL SCRIPT
+-- CS340 : Project Step 5 Final DDL SQL SCRIPT
 -- Group 38 Name: Team 38
 -- Title: Dungeons & Dragons Character Management System
 -- Members:
@@ -137,7 +137,7 @@ DROP TABLE IF EXISTS `Inventory_Items` ;
 CREATE TABLE IF NOT EXISTS `Inventory_Items` (
   `inventory_id` INT(11) NOT NULL AUTO_INCREMENT UNIQUE,
   `quantity` INT(11) NULL,
-  `Items_item_id` INT(11) NOT NULL,
+  `Items_item_id` INT(11) NULL,
   `Characters_character_id` INT(11) NOT NULL,
   PRIMARY KEY (`inventory_id`, `Characters_character_id`),
   INDEX `fk_item_id_idx` (`Items_item_id` ASC) VISIBLE,
@@ -147,14 +147,14 @@ CREATE TABLE IF NOT EXISTS `Inventory_Items` (
     FOREIGN KEY (`Items_item_id`)
     REFERENCES `Items` (`item_id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON UPDATE SET NULL,
   CONSTRAINT `Characters_character_id`
     FOREIGN KEY (`Characters_character_id`)
     REFERENCES `Characters` (`character_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-        CONSTRAINT `single_stack_of_item_per_char`
-        UNIQUE (`Items_item_id`, `Characters_character_id`))
+  CONSTRAINT `single_stack_of_item_per_char`
+    UNIQUE (`Items_item_id`, `Characters_character_id`))
 ENGINE = InnoDB;
 
 

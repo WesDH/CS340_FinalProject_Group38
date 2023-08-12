@@ -12,10 +12,13 @@ junction table.
 
 {% block content %}
 <div class="table_data table_left mdl-card mdl-shadow--6dp">
-    <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">All Inventory Items View</h2>
+    <div class="mdl-card__title table_left_inventories">
+        <h2 class="mdl-card__title-text">All Inventory Items View.</h2>
     </div>
-    <div class="mdl-card__supporting-text">
+    <div class="mdl-card__supporting-text table_left_inventories">
+        <p style="margin:0px;color:#282828;" >Inventory_Items.Items_item_id is a NULLable foreign key. USAGE: Item to "NONE" or "NULL" then click on UPDATE button for that row.</p>
+    </div>
+    <div class="mdl-card__supporting-text" style="padding-top:0px;">
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
@@ -40,13 +43,23 @@ junction table.
                         </td>
                         <td>
                             <div class="mdl-textfield normal mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="item_name" value="{{row[1]}}">
+                                <!-- Python None is equivalent to NULL in SQL Syntax, so change Pythonic None type to NULL here -->
+                                {% if row[1] is none %}
+                                    <input class="mdl-textfield__input" type="text" name="item_name" value="NULL">
+                                {% else %}
+                                    <input class="mdl-textfield__input" type="text" name="item_name" value="{{row[1]}}">
+                                {% endif %}
                                 <label class="mdl-textfield__label" ></label>
                             </div>
                         </td>
                         <td>
                             <div class="mdl-textfield fatter mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="item_description" value="{{row[2]}}">
+                                <!-- Don't display anything for Item description if it's a NULL relationship  -->
+                                {% if row[2] is none %}
+                                    <input class="mdl-textfield__input" type="text" name="item_description" value="">
+                                {% else %}
+                                    <input class="mdl-textfield__input" type="text" name="item_description" value="{{row[2]}}">
+                                {% endif %}
                                 <label class="mdl-textfield__label" ></label>
                             </div>
                         </td>

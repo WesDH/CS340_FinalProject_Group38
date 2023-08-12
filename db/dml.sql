@@ -1,7 +1,6 @@
--- Project Step 4 Draft Version: Design HTML Interface + DML SQL (Group / On Ed Discussion)
--- GROUP 38: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens
---
--- DML queries that define the front-end/database interactions
+-- Project Group 38 Step 5 Final : DML
+-- Queries that define the front-end/database interactions
+-- Names: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens
 -- {{var}} denotes custom variable inserted by Flask web framework
 
 
@@ -158,6 +157,16 @@ SELECT SELECT Items.item_id, Items.item_name FROM Items;
 -- User clicks "X" button to DELETE an Inventory_Item:
 DELETE FROM Inventory_Items
 WHERE Inventory_Items.inventory_id='{{inventory_id_from_cur_row}}';
+
+-- User clicks "Update" to update a row AND requests Items relationship to
+-- be set to NULL:
+UPDATE Characters, Inventory_Items
+SET
+    Characters.character_name='{{input_character_name_cur_row}}',
+    Inventory_Items.quantity={{input_quantity_cur_row}},
+    Inventory_Items.Items_item_id=NULL
+WHERE Characters.character_id=Inventory_Items.Characters_character_id
+AND Inventory_Items.inventory_id='{{inventory_id_of_row_clicked}}';
 
 -- User clicks "update" button to UPDATE a row
 -- (Update for 3 tables: Items, Inventory_Items, Characters)
