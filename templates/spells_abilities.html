@@ -47,7 +47,7 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
     </div>
     <div class="mdl-card__supporting-text">
 	{% if not username %}
-	    <h5 class="mdl-card__title-text">Select a User to change the Abilities of that User's Characters</h5>
+	    <h5 class="mdl-card__title-text">Select a User to add Abilities to that User's Characters</h5>
 	{% endif %}	
         <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
             <thead>
@@ -65,8 +65,8 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
             </thead>
             <tbody>
             {% for ability in all_abilities %}
+	    <tr>
 	    <form action="/spells_abilities.html" method="POST">
-                <tr>
                     <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
                             <input
@@ -166,8 +166,8 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
                         </button>
                     </td>
 		    {% endif %}
-                </tr>
 		</form>
+		</tr>
             {% endfor %}
             </tbody>
         </table>	
@@ -182,7 +182,7 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
     </div>
     <div class="mdl-card__supporting-text">
 	{% if not username %}
-	    <h5 class="mdl-card__title-text">Select a User to change the Spells of that User's Characters</h5>
+	    <h5 class="mdl-card__title-text">Select a User to add Spells to that User's Characters</h5>
 	{% endif %}
         <table class="mdl-data-table th-right-align mdl-js-data-table mdl-shadow--2dp">
             <thead>
@@ -199,8 +199,8 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
             </thead>
             <tbody>
             {% for spell in all_spells %}
+	    <tr>
 	    <form action="/spells_abilities.html" method="POST">
-                <tr>
 		    <td>
                         <div class="mdl-textfield normal mdl-js-textfield">
                             <input
@@ -289,8 +289,8 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
                         </button>
                     </td>
 		    {% endif %}
-                </tr>
 	    </form>
+	    </tr>
             {% endfor %}
             </tbody>
         </table>
@@ -317,8 +317,8 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
             <tbody>
 		{% if user_abilities %} 
 		{% for user_ability in user_abilities %}
+		<tr>
 		<form action="/spells_abilities.html" method="POST">
-                <tr>
 		    <td>
 			    {{user_ability[1]}}
 		    </td>
@@ -340,8 +340,8 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
                         <i class="material-icons md-18">close</i>
                         </button> 	
                     </td> 
-		</tr>
 		</form>
+		</tr>
 		{% endfor %} 
 		{% endif %}
             </tbody>
@@ -377,8 +377,8 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
             <tbody>
 		{% if user_spells %} 
 		{% for user_spell in user_spells %}
+		<tr>
 		<form action="/spells_abilities.html" method="POST">
-                <tr>
 		    <td>
 			    {{user_spell[1]}}
 		    </td>
@@ -397,8 +397,8 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
                         <i class="material-icons md-18">close</i>
                         </button>
                     </td> 
-		</tr>
 		</form>
+		</tr>
 		{% endfor %} 
 		{% endif %}
             </tbody>

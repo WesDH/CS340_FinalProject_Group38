@@ -56,18 +56,22 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
 
     <div class="mdl-card-attribute mdl-shadow--2dp">
         <div class="mdl-card__title mdl-card--expand">
-            <h4 class="char_details">
-                <u>Race:</u>  {{char[1]}}
-	        </h4>
-	        <h4 class="char_details">
-                <u>Class:</u>  {{char[2]}}
-            </h4>
-	        <h4 class="char_details">
-                <u>Creature Type:</u>  {{char[3]}}
-            </h4>
-	        <h4 class="char_details">
-                <u>Alignment:</u>  {{char[4]}}
-            </h4>
+	    <div class="char_details_div">
+		<h4 class="char_details_title">Race: </h4>
+		<h5 class="char_details_var">{{char[1]}}</h5>
+	    </div>
+	    <div class="char_details_div">
+		<h4 class="char_details_title">Class: </h4>
+		<h5 class="char_details_var">{{char[2]}}</h5>
+	    </div> 
+	    <div class="char_details_div">
+		<h4 class="char_details_title">Creature Type: </h4>
+		<h5 class="char_details_var">{{char[3]}}</h5>
+	    </div>
+	    <div class="char_details_div">
+		<h4 class="char_details_title">Alignment: </h4>
+		<h5 class="char_details_var">{{char[4]}}</h5>
+	    </div>
         </div>
         <div class="mdl-card__actions mdl-card--border">
             Character Details

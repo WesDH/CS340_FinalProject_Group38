@@ -56,6 +56,11 @@ Copied from solution:
     overflow-y: hidden;
 }
 
+.mdl-layout__container.has-scrolling-header .mdl-layout__content {
+    overflow: scroll;
+}
+
+
 .mdl-layout__header {
     background-color: var(--primcol1);
     border-bottom: 1px solid var(--border_highlight);
@@ -108,6 +113,7 @@ div.mdl-layout__drawer.is-visible {
     margin-top: 25px;
     margin-left: 15px;
     margin-right: 15px;
+    margin-bottom: 25px;
     width: 48vw;
     min-width: 750px;
     border-radius: 4px;
@@ -124,6 +130,12 @@ div.mdl-layout__drawer.is-visible {
 
 .mdl-data-table {
     width: 100%;
+    margin: 8px 0 8px 0;
+   /* border: 3px solid var(--bg_col_slate); */
+    border: none;
+    background: none;
+    border-radius: 10px;
+    background-color: transparent;
 }
 
 /* Table header custom CSS */
@@ -136,12 +148,17 @@ div.mdl-layout__drawer.is-visible {
     width: 97%;
 }
 
+.mdl-card-attribute {
+    border: 2px solid var(--primcol1);
+    border-radius: 10px;
+}
+
 .mdl-data-table th {
     text-align: left;
     background-color: var(--primcol1);
     font-size: medium;
     padding-left: 15px !important;
-    padding-right: 5px
+    padding-right: 5px;
 }
 
 
@@ -165,6 +182,19 @@ tr:nth-child(odd):hover {
     background-color: var(--hovercol2) !important;
 }
 
+/* rounded table corners */
+th:first-of-type {
+  border-top-left-radius: 10px;
+}
+th:last-of-type {
+  border-top-right-radius: 10px;
+}
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 10px;
+}
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 10px;
+}
 
 
 /*General main background color*/
@@ -172,7 +202,7 @@ tr:nth-child(odd):hover {
 /* footer css */
 .mdl-mini-footer {
     border-top: 1px solid var(--border_highlight);
-    position: absolute;
+    position: sticky;
     left: 0px; bottom: 0px;
     z-index: 2;
     width: 100vw;
@@ -322,8 +352,9 @@ width: 36px !important;
 
 
     .mdl-mini-footer {
-        position: absolute;
-        left: 0px; bottom: 0px;
+        position: sticky;
+        left: 0px; 
+	bottom: 0px;
     }
 
     .navbar-credits,
@@ -344,10 +375,10 @@ width: 36px !important;
     .mdl-data-table th {
         font-size: 14px;
         width: 0;
-        padding: 0 !important;
+        padding: 10px !important;
     }
     td{
-        padding: 10px 0 10px 4px !important;
+        padding: 10px 10px 10px 10px !important;
         /*border: 1px solid var(--hovercol1);*/
     }
 
@@ -456,6 +487,15 @@ a[title="RELOAD DATABASE"]:hover {
     color: #c70000;
 }
 
-.char_details {
+.char_details_title {
     margin: 12px;
 }
+
+.char_details_div {
+    text-align: center;
+}
+
+.char_details_var {
+    color: var(--bg_col_light);
+}
+
