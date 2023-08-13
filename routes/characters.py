@@ -1,6 +1,71 @@
 """
     This Flask/Python file handles route for "Characters" table in the DB
     CRUD Functionality for this table implemented: Full CRUD
+
+ ************ Citations below apply to all /routes!!!!!! ************
+
+Citation for:
+-   General usage and understanding throughout the project:
+-   Routes/Jinja templating
+Scope: Module
+Date: June 26th-August 5th, 2023
+Accessed by: Havensw, Houghtjo
+Adapted from:
+-   Source Title: osu-cs340-ecampus / flask-starter-app
+-   Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app#setup
+
+Citation for:
+-  Using sessions to save a username for personalized view
+-  Using Flask flash() functionality to send feedback to the UI
+Scope: Module
+Date Accessed: July 22nd, 2023
+Accessed by: Havensw, Houghtjo
+Adapted from:
+-   Source Title: Flask Tutorials
+-   Source URL: https://www.youtube.com/playlist?list=PLzMcBGfZo4-n4vJJybUVV3Un_NFS5EOgX
+
+Citation for:
+-  Using Flask flash() messages with categories
+Scope: Function
+Date Accessed: July 22nd, 2023
+Copied with modifications by: Havensw
+Adapted from:
+-   Source Title: Message Flashing
+-   Source URL: https://flask.palletsprojects.com/en/2.3.x/patterns/flashing/
+
+Citation for:
+-  Better understanding for how to: SELECT from DB to display table to UX
+-  and INSERT to add row from UX into the DB
+Scope: Module
+Date Accessed: July 22nd, 2023
+Accessed by: Havensw, Houghtjo
+Adapted from:
+-   Source Title: Python Flask MySQL Database Example
+-   Source URL: https://www.youtube.com/watch?v=7r93l-sRmwI
+
+Citation for:
+-  Flask Blueprinting
+Scope: Module
+Accessed by: Havensw
+Date Accessed: August 11th, 2023
+Modified from:
+-   Source URL: https://flask.palletsprojects.com/en/2.3.x/blueprints/
+
+Citation for:
+-  How to import from parent directory "../" in Python
+Scope: Line
+Accessed by: Havensw
+Date Accessed: August 6th, 2023
+Copied from answer by user Jenish:
+-   Source URL: https://stackoverflow.com/questions/30669474/beyond-top-level-package-error-in-relative-import
+
+Citation for:
+-  How to fix circular import statements in Flask/Python with Blueprints
+Scope: Line
+Accessed by: Havensw
+Date Accessed: August 6th, 2023
+Copied from answer by Robert Moskal:
+-   Source URL: https://stackoverflow.com/questions/28784849/how-to-fix-circular-import-in-flask-project-using-blueprints-mysql-w-o-sqlalchem
 """
 import sys
 sys.path.append("..")  # Add parent directory sys.path for imports

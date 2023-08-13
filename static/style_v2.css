@@ -1,3 +1,23 @@
+/*
+Defines custom CSS styling applied to all pages
+
+Citation for:
+-  MDL styling fix for MDL Icon Graphics
+Scope: Line
+Date Accessed: July 25th, 2023
+Accessed by: Havensw
+Adapted from solution:
+-   Source URL: https://github.com/angular/material/issues/3776
+
+Citation for:
+-  MDL styling fix for database reload Icon with text
+Scope: Line
+Accessed by: Havensw
+Date Accessed: July 25th, 2023
+Copied from solution:
+-   Source URL: https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize
+
+*/
 :root {
     --primcol1 : #9fa8d3;
     --hovercol1 : #eae0cf;
@@ -33,6 +53,7 @@
 }
 .mdl-layout {
     background-color: var(--bg_col_slate);
+    overflow-y: hidden;
 }
 
 .mdl-layout__header {
@@ -302,7 +323,7 @@ width: 36px !important;
 
     .mdl-mini-footer {
         position: absolute;
-        left: 0px; bottom: -8vh;
+        left: 0px; bottom: 0px;
     }
 
     .navbar-credits,
@@ -311,7 +332,7 @@ width: 36px !important;
     }
 
     ul, ol {
-        font-size: 8px;
+        font-size: 10px;
     }
 
     .page-content {
@@ -377,9 +398,6 @@ tr.tr_with_forms:nth-child(4n):hover {
     line-height: 25px;
 }
 
-/*.intro-ul-list li{*/
-/*    padding: 4px;*/
-/*}*/
 
  /*This is for the reload database on bottom of navbar*/
 /*https://stackoverflow.com/questions/39907145/align-material-icon-with-text-on-materialize

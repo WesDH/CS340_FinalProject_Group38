@@ -126,6 +126,15 @@ Copied from solution:<br>
 <br>
 <br>
 Citation for:<br>
+- &emsp;Flask Blueprinting<br>
+Scope: Module<br>
+Accessed by: Havensw<br>
+Date Accessed: August 11th, 2023<br>
+Modified from:<br>
+- &emsp; Source URL: https://flask.palletsprojects.com/en/2.3.x/blueprints/
+<br>
+<br>
+Citation for:<br>
 - &emsp;How to import from parent directory "../" in Python<br>
 Scope: Line<br>
 Accessed by: Havensw<br>

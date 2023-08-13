@@ -5,6 +5,17 @@ This small Javascript file binds a few buttons on "items" page, which is our
 index.html
 
 It also defines custom behavior for the "reload db" icon on the footer.
+
+ References:
+Citation for:
+-  Javascript FETCH request syntax
+Scope: Function
+Date Accessed: July 27th, 2023
+Accessed by: Havensw
+Modified from previous CS290 final project Javascript source:
+-   Source Title: CRUDapp
+-   Source URL: http://weshavens.info/CRUDapp/
+
  */
 
 

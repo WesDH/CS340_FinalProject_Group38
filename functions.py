@@ -1,5 +1,18 @@
 """
  general function accessed by app / multiple routes
+
+ References:
+
+Citation for:
+-  Using Flask flash() messages with categories
+Scope: Function
+Date Accessed: July 22nd, 2023
+Copied with modifications by: Havensw
+Adapted from:
+-   Source Title: Message Flashing
+-   Source URL: https://flask.palletsprojects.com/en/2.3.x/patterns/flashing/
+
+
 """
 from db.mysql_initializer import mysql
 from flask import flash

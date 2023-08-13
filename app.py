@@ -3,15 +3,39 @@
 -- GROUP 38: Joseph Houghton, Lauren Norman Schueneman, Wesley Havens
 --
 -- App.py is the logic for handling DB and UI interactions via routes with Flask
+
+References:
+    Citation for:
+-   General usage and understanding throughout the project:
+-   Routes/Jinja templating
+Scope: Module
+Date: June 26th-August 5th, 2023
+Accessed by: Havensw, Houghtjo
+Adapted from:
+-   Source Title: osu-cs340-ecampus / flask-starter-app
+-   Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app#setup
+
+Citation for:
+-  Using sessions to save a username for personalized view
+-  Using Flask flash() functionality to send feedback to the UI
+Scope: Module
+Date Accessed: July 22nd, 2023
+Accessed by: Havensw, Houghtjo
+Adapted from:
+-   Source Title: Flask Tutorials
+-   Source URL: https://www.youtube.com/playlist?list=PLzMcBGfZo4-n4vJJybUVV3Un_NFS5EOgX
+
+Citation for:
+-  Flask Blueprinting
+Scope: Module
+Accessed by: Havensw
+Date Accessed: August 11th, 2023
+Modified from:
+-   Source URL: https://flask.palletsprojects.com/en/2.3.x/blueprints/
 """
-#import sys
 from flask import Flask
-#render_template, request, redirect, url_for, flash, session
-#from flask_mysqldb import MySQL
 from env.credentials import *
-#from db import queries as sql
 from datetime import timedelta
-from functions import generate_ddl
 
 # Route imports:
 import routes.characters
@@ -23,7 +47,7 @@ import routes.spells_abilities
 import routes.users
 import routes.inventory
 
-APP_PORT = 19807
+APP_PORT = 19806
 
 # Separate out MySQL connector so that python files in routes can import it too
 from db.mysql_initializer import mysql
