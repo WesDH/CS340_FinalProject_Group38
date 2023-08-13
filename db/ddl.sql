@@ -298,4 +298,5 @@ VALUES
     (5, 3)
     ;
 
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
