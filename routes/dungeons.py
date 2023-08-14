@@ -24,13 +24,16 @@ def dungeon_selection():
     if request.method == "GET":
         cur = mysql.connection.cursor()
 
-        if session["username"]:
-            username = session["username"]
-            curr_user_id = cur.execute(sql.get_user_id, [username])
-            curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
-            print("curr_user_id =", curr_user_id)
-            user_dungeons = cur.execute(sql.get_user_dungeons, [curr_user_id][0][0])
-            user_dungeons = cur.fetchall() if user_dungeons > 0 else ()
+        if "username" in session:
+            if session["username"] is not None:
+                username = session["username"]
+                curr_user_id = cur.execute(sql.get_user_id, [username])
+                curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
+                print("curr_user_id =", curr_user_id)
+                user_dungeons = cur.execute(sql.get_user_dungeons, [curr_user_id][0][0])
+                user_dungeons = cur.fetchall() if user_dungeons > 0 else ()
+            else:
+                username, user_dungeons = None, None
         else:
             username, user_dungeons = None, None
 

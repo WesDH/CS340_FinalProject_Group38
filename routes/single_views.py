@@ -44,6 +44,30 @@ def char_page(char_id):
             char_spells = cur.fetchall() if char_spells > 0 else ()
             char_abilities = cur.execute(sql.get_char_abilities, [char_id])
             char_abilities = cur.fetchall() if char_abilities > 0 else ()
+
+
+            if char_abilities:
+                char_abilities_list = []
+                for ability in char_abilities:
+                    ability = list(ability)
+                    print(ability)
+                    if ability[3]:
+                        # this ability has a dungeon_id
+                        dungeon_name = cur.execute(sql.get_ability_dungeon,
+                                                   [ability[3]])
+                        dungeon_name = cur.fetchall()[0][0]
+                        ability[3] = dungeon_name
+                    else:
+                        # this ability does NOT have a dungeon_id
+                        ability[3] = "No Dungeon"
+                    print(ability)
+                    char_abilities_list.append(ability)
+
+            else:
+                char_abilities_list = ()
+
+
+
             if char_spells:
                 if char_spells[0][3] != username:
                     # user is selected but that user is viewing some other users' characters
@@ -60,12 +84,33 @@ def char_page(char_id):
             char_abilities = cur.fetchall() if char_abilities > 0 else ()
 
 
+            if char_abilities:
+                char_abilities_list = []
+                for ability in char_abilities:
+                    ability = list(ability)
+                    print(ability)
+                    if ability[3]:
+                        # this ability has a dungeon_id
+                        dungeon_name = cur.execute(sql.get_ability_dungeon,
+                                                   [ability[3]])
+                        dungeon_name = cur.fetchall()[0][0]
+                        ability[3] = dungeon_name
+                    else:
+                        # this ability does NOT have a dungeon_id
+                        ability[3] = "No Dungeon"
+                    print(ability)
+                    char_abilities_list.append(ability)
+
+            else:
+                char_abilities_list = ()
+
+
         return render_template('charPage.html',
                                 username=username,
                                 char_id=char_id,
                                 char=char,
                                 char_spells=char_spells,
-                                char_abilities=char_abilities)
+                                char_abilities=char_abilities_list)
 
 @single_views_bp.route("/dungeonPage.html/dungeon_id=<dungeon_id>", methods=['GET'])
 def dungeon_page(dungeon_id):

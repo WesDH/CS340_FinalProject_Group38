@@ -150,16 +150,16 @@ chars_items_qty = "SELECT Characters.character_name, Items.item_name, Items.item
                  "ORDER BY Characters.character_name ASC;"
 
 # -- Select inventory items based on User_Accounts.username:
-individual_char_items = "SELECT User_Accounts.username, Characters.character_name, Items.item_name, Items.item_description,Inventory_Items.quantity, Items.item_id from User_Accounts INNER JOIN Characters on User_Accounts.user_id=Characters.Users_user_id INNER JOIN Inventory_Items ON Characters.character_id=Inventory_Items.Characters_character_id INNER JOIN Items ON Inventory_Items.Items_item_id=Items.item_id WHERE User_Accounts.username='%s';"
+individual_char_items = "SELECT User_Accounts.username, Characters.character_name, Items.item_name, Items.item_description,Inventory_Items.quantity, Items.item_id from User_Accounts INNER JOIN Characters on User_Accounts.user_id=Characters.Users_user_id INNER JOIN Inventory_Items ON Characters.character_id=Inventory_Items.Characters_character_id INNER JOIN Items ON Inventory_Items.Items_item_id=Items.item_id WHERE User_Accounts.username=%s;"
 
 # -- for when a user deletes an inventory item
 delete_item_from_inv = "DELETE FROM Inventory_Items WHERE inventory_id=%s;"
 
 # -- Update query for 3 tables (Items, Inventory_Items, Characters)
-update_inventory_items = "UPDATE Characters, Inventory_Items, Items SET Characters.character_name='%s', Inventory_Items.quantity=%s, Items.item_name='%s', Items.item_description='%s' WHERE Items.item_id=Inventory_Items.Items_item_id AND Characters.character_id=Inventory_Items.Characters_character_id AND Inventory_Items.inventory_id='%s';"
+update_inventory_items = "UPDATE Characters, Inventory_Items, Items SET Characters.character_name=%s, Inventory_Items.quantity=%s, Items.item_name=%s, Items.item_description=%s WHERE Items.item_id=Inventory_Items.Items_item_id AND Characters.character_id=Inventory_Items.Characters_character_id AND Inventory_Items.inventory_id=%s;"
 
 # -- Set a Inventory_Items.Items_item_id FK to NULL:
-update_inv_items_null = "UPDATE Characters, Inventory_Items SET Characters.character_name='%s', Inventory_Items.quantity=%s, Inventory_Items.Items_item_id=NULL WHERE Characters.character_id=Inventory_Items.Characters_character_id AND Inventory_Items.inventory_id='%s';"
+update_inv_items_null = "UPDATE Characters, Inventory_Items SET Characters.character_name=%s, Inventory_Items.quantity=%s, Inventory_Items.Items_item_id=NULL WHERE Characters.character_id=Inventory_Items.Characters_character_id AND Inventory_Items.inventory_id=%s;"
 
 # -- INSERT into Inventory_Items table
 insert_inv_items = "INSERT INTO Inventory_Items (Characters_character_id, Items_item_id, quantity) VALUES (%s,%s,%s);"

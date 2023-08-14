@@ -30,8 +30,8 @@ def item_selection():
                 cur = mysql.connection.cursor()
                 cur_usr = session["username"]
                 # print(sql.individual_char_items % cur_usr)
-                parsed = (sql.individual_char_items % cur_usr)
-                cur_user_inv_items = cur.execute(parsed)
+                # parsed = (sql.individual_char_items, (cur_usr,))
+                cur_user_inv_items = cur.execute(sql.individual_char_items, (cur_usr,))
                 cur_user_inv_table_rows = cur.fetchall() if cur_user_inv_items > 0 else ()
         else:
             session["username"] = None
@@ -76,18 +76,21 @@ def item_selection():
                 item_qty = request.form['item_quantity']
 
                 print("SQL statement to be executed:")
+                cur = mysql.connection.cursor()
                 # First query is logic to create a NULL'able FK,
                 # Set Inventory_Items.Items_item_id = NULL if the user requests:
                 if item_name.lower() == "none" or item_name.lower() == "null":
-                    query_parsed = (sql.update_inv_items_null % (
-                    character_name, item_qty, inventory_id))
+                    # query_parsed = (sql.update_inv_items_null % (
+                    # character_name, item_qty, inventory_id))
+                    rows_affect = cur.execute(sql.update_inv_items_null, (character_name, item_qty, inventory_id))
                 # Otherwise do a standard update query:
                 else:
-                    query_parsed = (sql.update_inventory_items % (
-                    character_name, item_qty, item_name, item_desc, inventory_id))
-                print(query_parsed)
-                cur = mysql.connection.cursor()
-                rows_affect = cur.execute(query_parsed)
+                    # query_parsed = (sql.update_inventory_items % (
+                    # character_name, item_qty, item_name, item_desc, inventory_id))
+                    rows_affect = cur.execute(sql.update_inventory_items, (character_name, item_qty, item_name, item_desc, inventory_id))
+                # print(rows_affect)
+                # cur = mysql.connection.cursor()
+                # rows_affect = cur.execute(query_parsed)
                 mysql.connection.commit()
                 cur.close()
 

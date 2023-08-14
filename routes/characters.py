@@ -87,14 +87,17 @@ def char_selection():
     if request.method == "GET":
         cur = mysql.connection.cursor()
 
-        if session["username"]:
-            username = session["username"]
-            curr_user_id = cur.execute(sql.get_user_id, [username])
-            curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
-            print("curr_user_id =", curr_user_id)
+        if "username" in session:
+            if session["username"] is not None:
+                username = session["username"]
+                curr_user_id = cur.execute(sql.get_user_id, [username])
+                curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
+                print("curr_user_id =", curr_user_id)
 
-            user_chars = cur.execute(sql.get_user_chars, [curr_user_id][0][0])
-            user_chars = cur.fetchall() if user_chars > 0 else ()
+                user_chars = cur.execute(sql.get_user_chars, [curr_user_id][0][0])
+                user_chars = cur.fetchall() if user_chars > 0 else ()
+            else:
+                username, user_chars = None, None
         else:
             username, user_chars = None, None
 

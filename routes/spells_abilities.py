@@ -23,47 +23,54 @@ def spells_abilities_page():
         cur = mysql.connection.cursor()
 
         # get user abilities & user spells
-        if session["username"]:
-            username = session["username"]
-            curr_user_id = cur.execute(sql.get_user_id, [username])
-            curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
-            print("curr_user_id =", curr_user_id)
+        if "username" in session:
+            if session["username"] is not None:
+                username = session["username"]
+                curr_user_id = cur.execute(sql.get_user_id, [username])
+                curr_user_id = cur.fetchall() if curr_user_id > 0 else ()
+                print("curr_user_id =", curr_user_id)
 
-            user_abilities = cur.execute(sql.get_user_abilities,
-                                         [curr_user_id][0][0])
-            if user_abilities > 0:
-                user_abilities = cur.fetchall()
-                user_abilities_list = []
-                for ability in user_abilities:
-                    ability = list(ability)
-                    # print(ability)
-                    if ability[3]:
-                        # this ability has a dungeon_id
-                        dungeon_name = cur.execute(sql.get_ability_dungeon,
-                                                   [ability[3]])
-                        dungeon_name = cur.fetchall()[0][0]
-                        ability[3] = dungeon_name
+                if curr_user_id:
+                
+                    user_abilities = cur.execute(sql.get_user_abilities,
+                                                 [curr_user_id][0][0])
+                    
+                    if user_abilities and user_abilities > 0: 
+                        user_abilities = cur.fetchall()
+                        user_abilities_list = []
+                        for ability in user_abilities:
+                            ability = list(ability)
+                            # print(ability)
+                            if ability[3]:
+                                # this ability has a dungeon_id
+                                dungeon_name = cur.execute(sql.get_ability_dungeon,
+                                                           [ability[3]])
+                                dungeon_name = cur.fetchall()[0][0]
+                                ability[3] = dungeon_name
+                            else:
+                                # this ability does NOT have a dungeon_id
+                                ability[3] = "No Dungeon"
+                            # print(ability)
+                            user_abilities_list.append(ability)
+
                     else:
-                        # this ability does NOT have a dungeon_id
-                        ability[3] = "No Dungeon"
-                    # print(ability)
-                    user_abilities_list.append(ability)
+                        user_abilities_list = ()
 
-            else:
-                user_abilities_list = ()
+                    user_spells = cur.execute(sql.get_user_spells,
+                                              [curr_user_id][0][0])
+                    if user_spells and user_spells > 0:
+                        user_spells = cur.fetchall()
+                    else:
+                        user_spells = ()
 
-            user_spells = cur.execute(sql.get_user_spells,
-                                      [curr_user_id][0][0])
-            if user_spells > 0:
-                user_spells = cur.fetchall()
+                    user_chars = cur.execute(sql.get_user_chars, [curr_user_id][0][0])
+                    if user_chars and user_chars > 0:
+                        user_chars = cur.fetchall()
+                    else:
+                        user_chars = ()
             else:
-                user_spells = ()
+                username = user_abilities_list = user_spells = user_chars = None
 
-            user_chars = cur.execute(sql.get_user_chars, [curr_user_id][0][0])
-            if user_chars > 0:
-                user_chars = cur.fetchall()
-            else:
-                user_chars = ()
 
         else:
             username = user_abilities_list = user_spells = user_chars = None
@@ -71,12 +78,12 @@ def spells_abilities_page():
             # get all abilities & all spells & all dungeons
         try:
             all_abilities = cur.execute(sql.get_all_abilities)
-            if all_abilities > 0:
+            if all_abilities and all_abilities > 0:
                 all_abilities = cur.fetchall()
                 all_abilities_list = []
                 for ability in all_abilities:
                     ability = list(ability)
-                    # print(ability)
+                    print(ability)
                     if ability[3]:
                         # this ability has a dungeon_id
                         dungeon_name = cur.execute(sql.get_ability_dungeon,
@@ -86,14 +93,14 @@ def spells_abilities_page():
                     else:
                         # this ability does NOT have a dungeon_id
                         ability[3] = "No Dungeon"
-                    # print(ability)
+                    print(ability)
                     all_abilities_list.append(ability)
 
             else:
                 all_abilities_list = ()
 
             all_spells = cur.execute(sql.get_all_spells)
-            all_spells = cur.fetchall() if all_spells > 0 else ()
+            all_spells = cur.fetchall() if (all_spells and all_spells > 0) else ()
 
             all_dungeons = cur.execute(sql.get_all_dungeons)
             all_dungeons = cur.fetchall() if all_dungeons > 0 else ()
@@ -277,6 +284,7 @@ def spells_abilities_page():
                 ability_id = request.form['button_press'][4:]
                 ability_name = request.form['ability_name']
                 ability_damage = request.form['ability_damage']
+                print(ability_id, ability_name, ability_damage)
                 ability_dungeon_id = request.form['ability_dungeon']
                 print(ability_name, ability_damage, ability_dungeon_id,
                       ability_id)

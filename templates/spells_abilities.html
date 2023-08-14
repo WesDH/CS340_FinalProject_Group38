@@ -89,11 +89,15 @@ Adapted from component examples (Tables, Cards, Navbar, Inputs):
                     </td>
 		    <td>
                         <select id="Dungeon" name="ability_dungeon">
-				<option value="" selected="selected" disabled >{{ability[3]}}</option>
-				<option value="No Dungeon">No Dungeon</option>
+			    {% for dungeon in all_dungeons %}
+			    {% if dungeon[1] == ability[3] %}
+			    <option  value="{{dungeon[0]}}" selected="selected" >{{ability[3]}}</option>
+			    {% endif %}
+			    {% endfor %}
+				<option  value="No Dungeon">No Dungeon</option>
                                 {% for dungeon in all_dungeons %}
 				{% if dungeon[1] != ability[3] %}
-				<option value="{{dungeon[0]}}">{{dungeon[1]}}</option>
+				<option  value="{{dungeon[0]}}">{{dungeon[1]}}</option>
 				{% endif %}
                                 {% endfor %}
                         </select>
